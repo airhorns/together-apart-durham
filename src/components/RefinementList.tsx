@@ -73,7 +73,6 @@ export const StaticRefinementList = connectRefinementList(
     } & RefinementListProvided
   ) => {
     const itemsByLabel = keyBy(props.items, "label");
-    console.log(props.items);
 
     return (
       <div>

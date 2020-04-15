@@ -2,6 +2,8 @@ import React from "react";
 import classnames from "classnames";
 import { Hit } from "react-instantsearch-core";
 import { Highlight } from "react-instantsearch-dom";
+import Imgix from "react-imgix";
+import { webflowToImgixURL } from "../utils";
 import { BusinessDoc } from "../types";
 import { RichTextHighlight } from "./RichTextHighlight";
 
@@ -27,10 +29,11 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
   return (
     <div className="business-item w-dyn-item">
       <div className="card-parent">
-        <img
-          src={props.hit.header_image || "#"}
-          alt={`Goods or services from ${props.hit.name}`}
+        <Imgix
+          src={webflowToImgixURL(props.hit.header_image)}
           className="card-image"
+          sizes="100vw"
+          htmlAttributes={{ alt: `Goods or services from ${props.hit.name}` }}
         />
         <div className="card-content">
           <div className="div-block-2">
