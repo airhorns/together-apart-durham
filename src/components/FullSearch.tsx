@@ -16,6 +16,7 @@ import {
 import { Block } from "baseui/block";
 import { ChevronDown } from "baseui/icon";
 import { useStyletron } from "baseui";
+import { NoResultsIndicator } from "./NoResultsIndicator";
 
 const searchClient = algoliasearch(
   "BP6X6YAZSL",
@@ -132,6 +133,7 @@ export const FullSearch = () => {
         </Cell>
         <Cell span={[4, 8, 9]}>
           <BusinessCardGrid />
+          <NoResultsIndicator />
         </Cell>
       </Grid>
     </InstantSearch>
