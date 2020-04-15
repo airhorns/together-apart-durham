@@ -1,0 +1,11 @@
+source "https://rubygems.org"
+
+gem "webflow-ruby"
+gem "byebug"
+gem "activesupport"
+gem "phonelib"
+gem "rufo"
+gem "irb"
+gem "roo"
+gem "algoliasearch"
+gem "dotenv"

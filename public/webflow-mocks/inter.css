@@ -1,0 +1,155 @@
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-Thin-BETA.2bfdc99f05.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-Thin-BETA.c384c502d4.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter';
+  font-style:  italic;
+  font-weight: 100;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-ThinItalic-BETA.fb1ddb0172.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-ThinItalic-BETA.3c54042f27.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-ExtraLight-BETA.c02b5399b.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-ExtraLight-BETA.b59d89b91e.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter';
+  font-style:  italic;
+  font-weight: 200;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-ExtraLightItalic-BETA.8375a24f4c.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-ExtraLightItalic-BETA.e68462ca8b.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-Light-BETA.75cf3ef146.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-Light-BETA.8b4112714d.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter';
+  font-style:  italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-LightItalic-BETA.ca0b651538.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-LightItalic-BETA.5970e8e219.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-Regular.47e70f6ff0.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-Regular.4f147571be.woff") format("woff");
+
+
+}
+@font-face {
+  font-family: 'Inter';
+  font-style:  italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-Italic.27b5aa8a97.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-Italic.7ce2bd2bf5.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-Medium.61de2b8a38.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-Medium.04e41bdda2.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style:  italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-MediumItalic.322a943891.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-MediumItalic.4e29e2a94f.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-SemiBold.8bcb84d706.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-SemiBold.d47f00ba90.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter';
+  font-style:  italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-SemiBoldItalic.bc6d11dc64.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-SemiBoldItalic.eb6606280a.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-Bold.067214a91f.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-Bold.100b5c823c.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter';
+  font-style:  italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-BoldItalic.9425013e0e.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-BoldItalic.5a5fc3873f.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-ExtraBold.c7e5cfd393.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-ExtraBold.c218f0e442.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter';
+  font-style:  italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-ExtraBoldItalic.23c84803ef.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-ExtraBoldItalic.50d9a6c6c5.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-Black.0967971430.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-Black.1363742820.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter';
+  font-style:  italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-BlackItalic.e9c95ecb20.woff2") format("woff2"),
+       url("https://d3e54v103j8qbb.cloudfront.net/fonts/inter/Inter-BlackItalic.c7ed13a168.woff") format("woff");
+}
