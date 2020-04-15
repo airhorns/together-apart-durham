@@ -13,7 +13,6 @@ import {
   StaticRefinementList,
   ToggleRefinement,
 } from "./RefinementList";
-import { Block } from "baseui/block";
 import { ChevronDown } from "baseui/icon";
 import { useStyletron } from "baseui";
 import { NoResultsIndicator } from "./NoResultsIndicator";
@@ -98,8 +97,10 @@ export const FullSearch = () => {
             className={css({
               display: "flex",
               flexDirection: "row",
+              overflowX: "scroll",
               [$theme.mediaQuery.large]: {
                 flexDirection: "column",
+                overflowX: "auto",
               },
             })}
           >

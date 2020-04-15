@@ -6,8 +6,9 @@ import {
 import { Highlight, connectRefinementList } from "react-instantsearch-dom";
 import { Checkbox } from "baseui/checkbox";
 import { Input, SIZE } from "baseui/input";
-import { isUndefined, keyBy, concat, last } from "lodash";
+import { isUndefined, keyBy, concat } from "lodash";
 import { useStyletron } from "baseui";
+import { Label3 } from "baseui/typography";
 
 export const RefinementOption = (props: {
   item: RefinementListProvided["items"][0];
@@ -58,6 +59,7 @@ export const RefinementList = connectRefinementList(
             isFromSearch={props.isFromSearch}
           />
         ))}
+        {props.items.length === 0 && <Label3>No matching filters found</Label3>}
       </div>
     );
   }
