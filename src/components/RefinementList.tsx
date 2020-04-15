@@ -45,6 +45,7 @@ export const RefinementList = connectRefinementList(
           <Input
             size={SIZE.mini}
             type="search"
+            autoFocus={false}
             placeholder="Search..."
             onChange={(event) =>
               props.searchForItems(event.currentTarget.value)

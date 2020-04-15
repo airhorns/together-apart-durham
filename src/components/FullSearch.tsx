@@ -1,11 +1,12 @@
 import React from "react";
 import algoliasearch from "algoliasearch/lite";
 import "instantsearch.css/themes/reset.css";
-import { InstantSearch } from "react-instantsearch-dom";
+import { InstantSearch, connectStateResults } from "react-instantsearch-dom";
+import { StateResultsProvided } from "react-instantsearch-core";
 import { Grid, Cell } from "baseui/layout-grid";
 import { Heading, HeadingLevel } from "baseui/heading";
 import { Button, SHAPE } from "baseui/button";
-import { StatefulPopover, PLACEMENT } from "baseui/popover";
+import { Drawer, ANCHOR, SIZE } from "baseui/drawer";
 import { BusinessCardGrid } from "./BusinessCardGrid";
 import { SearchBox } from "./SearchBox";
 import {
@@ -31,43 +32,49 @@ const CATEGORY_REFINEMENT_OPTIONS = [
   "Other",
 ].map((value) => ({ value, label: value }));
 
-export const RefinementPane = (props: {
-  title: string;
-  children: React.ReactNode;
-}) => {
-  const [css, $theme] = useStyletron();
-
-  return (
-    <>
-      <div
-        className={css({
-          display: "none",
-          [$theme.mediaQuery.large]: { display: "block" },
-        })}
-      >
-        <HeadingLevel>
+export const RefinementPane = connectStateResults(
+  (
+    props: StateResultsProvided & {
+      title: string;
+      children: React.ReactNode;
+      attributes: string[];
+    }
+  ) => {
+    const [css, $theme] = useStyletron();
+    const [drawerOpen, setDrawerOpen] = React.useState(false);
+    console.log(props);
+    return (
+      <HeadingLevel>
+        <div
+          className={css({
+            display: "none",
+            [$theme.mediaQuery.large]: { display: "block" },
+          })}
+        >
           <Heading styleLevel={4}>{props.title}</Heading>
           {props.children}
-        </HeadingLevel>
-      </div>
+        </div>
 
-      <div
-        className={css({
-          marginBottom: "1em",
-          [$theme.mediaQuery.large]: { display: "none" },
-        })}
-      >
-        <StatefulPopover
-          focusLock
-          placement={PLACEMENT.bottomLeft}
-          content={({ close }) => {
-            return (
-              <div className={css({ padding: $theme.sizing.scale400 })}>
-                {props.children}
-              </div>
-            );
-          }}
+        <div
+          className={css({
+            marginBottom: "1em",
+            [$theme.mediaQuery.large]: { display: "none" },
+          })}
         >
+          <Drawer
+            isOpen={drawerOpen}
+            autoFocus
+            renderAll
+            onClose={() => setDrawerOpen(false)}
+            anchor={ANCHOR.bottom}
+            size={SIZE.auto}
+          >
+            <Heading styleLevel={4}>{props.title}</Heading>
+            <div className={css({ padding: $theme.sizing.scale400 })}>
+              {props.children}
+            </div>
+          </Drawer>
+
           <Button
             kind="secondary"
             shape={SHAPE.pill}
@@ -75,14 +82,15 @@ export const RefinementPane = (props: {
               BaseButton: { style: { marginRight: $theme.sizing.scale600 } },
             }}
             endEnhancer={() => <ChevronDown size={24} />}
+            onClick={() => setDrawerOpen(true)}
           >
             {props.title}
           </Button>
-        </StatefulPopover>
-      </div>
-    </>
-  );
-};
+        </div>
+      </HeadingLevel>
+    );
+  }
+);
 
 export const FullSearch = () => {
   const [css, $theme] = useStyletron();
@@ -104,16 +112,19 @@ export const FullSearch = () => {
               },
             })}
           >
-            <RefinementPane title="Category">
+            <RefinementPane title="Category" attributes={["category"]}>
               <StaticRefinementList
                 attribute="category"
                 values={CATEGORY_REFINEMENT_OPTIONS}
               />
             </RefinementPane>
-            <RefinementPane title="Location">
+            <RefinementPane title="Location" attributes={["location"]}>
               <RefinementList attribute="location" />
             </RefinementPane>
-            <RefinementPane title="Methods">
+            <RefinementPane
+              title="Delivery Methods"
+              attributes={["delivery", "curbside", "takeout"]}
+            >
               <ToggleRefinement
                 attribute="delivery"
                 label="Delivery"
