@@ -39,15 +39,19 @@ export class Importer {
       return true;
     }
     this.locations = keyBy(
-      await this.$webflow.items({
-        collectionId: Importer.LOCATIONS_COLLECTION_ID,
-      }),
+      (
+        await this.$webflow.items({
+          collectionId: Importer.LOCATIONS_COLLECTION_ID,
+        })
+      ).items,
       "_id"
     );
     this.categories = keyBy(
-      await this.$webflow.items({
-        collectionId: Importer.CATEGORIES_COLLECTION_ID,
-      }),
+      (
+        await this.$webflow.items({
+          collectionId: Importer.CATEGORIES_COLLECTION_ID,
+        })
+      ).items,
       "_id"
     );
     this.prepared = true;
@@ -128,8 +132,8 @@ export class Importer {
     ret.location = this.locations[item["location-2"]]
       ? this.locations[item["location-2"]].name
       : null;
-    ret.category = this.locations[item["category"]]
-      ? this.locations[item["category"]].name
+    ret.category = this.categories[item["category"]]
+      ? this.categories[item["category"]].name
       : null;
     ret.hours = Importer.HOURS[item["status"]];
     ret["header_image"] = item["image-field"]["url"];
