@@ -1,5 +1,6 @@
 import React from "react";
 import "instantsearch.css/themes/reset.css";
+import "iframe-resizer/js/iframeResizer.contentWindow";
 import "./App.css";
 
 import { Client as Styletron } from "styletron-engine-atomic";
