@@ -54,31 +54,29 @@ const SearchDecorations = connectStateResults((props: StateResultsProvided) => {
   );
 });
 
-const SearchAfter = (props: {}) => {
+const SearchAfter = (_props: {}) => {
   return <SearchDecorations />;
 };
 
-export const SearchBox = connectSearchBox(
-  ({ currentRefinement, refine, isSearchStalled }) => {
-    const [css] = useStyletron();
-    return (
-      <div
-        className={css({
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          marginBottom: "1em",
-        })}
-      >
-        <Input
-          type="search"
-          size="large"
-          placeholder="Search by anything..."
-          value={currentRefinement}
-          onChange={(event) => refine(event.currentTarget.value)}
-          overrides={{ Before: SearchBefore, After: SearchAfter }}
-        />
-      </div>
-    );
-  }
-);
+export const SearchBox = connectSearchBox(({ currentRefinement, refine }) => {
+  const [css] = useStyletron();
+  return (
+    <div
+      className={css({
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        marginBottom: "1em",
+      })}
+    >
+      <Input
+        type="search"
+        size="large"
+        placeholder="Search by anything..."
+        value={currentRefinement}
+        onChange={(event) => refine(event.currentTarget.value)}
+        overrides={{ Before: SearchBefore, After: SearchAfter }}
+      />
+    </div>
+  );
+});

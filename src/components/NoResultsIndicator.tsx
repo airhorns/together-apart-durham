@@ -17,7 +17,8 @@ export const NoResultsIndicator = connectStateResults(
           })}
         >
           <Label1 marginBottom="scale500">
-            No listings found for search "{props.searchState.query}".
+            No listings found for search &ldquo;{props.searchState.query}
+            &rdquo;.
           </Label1>
           <Paragraph1>
             Add more businesses to this page by{" "}
