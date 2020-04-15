@@ -6,7 +6,7 @@ import {
 import { Highlight, connectRefinementList } from "react-instantsearch-dom";
 import { Checkbox } from "baseui/checkbox";
 import { Input, SIZE } from "baseui/input";
-import { isUndefined, keyBy, concat } from "lodash";
+import { isUndefined, keyBy, concat } from "lodash-es";
 import { useStyletron } from "baseui";
 import { Label3 } from "baseui/typography";
 

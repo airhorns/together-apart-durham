@@ -2,7 +2,7 @@ import Webflow from "webflow-api";
 import algoliasearch, { SearchIndex } from "algoliasearch";
 import dotenv from "dotenv";
 import { assert } from "./utils";
-import { keyBy, pick } from "lodash";
+import { keyBy, pick } from "lodash-es";
 dotenv.config();
 
 interface WebflowItem {

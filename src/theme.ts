@@ -1,5 +1,5 @@
 import { LightTheme, createDarkTheme } from "baseui";
-import { mapValues } from "lodash";
+import { mapValues } from "lodash-es";
 import { ThemePrimitives } from "baseui/theme";
 
 // const primitives = {
