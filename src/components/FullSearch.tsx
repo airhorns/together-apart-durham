@@ -38,11 +38,13 @@ export const RefinementPane = connectStateResults(
       title: string;
       children: React.ReactNode;
       attributes: string[];
+      searchState: any;
+      onSearchStateChange: (newState: any) => void;
     }
   ) => {
     const [css, $theme] = useStyletron();
     const [drawerOpen, setDrawerOpen] = React.useState(false);
-    console.log(props);
+
     return (
       <HeadingLevel>
         <div
@@ -64,14 +66,21 @@ export const RefinementPane = connectStateResults(
           <Drawer
             isOpen={drawerOpen}
             autoFocus
-            renderAll
             onClose={() => setDrawerOpen(false)}
             anchor={ANCHOR.bottom}
             size={SIZE.auto}
           >
             <Heading styleLevel={4}>{props.title}</Heading>
             <div className={css({ padding: $theme.sizing.scale400 })}>
-              {props.children}
+              {/* This fuckery is in order to support persisting the Algolia search state when these inner components unmount. See https://github.com/algolia/react-instantsearch/issues/892 and https://www.algolia.com/doc/guides/building-search-ui/going-further/native/react/ for more information */}
+              <InstantSearch
+                searchClient={searchClient}
+                indexName="prod_businesses"
+                searchState={props.searchState}
+                onSearchStateChange={props.onSearchStateChange}
+              >
+                {props.children}
+              </InstantSearch>
             </div>
           </Drawer>
 
@@ -79,7 +88,12 @@ export const RefinementPane = connectStateResults(
             kind="secondary"
             shape={SHAPE.pill}
             overrides={{
-              BaseButton: { style: { marginRight: $theme.sizing.scale600 } },
+              BaseButton: {
+                style: {
+                  marginRight: $theme.sizing.scale600,
+                  whiteSpace: "nowrap",
+                },
+              },
             }}
             endEnhancer={() => <ChevronDown size={24} />}
             onClick={() => setDrawerOpen(true)}
@@ -94,8 +108,18 @@ export const RefinementPane = connectStateResults(
 
 export const FullSearch = () => {
   const [css, $theme] = useStyletron();
+  const [searchState, setSearchState] = React.useState({});
+  const controlledSearchStateProps = {
+    searchState,
+    onSearchStateChange: setSearchState,
+  };
+
   return (
-    <InstantSearch searchClient={searchClient} indexName="prod_businesses">
+    <InstantSearch
+      searchClient={searchClient}
+      indexName="prod_businesses"
+      {...controlledSearchStateProps}
+    >
       <Grid>
         <Cell span={[4, 8, 12]}>
           <SearchBox />
@@ -112,18 +136,27 @@ export const FullSearch = () => {
               },
             })}
           >
-            <RefinementPane title="Category" attributes={["category"]}>
+            <RefinementPane
+              title="Category"
+              attributes={["category"]}
+              {...controlledSearchStateProps}
+            >
               <StaticRefinementList
                 attribute="category"
                 values={CATEGORY_REFINEMENT_OPTIONS}
               />
             </RefinementPane>
-            <RefinementPane title="Location" attributes={["location"]}>
+            <RefinementPane
+              title="Location"
+              attributes={["location"]}
+              {...controlledSearchStateProps}
+            >
               <RefinementList attribute="location" />
             </RefinementPane>
             <RefinementPane
               title="Delivery Methods"
               attributes={["delivery", "curbside", "takeout"]}
+              {...controlledSearchStateProps}
             >
               <ToggleRefinement
                 attribute="delivery"
