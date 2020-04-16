@@ -2,12 +2,20 @@ import Webflow from "webflow-api";
 import algoliasearch, { SearchIndex } from "algoliasearch";
 import dotenv from "dotenv";
 import { assert } from "./utils";
-import { keyBy, pick } from "lodash-es";
+import { keyBy, pick, values } from "lodash-es";
 dotenv.config();
 
 interface WebflowItem {
   _id: string;
+  name: string;
   [key: string]: any;
+}
+
+interface WebflowItemsPage {
+  items: WebflowItem[];
+  count: number;
+  offset: number;
+  total: number;
 }
 
 export class Importer {
@@ -26,8 +34,8 @@ export class Importer {
     assert(process.env.ALGOLIA_API_KEY)
   );
   $index: SearchIndex;
-  locations: { [key: string]: any } = null as any;
-  categories: { [key: string]: any } = null as any;
+  locations: { [key: string]: WebflowItem } = null as any;
+  categories: { [key: string]: WebflowItem } = null as any;
   prepared = false;
 
   constructor() {
@@ -60,19 +68,62 @@ export class Importer {
 
   async sync() {
     await this.prepare();
+    let totalSaved = 0;
 
+    await this.paginatedItems(async (page) => {
+      const objects = page.items
+        .filter(this.readyForPublish)
+        .map((item) => this.formatWebflowForAlgolia(item));
+
+      const saveResponse = await this.$index.saveObjects(objects);
+      totalSaved += saveResponse.objectIDs.length;
+      console.log(`saved result batch, size=${saveResponse.objectIDs.length}`);
+    });
+
+    return totalSaved;
+  }
+
+  async stats() {
+    await this.prepare();
+
+    const stats = {
+      allTotal: 0,
+      publishedTotal: 0,
+      locationCounts: values(this.locations).reduce((agg, location) => {
+        agg[location.name] = 0;
+        return agg;
+      }, {} as Record<string, number>),
+      categoryCounts: values(this.categories).reduce((agg, category) => {
+        agg[category.name] = 0;
+        return agg;
+      }, {} as Record<string, number>),
+    };
+
+    await this.paginatedItems(async (page) => {
+      stats.allTotal += page.items.length;
+      const published = page.items.filter(this.readyForPublish);
+      stats.publishedTotal += published.length;
+      published.forEach((item) => {
+        let location, category;
+        if ((location = this.locationNameForItem(item))) {
+          stats.locationCounts[location] += 1;
+        }
+        if ((category = this.categoryNameForItem(item))) {
+          stats.categoryCounts[category] += 1;
+        }
+      });
+    });
+
+    return stats;
+  }
+
+  async paginatedItems(callback: (page: WebflowItemsPage) => Promise<void>) {
     let nextPage = true,
-      offset = 0,
-      totalSaved = 0;
+      offset = 0;
     const pageSize = 100;
 
     while (nextPage) {
-      const page: {
-        items: WebflowItem[];
-        count: number;
-        offset: number;
-        total: number;
-      } = await this.$webflow.items(
+      const page: WebflowItemsPage = await this.$webflow.items(
         { collectionId: Importer.BUSINESSES_COLLECTION_ID },
         { limit: pageSize, offset }
       );
@@ -83,21 +134,16 @@ export class Importer {
         nextPage = false;
       }
 
-      const objects = page.items
-        .filter(
-          (item) =>
-            item["_draft"] == false &&
-            item["_archived"] == false &&
-            item["image-field"]
-        )
-        .map((item) => this.formatWebflowForAlgolia(item));
-
-      const saveResponse = await this.$index.saveObjects(objects);
-      totalSaved += saveResponse.objectIDs.length;
-      console.log(`saved result batch, size=${saveResponse.objectIDs.length}`);
+      await callback(page);
     }
+  }
 
-    return totalSaved;
+  readyForPublish(item: WebflowItem) {
+    return (
+      item["_draft"] == false &&
+      item["_archived"] == false &&
+      item["image-field"]
+    );
   }
 
   formatWebflowForAlgolia(item: WebflowItem) {
@@ -129,16 +175,24 @@ export class Importer {
     ]);
 
     ret.objectID = item["_id"];
-    ret.location = this.locations[item["location-2"]]
-      ? this.locations[item["location-2"]].name
-      : null;
-    ret.category = this.categories[item["category"]]
-      ? this.categories[item["category"]].name
-      : null;
+    ret.location = this.locationNameForItem(item);
+    ret.category = this.categoryNameForItem(item);
     ret.hours = Importer.HOURS[item["status"]];
     ret["header_image"] = item["image-field"]["url"];
 
     return ret;
+  }
+
+  locationNameForItem(item: WebflowItem) {
+    return this.locations[item["location-2"]]
+      ? this.locations[item["location-2"]].name
+      : null;
+  }
+
+  categoryNameForItem(item: WebflowItem) {
+    return this.categories[item["category"]]
+      ? this.categories[item["category"]].name
+      : null;
   }
 }
 

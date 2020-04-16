@@ -52,7 +52,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "serve-lambda": "rm build-lambda/**/* && netlify-lambda serve src/lambda/handlers"
+    "serve-lambda": "rm -rf build-lambda/* && netlify-lambda serve src/lambda/handlers"
   },
   "eslintConfig": {
     "extends": "@fixings/eslint-config",
