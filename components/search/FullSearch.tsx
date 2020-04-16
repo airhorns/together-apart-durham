@@ -5,32 +5,17 @@ import { InstantSearch } from "react-instantsearch-dom";
 import { Grid, Cell } from "baseui/layout-grid";
 import { BusinessCardGrid } from "./BusinessCardGrid";
 import { SearchBox } from "./SearchBox";
-import {
-  RefinementList,
-  StaticRefinementList,
-  ToggleRefinement,
-} from "./RefinementList";
+import { RefinementList, StaticRefinementList, ToggleRefinement } from "./RefinementList";
 import { useStyletron } from "baseui";
 import { NoResultsIndicator } from "./NoResultsIndicator";
 import { RefinementPane } from "./RefinementPane";
-import {
-  searchClient,
-  searchStateToURL,
-  INDEX_NAME,
-  pathToSearchState,
-  paramsToSearchState,
-} from "./client";
-import { GetServerSideProps } from "next";
+import { searchClient, searchStateToURL, INDEX_NAME, paramsToSearchState } from "./client";
 import { findResultsState } from "react-instantsearch-dom/server";
 
-const CATEGORY_REFINEMENT_OPTIONS = [
-  "Grocery",
-  "Restaurant",
-  "Retail",
-  "Brewery",
-  "Coffee",
-  "Other",
-].map((value) => ({ value, label: value }));
+const CATEGORY_REFINEMENT_OPTIONS = ["Grocery", "Restaurant", "Retail", "Brewery", "Coffee", "Other"].map((value) => ({
+  value,
+  label: value,
+}));
 
 export interface FullSearchProps {
   resultsState?: any;
@@ -50,12 +35,7 @@ export const FullSearch = (props: FullSearchProps) => {
   };
 
   return (
-    <InstantSearch
-      searchClient={searchClient}
-      indexName={INDEX_NAME}
-      resultsState={props.resultsState}
-      {...controlledSearchStateProps}
-    >
+    <InstantSearch searchClient={searchClient} indexName={INDEX_NAME} resultsState={props.resultsState} {...controlledSearchStateProps}>
       <Grid>
         <Cell span={[4, 8, 12]}>
           <SearchBox />
@@ -72,43 +52,16 @@ export const FullSearch = (props: FullSearchProps) => {
               },
             })}
           >
-            <RefinementPane
-              title="Category"
-              attributes={["category"]}
-              {...controlledSearchStateProps}
-            >
-              <StaticRefinementList
-                attribute="category"
-                values={CATEGORY_REFINEMENT_OPTIONS}
-              />
+            <RefinementPane title="Category" attributes={["category"]} {...controlledSearchStateProps}>
+              <StaticRefinementList attribute="category" values={CATEGORY_REFINEMENT_OPTIONS} />
             </RefinementPane>
-            <RefinementPane
-              title="Location"
-              attributes={["location"]}
-              {...controlledSearchStateProps}
-            >
+            <RefinementPane title="Location" attributes={["location"]} {...controlledSearchStateProps}>
               <RefinementList attribute="location" />
             </RefinementPane>
-            <RefinementPane
-              title="Delivery Methods"
-              attributes={["delivery", "curbside", "takeout"]}
-              {...controlledSearchStateProps}
-            >
-              <ToggleRefinement
-                attribute="delivery"
-                label="Delivery"
-                value={true}
-              />
-              <ToggleRefinement
-                attribute="curbside"
-                label="Curbside Pickup"
-                value={true}
-              />
-              <ToggleRefinement
-                attribute="takeout"
-                label="Takeout or In Store Pickup"
-                value={true}
-              />
+            <RefinementPane title="Delivery Methods" attributes={["delivery", "curbside", "takeout"]} {...controlledSearchStateProps}>
+              <ToggleRefinement attribute="delivery" label="Delivery" value={true} />
+              <ToggleRefinement attribute="curbside" label="Curbside Pickup" value={true} />
+              <ToggleRefinement attribute="takeout" label="Takeout or In Store Pickup" value={true} />
             </RefinementPane>
           </div>
         </Cell>

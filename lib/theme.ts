@@ -29,10 +29,7 @@ const primitives: Partial<ThemePrimitives> = {
 
 export const theme = createDarkTheme(primitives, {
   breakpoints,
-  mediaQuery: mapValues(
-    breakpoints,
-    (value) => `@media screen and (min-width: ${value}px)`
-  ),
+  mediaQuery: mapValues(breakpoints, (value) => `@media screen and (min-width: ${value}px)`),
   typography: {
     ParagraphMedium: {
       fontSize: "14px",

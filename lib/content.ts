@@ -2,7 +2,7 @@ import Webflow from "webflow-api";
 import algoliasearch, { SearchIndex } from "algoliasearch";
 import dotenv from "dotenv";
 import { assert } from "./utils";
-import { keyBy, pick, values } from "lodash-es";
+import { keyBy, pick, values, omit } from "lodash-es";
 dotenv.config();
 
 interface WebflowItem {
@@ -18,6 +18,8 @@ interface WebflowItemsPage {
   total: number;
 }
 
+const stripWebflowFunctions = (item: { [key: string]: any }) => omit(item, ["update", "remove"]);
+
 export class Importer {
   static BUSINESSES_COLLECTION_ID = "5e7a88e0ded784db2c263c6a";
   static LOCATIONS_COLLECTION_ID = "5e7a88e0ded78464ab263c6c";
@@ -29,10 +31,7 @@ export class Importer {
   };
 
   $webflow = new Webflow({ token: assert(process.env.WEBFLOW_API_KEY) });
-  $algolia = algoliasearch(
-    assert(process.env.ALGOLIA_APP_ID),
-    assert(process.env.ALGOLIA_API_KEY)
-  );
+  $algolia = algoliasearch(assert(process.env.ALGOLIA_APP_ID), assert(process.env.ALGOLIA_API_KEY));
   $index: SearchIndex;
   locations: { [key: string]: WebflowItem } = null as any;
   categories: { [key: string]: WebflowItem } = null as any;
@@ -51,7 +50,7 @@ export class Importer {
         await this.$webflow.items({
           collectionId: Importer.LOCATIONS_COLLECTION_ID,
         })
-      ).items,
+      ).items.map(stripWebflowFunctions),
       "_id"
     );
     this.categories = keyBy(
@@ -59,7 +58,7 @@ export class Importer {
         await this.$webflow.items({
           collectionId: Importer.CATEGORIES_COLLECTION_ID,
         })
-      ).items,
+      ).items.map(stripWebflowFunctions),
       "_id"
     );
     this.prepared = true;
@@ -71,9 +70,7 @@ export class Importer {
     let totalSaved = 0;
 
     await this.paginatedItems(async (page) => {
-      const objects = page.items
-        .filter(this.readyForPublish)
-        .map((item) => this.formatWebflowForAlgolia(item));
+      const objects = page.items.filter(this.readyForPublish).map((item) => this.formatWebflowForAlgolia(item));
 
       const saveResponse = await this.$index.saveObjects(objects);
       totalSaved += saveResponse.objectIDs.length;
@@ -139,11 +136,7 @@ export class Importer {
   }
 
   readyForPublish(item: WebflowItem) {
-    return (
-      item["_draft"] == false &&
-      item["_archived"] == false &&
-      item["image-field"]
-    );
+    return item["_draft"] == false && item["_archived"] == false && item["image-field"];
   }
 
   formatWebflowForAlgolia(item: WebflowItem) {
@@ -184,15 +177,11 @@ export class Importer {
   }
 
   locationNameForItem(item: WebflowItem) {
-    return this.locations[item["location-2"]]
-      ? this.locations[item["location-2"]].name
-      : null;
+    return this.locations[item["location-2"]] ? this.locations[item["location-2"]].name : null;
   }
 
   categoryNameForItem(item: WebflowItem) {
-    return this.categories[item["category"]]
-      ? this.categories[item["category"]].name
-      : null;
+    return this.categories[item["category"]] ? this.categories[item["category"]].name : null;
   }
 }
 

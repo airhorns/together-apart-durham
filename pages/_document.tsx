@@ -2,7 +2,6 @@ import React from "react";
 import Document, { Head, Main, NextScript } from "next/document";
 import { Provider as StyletronProvider } from "styletron-react";
 import { styletron } from "../lib/styletron";
-import { has } from "lodash-es";
 import { Server, Sheet } from "styletron-engine-atomic";
 
 class StyledDocument extends Document<{ stylesheets: Sheet[] }> {

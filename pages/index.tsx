@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  FullSearch,
-  getSearchServerSideProps,
-  FullSearchProps,
-} from "../components/search/FullSearch";
+import { FullSearch, getSearchServerSideProps, FullSearchProps } from "../components/search/FullSearch";
 import { Layout } from "../components/layout/Layout";
 import { SupportLocalCallout } from "../components/HeroCallout";
 import { Meta } from "../components/Meta";
@@ -17,9 +13,7 @@ export default (props: FullSearchProps) => (
   </Layout>
 );
 
-export const getStaticProps: GetStaticProps<FullSearchProps> = async (
-  context
-) => {
+export const getStaticProps: GetStaticProps<FullSearchProps> = async (_context) => {
   return {
     props: await getSearchServerSideProps({}),
   };

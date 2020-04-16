@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  RefinementListProvided,
-  connectToggleRefinement,
-} from "react-instantsearch-core";
+import { RefinementListProvided, connectToggleRefinement } from "react-instantsearch-core";
 import { Highlight, connectRefinementList } from "react-instantsearch-dom";
 import { Checkbox } from "baseui/checkbox";
 import { Input, SIZE } from "baseui/input";
@@ -20,12 +17,7 @@ export const RefinementOption = (props: {
   const showCount = isUndefined(props.showCount) ? true : props.showCount;
   const label = (
     <>
-      {props.isFromSearch ? (
-        <Highlight attribute="label" hit={props.item} />
-      ) : (
-        props.item.label
-      )}{" "}
-      {showCount && `(${props.item.count})`}
+      {props.isFromSearch ? <Highlight attribute="label" hit={props.item} /> : props.item.label} {showCount && `(${props.item.count})`}
     </>
   );
 
@@ -36,35 +28,26 @@ export const RefinementOption = (props: {
   );
 };
 
-export const RefinementList = connectRefinementList(
-  (props: RefinementListProvided) => {
-    const [css, theme] = useStyletron();
-    return (
-      <div>
-        <div className={css({ marginBottom: theme.sizing.scale200 })}>
-          <Input
-            size={SIZE.mini}
-            type="search"
-            autoFocus={false}
-            placeholder="Search..."
-            onChange={(event) =>
-              props.searchForItems(event.currentTarget.value)
-            }
-          />
-        </div>
-        {props.items.map((item) => (
-          <RefinementOption
-            key={item.label}
-            item={item}
-            onChange={() => props.refine(item.value)}
-            isFromSearch={props.isFromSearch}
-          />
-        ))}
-        {props.items.length === 0 && <Label3>No matching filters found</Label3>}
+export const RefinementList = connectRefinementList((props: RefinementListProvided) => {
+  const [css, theme] = useStyletron();
+  return (
+    <div>
+      <div className={css({ marginBottom: theme.sizing.scale200 })}>
+        <Input
+          size={SIZE.mini}
+          type="search"
+          autoFocus={false}
+          placeholder="Search..."
+          onChange={(event) => props.searchForItems(event.currentTarget.value)}
+        />
       </div>
-    );
-  }
-);
+      {props.items.map((item) => (
+        <RefinementOption key={item.label} item={item} onChange={() => props.refine(item.value)} isFromSearch={props.isFromSearch} />
+      ))}
+      {props.items.length === 0 && <Label3>No matching filters found</Label3>}
+    </div>
+  );
+});
 
 export const StaticRefinementList = connectRefinementList(
   (
@@ -82,12 +65,8 @@ export const StaticRefinementList = connectRefinementList(
             key={staticItem.value}
             item={{
               objectID: staticItem.value,
-              count: itemsByLabel[staticItem.label]
-                ? itemsByLabel[staticItem.label].count
-                : 0,
-              isRefined: !!props.currentRefinement.find(
-                (item) => item === staticItem.value
-              ),
+              count: itemsByLabel[staticItem.label] ? itemsByLabel[staticItem.label].count : 0,
+              isRefined: !!props.currentRefinement.find((item) => item === staticItem.value),
               label: staticItem.label,
               value: [staticItem.value as string],
               _highlightResult: null as any,
@@ -113,17 +92,15 @@ interface ToggleProvidedProps {
   count: { checked: number; unchecked: number };
   refine: (value: boolean) => void;
 }
-export const ToggleRefinement = connectToggleRefinement(
-  (props: ToggleProvidedProps & { label: React.ReactNode }) => {
-    return (
-      <Checkbox
-        checked={props.currentRefinement}
-        onChange={(_event) => {
-          props.refine(!props.currentRefinement);
-        }}
-      >
-        {props.label}
-      </Checkbox>
-    );
-  }
-);
+export const ToggleRefinement = connectToggleRefinement((props: ToggleProvidedProps & { label: React.ReactNode }) => {
+  return (
+    <Checkbox
+      checked={props.currentRefinement}
+      onChange={(_event) => {
+        props.refine(!props.currentRefinement);
+      }}
+    >
+      {props.label}
+    </Checkbox>
+  );
+});

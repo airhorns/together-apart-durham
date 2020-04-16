@@ -5,7 +5,7 @@ import Head from "next/head";
 
 export const Layout = (props: { children: React.ReactNode }) => (
   <>
-    <Head>
+    {/* <Head>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
       <script>{`WebFont.load({google:{families: ["DM Sans:regular,500,700","DM Serif Display:regular"]}});`}</script>
@@ -14,7 +14,7 @@ export const Layout = (props: { children: React.ReactNode }) => (
         property="og:image"
       />
       <meta content="summary" name="twitter:card" />
-    </Head>
+    </Head> */}
     <NavBar />
     {props.children}
     <Footer />

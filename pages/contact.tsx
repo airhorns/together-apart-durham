@@ -8,15 +8,10 @@ export default (_props: {}) => (
     <Meta title="Contact Us" />
     <div className="narrow-container">
       <div className="w-form">
-        <form
-          id="wf-form-Contact-Form"
-          name="wf-form-Contact-Form"
-          data-name="Contact Form"
-        >
+        <form id="wf-form-Contact-Form" name="wf-form-Contact-Form" data-name="Contact Form">
           <h2>Contact Us</h2>
           <p>
-            <strong>Note:</strong> If you&#x27;d like to submit a business for
-            inclusion on Together Apart, that&#x27;s done{" "}
+            <strong>Note:</strong> If you&#x27;d like to submit a business for inclusion on Together Apart, that&#x27;s done{" "}
             <StaticLink href="/submit-a-business">over here</StaticLink>.
           </p>
           <label htmlFor="name">Name</label>
@@ -43,12 +38,7 @@ export default (_props: {}) => (
           />
           <label htmlFor="Website">Message</label>
           <div className="w-embed">
-            <textarea
-              className="w-input input"
-              name="message"
-              placeholder="Enter your message here..."
-              required
-            ></textarea>
+            <textarea className="w-input input" name="message" placeholder="Enter your message here..." required></textarea>
           </div>
           <input
             type="submit"
@@ -73,9 +63,7 @@ export default (_props: {}) => (
               data-duration="0"
               className="lottie-animation"
             ></div>
-            <div>
-              Thank you! We&#x27;ll try to get back to you within 24 hours.
-            </div>
+            <div>Thank you! We&#x27;ll try to get back to you within 24 hours.</div>
           </div>
         </div>
         <div className="error-message w-form-fail">

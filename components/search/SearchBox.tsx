@@ -4,7 +4,7 @@ import { StateResultsProvided } from "react-instantsearch-core";
 import { Input } from "baseui/input";
 import { Search, Delete } from "baseui/icon";
 import { useStyletron } from "baseui";
-import { Spinner } from "baseui/spinner";
+import { StyledSpinnerNext } from "baseui/spinner";
 
 const SearchBefore = () => {
   const [css, theme] = useStyletron();
@@ -23,8 +23,7 @@ const SearchBefore = () => {
 
 const SearchDecorations = connectStateResults((props: StateResultsProvided) => {
   const [css, theme] = useStyletron();
-  const hasQuery =
-    props.searchState.query && props.searchState.query.length > 0;
+  const hasQuery = props.searchState.query && props.searchState.query.length > 0;
   return (
     <>
       <div
@@ -36,7 +35,7 @@ const SearchDecorations = connectStateResults((props: StateResultsProvided) => {
           flexShrink: 0,
         })}
       >
-        {props.isSearchStalled && <Spinner />}
+        {props.isSearchStalled && <StyledSpinnerNext />}
       </div>
       {hasQuery && (
         <div

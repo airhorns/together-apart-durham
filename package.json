@@ -48,7 +48,9 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "tsc --noEmit --incremental false --tsBuildInfoFile null && prettier --loglevel warn --check \"{pages,components,lib}/**/*.{js,ts,tsx}\" && eslint --ext js,ts,tsx .",
+    "lintfix": "prettier --write --loglevel warn \"{pages,components,lib}/**/*.{js,ts,tsx}\" && eslint --ext js,ts,tsx --fix ."
   },
   "eslintConfig": {
     "extends": "@fixings/eslint-config",

@@ -19,10 +19,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
   const [showTooltip, setShowTooltip] = React.useState(false);
 
   const hasMethods =
-    props.hit["gift-card-link"] ||
-    props.hit["online-store-link"] ||
-    props.hit["online-order-link"] ||
-    props.hit["dontations-link"];
+    props.hit["gift-card-link"] || props.hit["online-store-link"] || props.hit["online-order-link"] || props.hit["dontations-link"];
 
   const hasDeliveryApps = DeliveryApps.some(({ key }) => !!props.hit[key]);
 
@@ -72,9 +69,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                   <Highlight attribute="name" hit={props.hit} tagName="mark" />
                 </h2>
                 <p className="location">{props.hit.location}</p>
-                {props.hit.story && (
-                  <RichTextHighlight attribute="story" hit={props.hit} />
-                )}
+                {props.hit.story && <RichTextHighlight attribute="story" hit={props.hit} />}
               </div>
               <img
                 src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e7a31dd4dd994117d4fbd0e_i.svg"
@@ -92,20 +87,13 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                   display: showTooltip ? "auto" : "none",
                 }}
               >
-                <p className="special-instructions-paragraph">
-                  {props.hit["special-instructions"]}
-                </p>
+                <p className="special-instructions-paragraph">{props.hit["special-instructions"]}</p>
               </div>
             </div>
             {hasMethods && (
               <div className="support-methods">
                 {props.hit["gift-card-link"] && (
-                  <a
-                    href={props.hit["gift-card-link"]}
-                    target="_blank"
-                    rel="noopener"
-                    className="method gift-card-method w-inline-block"
-                  >
+                  <a href={props.hit["gift-card-link"]} target="_blank" rel="noopener" className="method gift-card-method w-inline-block">
                     <img
                       src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e8507072b9389f28bb3ea8f_Gift%20Card%20black.svg"
                       alt=""
@@ -147,12 +135,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                   </a>
                 )}
                 {props.hit["dontations-link"] && (
-                  <a
-                    href={props.hit["dontations-link"]}
-                    target="_blank"
-                    rel="noopener"
-                    className="method donate-method w-inline-block"
-                  >
+                  <a href={props.hit["dontations-link"]} target="_blank" rel="noopener" className="method donate-method w-inline-block">
                     <img
                       src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e8508fcf6f6ed08173c5ddb_donate-black%3F.svg"
                       alt=""
@@ -176,12 +159,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                     />
                   </div>
                   <div className="info-text-wrapper">
-                    <a
-                      href={props.hit["website"]}
-                      target="_blank"
-                      rel="noopener"
-                      className="info-link url"
-                    >
+                    <a href={props.hit["website"]} target="_blank" rel="noopener" className="info-link url">
                       {props.hit["website"]}
                     </a>
                   </div>
@@ -197,10 +175,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                     />
                   </div>
                   <div className="info-text-wrapper">
-                    <a
-                      href={`tel:${props.hit["phone-number"]}`}
-                      className="info-link"
-                    >
+                    <a href={`tel:${props.hit["phone-number"]}`} className="info-link">
                       {props.hit["phone-number"]}
                     </a>
                   </div>
@@ -217,21 +192,11 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                 <div className="info-text-wrapper app-wrapper">
                   {props.hit["takeout"] && (
                     <span className="info-link app-tile no-pointer">
-                      {props.hit.category === "restaurant"
-                        ? "Takeout"
-                        : "In Store Pickup"}
+                      {props.hit.category === "restaurant" ? "Takeout" : "In Store Pickup"}
                     </span>
                   )}
-                  {props.hit.delivery && (
-                    <span className="info-link app-tile no-pointer">
-                      Home Delivery
-                    </span>
-                  )}
-                  {props.hit.curbside && (
-                    <span className="info-link app-tile no-pointer">
-                      Curbside Pickup
-                    </span>
-                  )}
+                  {props.hit.delivery && <span className="info-link app-tile no-pointer">Home Delivery</span>}
+                  {props.hit.curbside && <span className="info-link app-tile no-pointer">Curbside Pickup</span>}
                 </div>
               </div>
               {hasDeliveryApps && (
@@ -247,10 +212,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                     {DeliveryApps.map(
                       ({ key, label }) =>
                         props.hit[key] && (
-                          <span
-                            key={key}
-                            className="info-link app-tile no-pointer"
-                          >
+                          <span key={key} className="info-link app-tile no-pointer">
                             {label}
                           </span>
                         )
@@ -261,12 +223,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
               <div className="website-wrap socials-wrap">
                 {props.hit["twitter-profile"] && (
                   <div className="icon-wrapper">
-                    <a
-                      href={props.hit["twitter-profile"]}
-                      className="w-inline-block"
-                      target="_blank"
-                      rel="noopener"
-                    >
+                    <a href={props.hit["twitter-profile"]} className="w-inline-block" target="_blank" rel="noopener">
                       <img
                         src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e7bac53bdd045c2eac6e495_twitter_white.svg"
                         width="20"
@@ -278,12 +235,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                 )}
                 {props.hit["facebook-page"] && (
                   <div className="icon-wrapper">
-                    <a
-                      href={props.hit["facebook-page"]}
-                      className="w-inline-block"
-                      target="_blank"
-                      rel="noopener"
-                    >
+                    <a href={props.hit["facebook-page"]} className="w-inline-block" target="_blank" rel="noopener">
                       <img
                         src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e7bacc673c49866459268aa_facebook.svg"
                         width="20"
@@ -295,12 +247,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                 )}
                 {props.hit["instagram-profile"] && (
                   <div className="icon-wrapper">
-                    <a
-                      href={props.hit["instagram-profile"]}
-                      className="w-inline-block"
-                      target="_blank"
-                      rel="noopener"
-                    >
+                    <a href={props.hit["instagram-profile"]} className="w-inline-block" target="_blank" rel="noopener">
                       <img
                         src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e7bad3dd6833502eba9dc9b_instagram.svg"
                         width="20"
@@ -319,11 +266,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
         </div>
       </div>
       <div className="w-embed">
-        <input
-          type="hidden"
-          className="jetboost-list-item"
-          value="the-prescott"
-        />
+        <input type="hidden" className="jetboost-list-item" value="the-prescott" />
       </div>
     </div>
   );

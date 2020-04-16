@@ -4,14 +4,8 @@ const brokenImageReplacement =
 export const webflowToImgixURL = (src?: string | null) => {
   if (src) {
     return src
-      .replace(
-        "https://global-uploads.webflow.com/",
-        "https://ta-wf-global-uploads.imgix.net/"
-      )
-      .replace(
-        "https://uploads-ssl.webflow.com/",
-        "https://ta-wf-uploads-ssl.imgix.net/"
-      );
+      .replace("https://global-uploads.webflow.com/", "https://ta-wf-global-uploads.imgix.net/")
+      .replace("https://uploads-ssl.webflow.com/", "https://ta-wf-uploads-ssl.imgix.net/");
   } else {
     return brokenImageReplacement;
   }
