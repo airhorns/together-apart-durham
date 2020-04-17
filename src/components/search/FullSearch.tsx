@@ -11,6 +11,7 @@ import { NoResultsIndicator } from "./NoResultsIndicator";
 import { RefinementPane } from "./RefinementPane";
 import { searchClient, searchStateToURL, INDEX_NAME, paramsToSearchState } from "./client";
 import { findResultsState } from "react-instantsearch-dom/server";
+import { Pagination } from "./Pagination";
 
 const CATEGORY_REFINEMENT_OPTIONS = ["Grocery", "Restaurant", "Retail", "Brewery", "Coffee", "Other"].map((value) => ({
   value,
@@ -68,6 +69,11 @@ export const FullSearch = (props: FullSearchProps) => {
         <Cell span={[4, 8, 9]}>
           <BusinessCardGrid />
           <NoResultsIndicator />
+        </Cell>
+        <Cell span={[4, 8, 12]}>
+          <div className={css({ display: "flex", justifyContent: "center" })}>
+            <Pagination />
+          </div>
         </Cell>
       </Grid>
     </InstantSearch>
