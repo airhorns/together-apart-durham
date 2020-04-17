@@ -16,62 +16,65 @@ export const RefinementPane = connectStateResults(
       attributes: string[];
       searchState: any;
       onSearchStateChange: (newState: any) => void;
+      className?: string;
     }
   ) => {
     const [css, $theme] = useStyletron();
     const [drawerOpen, setDrawerOpen] = React.useState(false);
 
     return (
-      <HeadingLevel>
-        <div
-          className={css({
-            display: "none",
-            [$theme.mediaQuery.large]: { display: "block" },
-          })}
-        >
-          <Heading styleLevel={4}>{props.title}</Heading>
-          {props.children}
-        </div>
-
-        <div
-          className={css({
-            marginBottom: "1em",
-            [$theme.mediaQuery.large]: { display: "none" },
-          })}
-        >
-          <Drawer isOpen={drawerOpen} autoFocus onClose={() => setDrawerOpen(false)} anchor={ANCHOR.bottom} size={SIZE.auto}>
-            <Heading styleLevel={4}>{props.title}</Heading>
-            <div className={css({ padding: $theme.sizing.scale400 })}>
-              {/* This fuckery is in order to support persisting the Algolia search state when these inner components unmount. See https://github.com/algolia/react-instantsearch/issues/892 and https://www.algolia.com/doc/guides/building-search-ui/going-further/native/react/ for more information */}
-              <InstantSearch
-                searchClient={searchClient}
-                indexName={INDEX_NAME}
-                searchState={props.searchState}
-                onSearchStateChange={props.onSearchStateChange}
-              >
-                {props.children}
-              </InstantSearch>
-            </div>
-          </Drawer>
-
-          <Button
-            kind="secondary"
-            shape={SHAPE.pill}
-            overrides={{
-              BaseButton: {
-                style: {
-                  marginRight: $theme.sizing.scale600,
-                  whiteSpace: "nowrap",
-                },
-              },
-            }}
-            endEnhancer={() => <ChevronDown size={24} />}
-            onClick={() => setDrawerOpen(true)}
+      <div className={props.className}>
+        <HeadingLevel>
+          <div
+            className={css({
+              display: "none",
+              [$theme.mediaQuery.large]: { display: "block" },
+            })}
           >
-            {props.title}
-          </Button>
-        </div>
-      </HeadingLevel>
+            <Heading styleLevel={4}>{props.title}</Heading>
+            {props.children}
+          </div>
+
+          <div
+            className={css({
+              marginBottom: "1em",
+              [$theme.mediaQuery.large]: { display: "none" },
+            })}
+          >
+            <Drawer isOpen={drawerOpen} autoFocus onClose={() => setDrawerOpen(false)} anchor={ANCHOR.bottom} size={SIZE.auto}>
+              <Heading styleLevel={4}>{props.title}</Heading>
+              <div className={css({ padding: $theme.sizing.scale400 })}>
+                {/* This fuckery is in order to support persisting the Algolia search state when these inner components unmount. See https://github.com/algolia/react-instantsearch/issues/892 and https://www.algolia.com/doc/guides/building-search-ui/going-further/native/react/ for more information */}
+                <InstantSearch
+                  searchClient={searchClient}
+                  indexName={INDEX_NAME}
+                  searchState={props.searchState}
+                  onSearchStateChange={props.onSearchStateChange}
+                >
+                  {props.children}
+                </InstantSearch>
+              </div>
+            </Drawer>
+
+            <Button
+              kind="secondary"
+              shape={SHAPE.pill}
+              overrides={{
+                BaseButton: {
+                  style: {
+                    marginRight: $theme.sizing.scale600,
+                    whiteSpace: "nowrap",
+                  },
+                },
+              }}
+              endEnhancer={() => <ChevronDown size={24} />}
+              onClick={() => setDrawerOpen(true)}
+            >
+              {props.title}
+            </Button>
+          </div>
+        </HeadingLevel>
+      </div>
     );
   }
 );

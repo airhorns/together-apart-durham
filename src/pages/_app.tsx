@@ -22,7 +22,8 @@ const getPathFromUrl = (url: string) => {
 };
 
 Router.events.on("routeChangeStart", (url) => {
-  if (getPathFromUrl(url) != getPathFromUrl(window.location.href)) {
+  console.log("url", { new: getPathFromUrl(url), old: window.location.pathname });
+  if (getPathFromUrl(url) != window.location.pathname) {
     console.log(`Loading: ${url}`);
     NProgress.start();
   }

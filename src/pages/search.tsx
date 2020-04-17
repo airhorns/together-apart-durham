@@ -8,16 +8,20 @@ import { assert } from "../lib/utils";
 
 type SearchPageProps = FullSearchProps;
 export default (props: SearchPageProps) => {
+  // don't need to parse search state again because this page is dynamically generated and pays attention to the query params
   return (
     <Layout>
       <Meta title="Search" />
-      <FullSearch resultsState={props.resultsState} searchState={props.searchState} />
+      <FullSearch {...props} />
     </Layout>
   );
 };
 
 export const getServerSideProps: GetServerSideProps<SearchPageProps> = async (context) => {
   return {
-    props: await getSearchServerSideProps(pathToSearchState(assert(context.req.url))),
+    props: {
+      path: "/search",
+      ...(await getSearchServerSideProps(pathToSearchState(assert(context.req.url)))),
+    },
   };
 };

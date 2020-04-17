@@ -6,12 +6,9 @@ import { Meta } from "../components/Meta";
 import { GetStaticProps } from "next";
 import { pathToSearchState } from "../components/search/searchClient";
 
-interface IndexPageProps {
-  resultsState: FullSearchProps["resultsState"];
-  searchState: FullSearchProps["searchState"];
-}
+type IndexPageProps = FullSearchProps;
 
-export default (props: IndexPageProps) => {
+export default (props: FullSearchProps) => {
   let searchState = props.searchState;
 
   // This page is statically generated ignoring the query params. Interpret them now live to rerender if required.
@@ -23,13 +20,16 @@ export default (props: IndexPageProps) => {
     <Layout>
       <Meta />
       <SupportLocalCallout />
-      <FullSearch resultsState={props.resultsState} searchState={searchState} />
+      <FullSearch {...props} searchState={searchState} />
     </Layout>
   );
 };
 
 export const getStaticProps: GetStaticProps<IndexPageProps> = async (_context) => {
   return {
-    props: await getSearchServerSideProps({}),
+    props: {
+      path: "/",
+      ...(await getSearchServerSideProps({})),
+    },
   };
 };

@@ -12,7 +12,7 @@ import { RefinementPane } from "./RefinementPane";
 import { searchClient, searchStateToURL, INDEX_NAME, paramsToSearchState } from "./searchClient";
 import { findResultsState } from "react-instantsearch-dom/server";
 import { Pagination } from "./Pagination";
-import { isUndefined } from "lodash-es";
+import { isUndefined, debounce } from "lodash-es";
 
 const CATEGORY_REFINEMENT_OPTIONS = ["Grocery", "Restaurant", "Retail", "Brewery", "Coffee", "Other"].map((value) => ({
   value,
@@ -23,18 +23,24 @@ export interface FullSearchProps {
   resultsState?: any;
   searchState?: any;
   showLocationFacets?: boolean;
+  path: string;
 }
 
 export const FullSearch = (props: FullSearchProps) => {
   const [css, $theme] = useStyletron();
   const [searchState, setSearchState] = React.useState(props.searchState || {});
+
+  const updateURL = React.useMemo(() => debounce((href: string) => Router.push(props.path, href, { shallow: true }), 1000), [props.path]);
+
   const controlledSearchStateProps = {
     searchState,
-    onSearchStateChange: React.useCallback((newState) => {
-      setSearchState(newState);
-      const href = searchStateToURL(newState);
-      setTimeout(() => Router.push(href, href, { shallow: true }), 700);
-    }, []),
+    onSearchStateChange: React.useCallback(
+      (newState) => {
+        setSearchState(newState);
+        updateURL(searchStateToURL(newState));
+      },
+      [updateURL]
+    ),
   };
 
   const showLocationFacets = isUndefined(props.showLocationFacets) ? true : props.showLocationFacets;
@@ -60,11 +66,14 @@ export const FullSearch = (props: FullSearchProps) => {
             <RefinementPane title="Category" attributes={["category"]} {...controlledSearchStateProps}>
               <StaticRefinementList attribute="category" values={CATEGORY_REFINEMENT_OPTIONS} />
             </RefinementPane>
-            {showLocationFacets && (
-              <RefinementPane title="Location" attributes={["location"]} {...controlledSearchStateProps}>
-                <RefinementList attribute="location" />
-              </RefinementPane>
-            )}
+            <RefinementPane
+              title="Location"
+              attributes={["location"]}
+              {...controlledSearchStateProps}
+              className={css({ display: showLocationFacets ? "auto" : "none" })}
+            >
+              <RefinementList attribute="location" />
+            </RefinementPane>
             <RefinementPane title="Delivery Methods" attributes={["delivery", "curbside", "takeout"]} {...controlledSearchStateProps}>
               <ToggleRefinement attribute="delivery" label="Delivery" value={true} />
               <ToggleRefinement attribute="curbside" label="Curbside Pickup" value={true} />
