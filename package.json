@@ -45,6 +45,7 @@
     "prettier": "^2.0.4",
     "query-string": "^6.12.1",
     "react": "^16.13.1",
+    "react-confetti": "^5.0.1",
     "react-dom": "^16.13.1",
     "react-imgix": "^9.0.2",
     "react-instantsearch-dom": "^6.4.0",

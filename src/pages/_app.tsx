@@ -5,7 +5,6 @@ import NProgress from "nprogress";
 import "../webflow/css/normalize.css";
 import "../webflow/css/webflow.css";
 import "../webflow/css/ottawa-covid-19-local-support.webflow.css";
-import "../webflow/css/nice-select.css";
 import "../components/nprogress.css";
 import "../components/global.css";
 

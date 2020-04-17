@@ -3,7 +3,7 @@ import { useStyletron } from "baseui";
 import { Display3, ParagraphMedium } from "baseui/typography";
 
 // From https://jsfiddle.net/Hybrid8287/gtb1avet/1/
-export const ItWorked = (props: {}) => {
+export const ItWorked = (_props: {}) => {
   return (
     <svg className="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
       <circle className="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
@@ -20,9 +20,7 @@ export const OpaqueNotification = (props: { title: React.ReactNode; message: Rea
       className={css({
         width: "100%",
         height: "100%",
-        position: "absolute",
-        top: 0,
-        left: 0,
+        padding: $theme.sizing.scale1000,
         backgroundColor: $theme.colors.primary,
         borderRadius: $theme.borders.radius200,
         display: "flex",
@@ -44,6 +42,24 @@ export const OpaqueNotification = (props: { title: React.ReactNode; message: Rea
       <Display3 color="#13141b">{props.title}</Display3>
       {props.success && <ItWorked />}
       <ParagraphMedium color="#13141b">{props.message}</ParagraphMedium>
+    </div>
+  );
+};
+
+export const NotificationOverlay = (props: { children: React.ReactNode }) => {
+  const [css] = useStyletron();
+
+  return (
+    <div
+      className={css({
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+      })}
+    >
+      {props.children}
     </div>
   );
 };

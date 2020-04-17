@@ -12,7 +12,7 @@ import { api } from "../lib/api";
 import { Row } from "../components/Row";
 import { Input } from "../components/form/Input";
 import { Textarea } from "../components/form/Textarea";
-import { OpaqueNotification } from "../components/OpaqueNotification";
+import { OpaqueNotification, NotificationOverlay } from "../components/OpaqueNotification";
 import { useStyletron } from "baseui";
 
 export interface ContactFormValues {
@@ -64,12 +64,14 @@ export const ContactForm = () => {
               </Button>
               {formik.isSubmitting && <StyledSpinnerNext />}
             </Row>
-            {submitted && (
-              <OpaqueNotification
-                title="Thanks!"
-                message="Your message has been received, we'll get back to you as soon as possible."
-                success
-              />
+            {true && (
+              <NotificationOverlay>
+                <OpaqueNotification
+                  title="Thanks!"
+                  message="Your message has been received, we'll get back to you as soon as possible."
+                  success
+                />
+              </NotificationOverlay>
             )}
           </Form>
         )}
