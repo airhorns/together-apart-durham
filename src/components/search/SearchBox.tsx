@@ -1,5 +1,6 @@
 import React from "react";
 import { connectSearchBox, connectStateResults } from "react-instantsearch-dom";
+import { connectCurrentRefinements } from "react-instantsearch-core";
 import { StateResultsProvided } from "react-instantsearch-core";
 import { Input } from "baseui/input";
 import { Search, Delete } from "baseui/icon";
@@ -21,8 +22,27 @@ const SearchBefore = () => {
   );
 };
 
-const SearchDecorations = connectStateResults((props: StateResultsProvided) => {
+const ClearInputButton = connectCurrentRefinements(({ items, refine }) => {
   const [css, theme] = useStyletron();
+
+  return (
+    <div
+      className={css({
+        display: "flex",
+        alignItems: "center",
+        paddingLeft: theme.sizing.scale500,
+        paddingRight: theme.sizing.scale500,
+        cursor: "pointer",
+      })}
+      onClick={() => refine(items as any)}
+    >
+      <Delete size="18px" />
+    </div>
+  );
+});
+
+const SearchDecorations = connectStateResults((props: StateResultsProvided) => {
+  const [css] = useStyletron();
   const hasQuery = props.searchState.query && props.searchState.query.length > 0;
   return (
     <>
@@ -37,18 +57,7 @@ const SearchDecorations = connectStateResults((props: StateResultsProvided) => {
       >
         {props.isSearchStalled && <StyledSpinnerNext />}
       </div>
-      {hasQuery && (
-        <div
-          className={css({
-            display: "flex",
-            alignItems: "center",
-            paddingLeft: theme.sizing.scale500,
-            paddingRight: theme.sizing.scale500,
-          })}
-        >
-          <Delete size="18px" />
-        </div>
-      )}
+      {hasQuery && <ClearInputButton clearsQuery />}
     </>
   );
 });
