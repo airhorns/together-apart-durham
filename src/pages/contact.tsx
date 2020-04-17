@@ -64,7 +64,7 @@ export const ContactForm = () => {
               </Button>
               {formik.isSubmitting && <StyledSpinnerNext />}
             </Row>
-            {true && (
+            {submitted && (
               <NotificationOverlay>
                 <OpaqueNotification
                   title="Thanks!"

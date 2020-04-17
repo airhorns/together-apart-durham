@@ -61,8 +61,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint": "tsc --noEmit --incremental false --tsBuildInfoFile null && prettier --loglevel warn --check \"{pages,components,lib}/**/*.{js,ts,tsx}\" && eslint --ext js,ts,tsx .",
-    "lintfix": "prettier --write --loglevel warn \"{pages,components,lib}/**/*.{js,ts,tsx}\" && eslint --ext js,ts,tsx --fix ."
+    "lint": "tsc --noEmit --incremental false --tsBuildInfoFile null && prettier --loglevel warn --check \"src/**/*.{js,ts,tsx}\" && eslint --ext js,ts,tsx src",
+    "lintfix": "prettier --write --loglevel warn \"src/**/*.{js,ts,tsx}\" && eslint --ext js,ts,tsx --fix src"
   },
   "eslintConfig": {
     "extends": "@fixings/eslint-config",
