@@ -36,16 +36,14 @@ export default class TogetherApartApp extends App<{}, TogetherApartAppState> {
   };
 
   static getDerivedStateFromError() {
-    // React Error Boundary here allows us to set state flagging the error (and
-    // later render a fallback UI).
+    // React Error Boundary here allows us to set state flagging the error (and later render a fallback UI).
     return { hasError: true };
   }
 
   componentDidCatch(error: any, errorInfo: any) {
     const errorEventId = captureException(error, { errorInfo });
 
-    // Store the event id at this point as we don't have access to it within
-    // `getDerivedStateFromError`.
+    // Store the event id at this point as we don't have access to it within `getDerivedStateFromError`.
     this.setState({ errorEventId });
   }
 

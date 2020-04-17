@@ -159,7 +159,13 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                     />
                   </div>
                   <div className="info-text-wrapper">
-                    <a href={props.hit["website"]} target="_blank" rel="noopener" className="info-link url">
+                    <a
+                      href={props.hit["website"]}
+                      target="_blank"
+                      rel="noopener"
+                      className="info-link url"
+                      style={{ textOverflow: "ellipsis", maxWidth: "225px", whiteSpace: "nowrap", overflow: "hidden" }}
+                    >
                       {props.hit["website"]}
                     </a>
                   </div>
