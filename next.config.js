@@ -18,6 +18,9 @@ module.exports = nextSourceMaps(
         config.resolve.alias["@sentry/node"] = "@sentry/browser";
       }
 
+      config.externals = config.externals || {};
+      config.externals["styletron-server"] = "styletron-server";
+
       return config;
     },
   })

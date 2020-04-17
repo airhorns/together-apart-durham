@@ -40,7 +40,6 @@ export default (props: LocationsPageProps) => (
 export const getStaticProps: GetStaticProps<LocationsPageProps, { slug: string }> = async (_context) => {
   await $importer.prepare();
 
-  console.log($importer.locations);
   return {
     props: {
       locations: sortBy(values($importer.locations) as any[], "name"),

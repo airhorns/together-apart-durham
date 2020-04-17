@@ -1,6 +1,6 @@
 import React from "react";
 import Router from "next/router";
-import App, { AppContext, AppProps } from "next/app";
+import App from "next/app";
 import NProgress from "nprogress";
 import "../webflow/css/normalize.css";
 import "../webflow/css/webflow.css";
@@ -29,45 +29,11 @@ interface TogetherApartAppState {
   errorEventId?: string;
 }
 
-interface TogetherApartAppProps {
-  hasError: boolean;
-  errorEventId?: string;
-}
-
-export default class TogetherApartApp extends App<TogetherApartAppProps, TogetherApartAppState> {
+export default class TogetherApartApp extends App<{}, TogetherApartAppState> {
   state = {
     hasError: false,
     errorEventId: undefined,
   };
-
-  // Wrap initial props getting in sentry error handling code
-  static async getInitialProps({ Component, ctx }: AppContext) {
-    try {
-      let pageProps = {};
-
-      if (Component.getInitialProps) {
-        pageProps = await Component.getInitialProps(ctx);
-      }
-
-      return { pageProps };
-    } catch (error) {
-      // Capture errors that happen during a page's getInitialProps.
-      // This will work on both client and server sides.
-      const errorEventId = captureException(error, ctx);
-      return {
-        hasError: true,
-        errorEventId,
-      } as any;
-    }
-  }
-
-  static getDerivedStateFromProps(props: AppProps & TogetherApartAppProps, state: TogetherApartAppState) {
-    // If there was an error generated within getInitialProps, and we haven't yet seen an error, we add it to this.state here
-    return {
-      hasError: props.hasError || state.hasError || false,
-      errorEventId: props.errorEventId || state.errorEventId || undefined,
-    };
-  }
 
   static getDerivedStateFromError() {
     // React Error Boundary here allows us to set state flagging the error (and

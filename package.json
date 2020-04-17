@@ -57,6 +57,9 @@
     "webflow-api": "^0.5.0",
     "yup": "^0.28.3"
   },
+  "resolutions": {
+    "styletron-react": "5.2.7"
+  },
   "scripts": {
     "dev": "next",
     "build": "next build",
