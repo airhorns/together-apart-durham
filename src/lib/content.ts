@@ -86,11 +86,13 @@ export class Importer {
     const stats = {
       allTotal: 0,
       publishedTotal: 0,
-      locationCounts: values(this.locations).reduce((agg, location) => {
+      draftTotal: 0,
+      archivedTotal: 0,
+      publishedByLocationCounts: values(this.locations).reduce((agg, location) => {
         agg[location.name] = 0;
         return agg;
       }, {} as Record<string, number>),
-      categoryCounts: values(this.categories).reduce((agg, category) => {
+      publishedByCategoryCounts: values(this.categories).reduce((agg, category) => {
         agg[category.name] = 0;
         return agg;
       }, {} as Record<string, number>),
@@ -100,13 +102,16 @@ export class Importer {
       stats.allTotal += page.items.length;
       const published = page.items.filter(this.readyForPublish);
       stats.publishedTotal += published.length;
+      stats.draftTotal += page.items.filter((item) => item["_draft"] && !item["_archived"]).length;
+      stats.archivedTotal += page.items.filter((item) => item["_archived"]).length;
+
       published.forEach((item) => {
         let location, category;
         if ((location = this.locationNameForItem(item))) {
-          stats.locationCounts[location] += 1;
+          stats.publishedByLocationCounts[location] += 1;
         }
         if ((category = this.categoryNameForItem(item))) {
-          stats.categoryCounts[category] += 1;
+          stats.publishedByCategoryCounts[category] += 1;
         }
       });
     });
