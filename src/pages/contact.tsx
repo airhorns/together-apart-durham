@@ -12,6 +12,8 @@ import { api } from "../lib/api";
 import { Row } from "../components/Row";
 import { Input } from "../components/form/Input";
 import { Textarea } from "../components/form/Textarea";
+import { OpaqueNotification } from "../components/OpaqueNotification";
+import { useStyletron } from "baseui";
 
 export interface ContactFormValues {
   name: string;
@@ -20,6 +22,8 @@ export interface ContactFormValues {
 }
 
 export const ContactForm = () => {
+  const [submitted, setSubmitted] = React.useState(false);
+  const [css] = useStyletron();
   return (
     <div className="w-form">
       <Formik
@@ -36,7 +40,7 @@ export const ContactForm = () => {
         onSubmit={async (values, helpers) => {
           try {
             await api.post("/contact", values);
-            toaster.positive("Contact form submitted! We'll be in touch ASAP!", {});
+            setSubmitted(true);
           } catch (e) {
             toaster.negative("There was an error submitting your form. Please try again.", { autoHideDuration: 3000 });
           }
@@ -44,7 +48,7 @@ export const ContactForm = () => {
         }}
       >
         {(formik) => (
-          <Form>
+          <Form className={css({ position: "relative" })}>
             <h2>Contact Us</h2>
             <p>
               <strong>Note:</strong> If you&#x27;d like to submit a business for inclusion on Together Apart, that&#x27;s done{" "}
@@ -60,30 +64,16 @@ export const ContactForm = () => {
               </Button>
               {formik.isSubmitting && <StyledSpinnerNext />}
             </Row>
+            {submitted && (
+              <OpaqueNotification
+                title="Thanks!"
+                message="Your message has been received, we'll get back to you as soon as possible."
+                success
+              />
+            )}
           </Form>
         )}
       </Formik>
-      <div className="success w-form-done">
-        <div className="success-wrapper">
-          <div
-            data-w-id="7d6eafb1-a27f-0300-96c1-ce5501eb7082"
-            data-animation-type="lottie"
-            data-src="https://uploads-ssl.webflow.com/5e7a31dcdd44a76199b8112d/5e7a31dd4dd994c4414fbd0d_lf30_editor_FcQPfq.json"
-            data-loop="0"
-            data-direction="1"
-            data-autoplay="0"
-            data-is-ix2-target="1"
-            data-renderer="svg"
-            data-default-duration="1.5015014403440954"
-            data-duration="0"
-            className="lottie-animation"
-          ></div>
-          <div>Thank you! We&#x27;ll try to get back to you within 24 hours.</div>
-        </div>
-      </div>
-      <div className="error-message w-form-fail">
-        <div>Oops! Something went wrong while submitting the form.</div>
-      </div>
     </div>
   );
 };

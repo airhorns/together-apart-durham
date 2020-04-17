@@ -1,9 +1,12 @@
 import React from "react";
+import Router from "next/router";
 import App, { AppContext, AppProps } from "next/app";
+import NProgress from "nprogress";
 import "../webflow/css/normalize.css";
 import "../webflow/css/webflow.css";
 import "../webflow/css/ottawa-covid-19-local-support.webflow.css";
 import "../webflow/css/nice-select.css";
+import "../components/nprogress.css";
 import "../components/global.css";
 
 import { styletron, debug } from "../lib/styletron";
@@ -14,6 +17,13 @@ import { theme } from "../lib/theme";
 import sentry from "../lib/sentry";
 
 const { captureException } = sentry();
+
+Router.events.on("routeChangeStart", (url) => {
+  console.log(`Loading: ${url}`);
+  NProgress.start();
+});
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 
 interface TogetherApartAppState {
   hasError: boolean;
