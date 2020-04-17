@@ -6,7 +6,7 @@ import { Button, SHAPE } from "baseui/button";
 import { Drawer, ANCHOR, SIZE } from "baseui/drawer";
 import { ChevronDown } from "baseui/icon";
 import { useStyletron } from "baseui";
-import { searchClient, INDEX_NAME } from "./client";
+import { searchClient, INDEX_NAME } from "./searchClient";
 
 export const RefinementPane = connectStateResults(
   (

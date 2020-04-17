@@ -1,5 +1,5 @@
 import React from "react";
-import Document, { Head, Main, NextScript, Html, DocumentInitialProps } from "next/document";
+import Document, { Head, Main, NextScript, Html } from "next/document";
 import { Provider as StyletronProvider } from "styletron-react";
 import { styletron } from "../lib/styletron";
 import { Server, Sheet } from "styletron-engine-atomic";
@@ -11,21 +11,16 @@ interface ExtraProps {
 
 export default class StyledDocument extends Document<ExtraProps> {
   static async getInitialProps(ctx: any) {
-    const originalRenderPage = ctx.renderPage;
+    const page = await ctx.renderPage((App: any) => (props: any) => {
+      return (
+        <StyletronProvider value={styletron}>
+          <App {...props} />
+        </StyletronProvider>
+      );
+    });
 
-    // https://nextjs.org/docs/advanced-features/custom-document#customizing-renderpage
-    ctx.renderPage = () =>
-      originalRenderPage({
-        enhanceApp: (App: any) => (props: any) => (
-          <StyletronProvider value={styletron}>
-            <App {...props} />
-          </StyletronProvider>
-        ),
-      });
-
-    const initialProps = await Document.getInitialProps(ctx);
-    (initialProps as DocumentInitialProps & ExtraProps).stylesheets = (styletron as Server).getStylesheets() || [];
-    return initialProps;
+    const stylesheets = (styletron as Server).getStylesheets() || [];
+    return { ...page, stylesheets };
   }
 
   render() {

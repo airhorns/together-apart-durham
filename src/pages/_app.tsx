@@ -17,9 +17,15 @@ import sentry from "../lib/sentry";
 
 const { captureException } = sentry();
 
+const getPathFromUrl = (url: string) => {
+  return url.split("?")[0];
+};
+
 Router.events.on("routeChangeStart", (url) => {
-  console.log(`Loading: ${url}`);
-  NProgress.start();
+  if (getPathFromUrl(url) != getPathFromUrl(window.location.href)) {
+    console.log(`Loading: ${url}`);
+    NProgress.start();
+  }
 });
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());

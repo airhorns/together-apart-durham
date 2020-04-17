@@ -4,7 +4,7 @@ import { Pagination as PaginationControl } from "baseui/pagination";
 
 export const Pagination = connectPagination(({ currentRefinement, nbPages, refine }) => (
   <PaginationControl
-    numPages={nbPages}
+    numPages={Math.min(nbPages, 1)}
     currentPage={currentRefinement}
     onPageChange={({ nextPage }) => refine(Math.min(Math.max(nextPage, 1), nbPages))}
   />

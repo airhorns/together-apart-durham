@@ -21,7 +21,7 @@ export default (props: LocationPageProps) => (
       With retailers and restaurants in {props.location.name} temporarily shut down due to COVID-19, many folks are struggling. Find out who
       is open for business in your area and how to support them best here.
     </HeroCallout>
-    <FullSearch {...props} />
+    <FullSearch searchState={props.searchState} resultsState={props.resultsState} showLocationFacets={false} />
   </Layout>
 );
 

@@ -8,8 +8,8 @@
     "@sentry/browser": "^5.15.4",
     "@sentry/integrations": "^5.15.4",
     "@sentry/node": "^5.15.4",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
+    "@testing-library/jest-dom": "^5.5.0",
+    "@testing-library/react": "^10.0.2",
     "@testing-library/user-event": "^7.1.2",
     "@types/aws-lambda": "^8.10.49",
     "@types/classnames": "^2.2.10",
@@ -18,6 +18,7 @@
     "@types/lodash-es": "^4.17.3",
     "@types/node": "^13.11.1",
     "@types/nprogress": "^0.2.0",
+    "@types/qs": "^6.9.1",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
     "@types/react-imgix": "^9.0.3",
@@ -43,6 +44,7 @@
     "next-transpile-modules": "^3.2.0",
     "nprogress": "^0.2.0",
     "prettier": "^2.0.4",
+    "qs": "^6.9.3",
     "query-string": "^6.12.1",
     "react": "^16.13.1",
     "react-confetti": "^5.0.1",
@@ -65,7 +67,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "tsc --noEmit --incremental false --tsBuildInfoFile null && prettier --loglevel warn --check \"src/**/*.{js,ts,tsx}\" && eslint --ext js,ts,tsx src",
-    "lintfix": "prettier --write --loglevel warn \"src/**/*.{js,ts,tsx}\" && eslint --ext js,ts,tsx --fix src"
+    "lintfix": "prettier --write --loglevel warn \"src/**/*.{js,ts,tsx}\" && eslint --ext js,ts,tsx --fix src",
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": "@fixings/eslint-config",
@@ -84,5 +87,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-test-renderer": "^16.9.2",
+    "babel-jest": "^25.3.0",
+    "jest": "^25.3.0",
+    "react-test-renderer": "^16.13.1"
   }
 }
