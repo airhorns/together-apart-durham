@@ -21,6 +21,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
   const hasMethods =
     props.hit["gift-card-link"] || props.hit["online-store-link"] || props.hit["online-order-link"] || props.hit["dontations-link"];
 
+  const hasDeliveryMethods = props.hit["takeout"] || props.hit["curbside"] || props.hit["delivery"];
   const hasDeliveryApps = DeliveryApps.some(({ key }) => !!props.hit[key]);
 
   return (
@@ -187,24 +188,26 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                   </div>
                 </div>
               )}
-              <div className="website-wrap">
-                <div className="icon-wrapper">
-                  <img
-                    src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e7a31dd4dd99467364fbcf7_Delivery%20Truck.svg"
-                    width="20"
-                    alt=""
-                  />
+              {hasDeliveryMethods && (
+                <div className="website-wrap">
+                  <div className="icon-wrapper">
+                    <img
+                      src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e7a31dd4dd99467364fbcf7_Delivery%20Truck.svg"
+                      width="20"
+                      alt=""
+                    />
+                  </div>
+                  <div className="info-text-wrapper app-wrapper">
+                    {props.hit["takeout"] && (
+                      <span className="info-link app-tile no-pointer">
+                        {props.hit.category === "restaurant" ? "Takeout" : "In Store Pickup"}
+                      </span>
+                    )}
+                    {props.hit.delivery && <span className="info-link app-tile no-pointer">Home Delivery</span>}
+                    {props.hit.curbside && <span className="info-link app-tile no-pointer">Curbside Pickup</span>}
+                  </div>
                 </div>
-                <div className="info-text-wrapper app-wrapper">
-                  {props.hit["takeout"] && (
-                    <span className="info-link app-tile no-pointer">
-                      {props.hit.category === "restaurant" ? "Takeout" : "In Store Pickup"}
-                    </span>
-                  )}
-                  {props.hit.delivery && <span className="info-link app-tile no-pointer">Home Delivery</span>}
-                  {props.hit.curbside && <span className="info-link app-tile no-pointer">Curbside Pickup</span>}
-                </div>
-              </div>
+              )}
               {hasDeliveryApps && (
                 <div className="website-wrap">
                   <div className="icon-wrapper">
