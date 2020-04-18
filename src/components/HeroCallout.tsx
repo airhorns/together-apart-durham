@@ -15,7 +15,6 @@ export const HeroCallout = (props: { heading: React.ReactNode; children: React.R
 
 export const SupportLocalCallout = () => (
   <HeroCallout heading="Support local businesses when you can.">
-    With retailers and restaurants in Ottawa temporarily shut down due to COVID-19, many folks are struggling. This site is meant to be a
-    resource for the residents of this city to find local spots to order from and support.
+    Small businesses in Ottawa are open and need your support to stay afloat during the pandemic.
   </HeroCallout>
 );
