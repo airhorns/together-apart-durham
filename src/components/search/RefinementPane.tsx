@@ -7,6 +7,7 @@ import { Drawer, ANCHOR, SIZE } from "baseui/drawer";
 import { ChevronDown } from "baseui/icon";
 import { useStyletron } from "baseui";
 import { searchClient, INDEX_NAME } from "./searchClient";
+import { compact } from "lodash-es";
 
 export const RefinementPane = connectStateResults(
   (
@@ -22,6 +23,8 @@ export const RefinementPane = connectStateResults(
     const [css, $theme] = useStyletron();
     const [drawerOpen, setDrawerOpen] = React.useState(false);
 
+    const allRefinements: { [key: string]: string[] } = props.searchState.refinementList || {};
+    const refinementCount = compact(props.attributes.flatMap((attribute) => allRefinements[attribute])).length;
     return (
       <div className={props.className}>
         <HeadingLevel>
@@ -64,13 +67,14 @@ export const RefinementPane = connectStateResults(
                   style: {
                     marginRight: $theme.sizing.scale600,
                     whiteSpace: "nowrap",
+                    fontWeight: refinementCount > 0 ? "bold" : undefined,
                   },
                 },
               }}
               endEnhancer={() => <ChevronDown size={24} />}
               onClick={() => setDrawerOpen(true)}
             >
-              {props.title}
+              {props.title} {refinementCount > 0 && `(${refinementCount})`}
             </Button>
           </div>
         </HeadingLevel>
