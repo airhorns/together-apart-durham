@@ -14,7 +14,7 @@ export const HeroCallout = (props: { heading: React.ReactNode; children: React.R
 );
 
 export const SupportLocalCallout = () => (
-  <HeroCallout heading="Support local businesses when you can.">
+  <HeroCallout heading="Support local when you can.">
     Small businesses in Ottawa are open and need your support to stay afloat during the pandemic.
   </HeroCallout>
 );
