@@ -7,9 +7,16 @@ export const GroupableCheckbox = <Values extends FormikValues>(
   props: { attribute: keyof Values & string; label: React.ReactNode } & CheckboxProps
 ) => {
   const formik = useFormikContext<Values>();
+  const onChange: CheckboxProps["onChange"] = React.useCallback(
+    (event) => {
+      formik.setFieldTouched(props.attribute, true);
+      formik.setFieldValue(props.attribute, event.target.checked);
+    },
+    [formik, props.attribute]
+  );
 
   return (
-    <CheckboxControl value={formik.values[props.attribute]} {...props}>
+    <CheckboxControl checked={!!formik.values[props.attribute]} onChange={onChange} {...props}>
       {props.label}
     </CheckboxControl>
   );
