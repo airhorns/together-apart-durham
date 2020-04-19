@@ -6,6 +6,7 @@ import { Input } from "baseui/input";
 import { Search, Delete } from "baseui/icon";
 import { useStyletron } from "baseui";
 import { StyledSpinnerNext } from "baseui/spinner";
+import { Row } from "../Row";
 
 const SearchBefore = () => {
   const [css, theme] = useStyletron();
@@ -45,7 +46,7 @@ const SearchDecorations = connectStateResults((props: StateResultsProvided) => {
   const [css] = useStyletron();
   const hasQuery = props.searchState.query && props.searchState.query.length > 0;
   return (
-    <>
+    <Row>
       <div
         className={css({
           marginLeft: "1em",
@@ -58,7 +59,7 @@ const SearchDecorations = connectStateResults((props: StateResultsProvided) => {
         {props.isSearchStalled && <StyledSpinnerNext />}
       </div>
       {hasQuery && <ClearInputButton clearsQuery />}
-    </>
+    </Row>
   );
 });
 
