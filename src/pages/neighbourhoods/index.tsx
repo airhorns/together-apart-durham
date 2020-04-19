@@ -25,7 +25,7 @@ export default (props: LocationsPageProps) => (
       <Card>
         <StyledBody>
           {props.locations.map((location) => (
-            <Link key={location._id} href="/locations/[slug]" as={`/locations/${location.slug}`}>
+            <Link key={location._id} href="/neighbourhoods/[slug]" as={`/neighbourhoods/${location.slug}`}>
               <a>
                 <Display3>{location.name}</Display3>
               </a>
