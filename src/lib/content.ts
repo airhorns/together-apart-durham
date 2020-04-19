@@ -1,9 +1,7 @@
 import Webflow from "webflow-api";
 import algoliasearch, { SearchIndex } from "algoliasearch";
-import dotenv from "dotenv";
 import { assert } from "./utils";
-import { keyBy, pick, values, omit } from "lodash-es";
-dotenv.config();
+import { keyBy, pick, omit } from "lodash-es";
 
 interface WebflowItem {
   _id: string;
@@ -18,9 +16,11 @@ interface WebflowItemsPage {
   total: number;
 }
 
-const stripWebflowFunctions = (item: { [key: string]: any }) => omit(item, ["update", "remove"]);
+export const stripWebflowFunctions = (item: { [key: string]: any }) => omit(item, ["update", "remove"]);
+export const stripWebflowManagedFields = (item: { [key: string]: any }) =>
+  omit(item, ["_id", "updated-on", "updated-by", "created-on", "created-by", "published-on", "published-by"]);
 
-export class Importer {
+export class ContentBackend {
   static BUSINESSES_COLLECTION_ID = "5e7a88e0ded784db2c263c6a";
   static LOCATIONS_COLLECTION_ID = "5e7a88e0ded78464ab263c6c";
   static CATEGORIES_COLLECTION_ID = "5e7a88e0ded784470a263c6b";
@@ -48,7 +48,7 @@ export class Importer {
     this.locations = keyBy(
       (
         await this.$webflow.items({
-          collectionId: Importer.LOCATIONS_COLLECTION_ID,
+          collectionId: ContentBackend.LOCATIONS_COLLECTION_ID,
         })
       ).items.map(stripWebflowFunctions),
       "_id"
@@ -56,7 +56,7 @@ export class Importer {
     this.categories = keyBy(
       (
         await this.$webflow.items({
-          collectionId: Importer.CATEGORIES_COLLECTION_ID,
+          collectionId: ContentBackend.CATEGORIES_COLLECTION_ID,
         })
       ).items.map(stripWebflowFunctions),
       "_id"
@@ -77,46 +77,8 @@ export class Importer {
       console.log(`saved result batch, size=${saveResponse.objectIDs.length}`);
     });
 
+    console.log("sync complete", { totalSaved });
     return totalSaved;
-  }
-
-  async stats() {
-    await this.prepare();
-
-    const stats = {
-      allTotal: 0,
-      publishedTotal: 0,
-      draftTotal: 0,
-      archivedTotal: 0,
-      publishedByLocationCounts: values(this.locations).reduce((agg, location) => {
-        agg[location.name] = 0;
-        return agg;
-      }, {} as Record<string, number>),
-      publishedByCategoryCounts: values(this.categories).reduce((agg, category) => {
-        agg[category.name] = 0;
-        return agg;
-      }, {} as Record<string, number>),
-    };
-
-    await this.paginatedItems(async (page) => {
-      stats.allTotal += page.items.length;
-      const published = page.items.filter(this.readyForPublish);
-      stats.publishedTotal += published.length;
-      stats.draftTotal += page.items.filter((item) => item["_draft"] && !item["_archived"]).length;
-      stats.archivedTotal += page.items.filter((item) => item["_archived"]).length;
-
-      published.forEach((item) => {
-        let location, category;
-        if ((location = this.locationNameForItem(item))) {
-          stats.publishedByLocationCounts[location] += 1;
-        }
-        if ((category = this.categoryNameForItem(item))) {
-          stats.publishedByCategoryCounts[category] += 1;
-        }
-      });
-    });
-
-    return stats;
   }
 
   async paginatedItems(callback: (page: WebflowItemsPage) => Promise<void>) {
@@ -126,7 +88,7 @@ export class Importer {
 
     while (nextPage) {
       const page: WebflowItemsPage = await this.$webflow.items(
-        { collectionId: Importer.BUSINESSES_COLLECTION_ID },
+        { collectionId: ContentBackend.BUSINESSES_COLLECTION_ID },
         { limit: pageSize, offset }
       );
       console.log(`fetched page offset=${page.offset} total=${page.total}`);
@@ -168,6 +130,7 @@ export class Importer {
       "story",
       "special-instructions",
       "slug",
+      "image-blurhash",
       "updated-on",
       "published-on",
     ]);
@@ -175,7 +138,7 @@ export class Importer {
     ret.objectID = item["_id"];
     ret.location = this.locationNameForItem(item);
     ret.category = this.categoryNameForItem(item);
-    ret.hours = Importer.HOURS[item["status"]];
+    ret.hours = ContentBackend.HOURS[item["status"]];
     ret["header_image"] = item["image-field"]["url"];
 
     return ret;
@@ -190,4 +153,4 @@ export class Importer {
   }
 }
 
-export const $importer = new Importer();
+export const $backend = new ContentBackend();

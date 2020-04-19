@@ -22,7 +22,7 @@ const CATEGORY_REFINEMENT_OPTIONS = ["Grocery", "Restaurant", "Retail", "Brewery
 export interface FullSearchProps {
   resultsState?: any;
   searchState?: any;
-  showLocationFacets?: boolean;
+  showNeighbourhoodFacets?: boolean;
   path: string;
 }
 
@@ -43,7 +43,7 @@ export const FullSearch = (props: FullSearchProps) => {
     ),
   };
 
-  const showLocationFacets = isUndefined(props.showLocationFacets) ? true : props.showLocationFacets;
+  const shownNeighbourhoodFacets = isUndefined(props.showNeighbourhoodFacets) ? true : props.showNeighbourhoodFacets;
 
   return (
     <InstantSearch searchClient={searchClient} indexName={INDEX_NAME} resultsState={props.resultsState} {...controlledSearchStateProps}>
@@ -67,10 +67,10 @@ export const FullSearch = (props: FullSearchProps) => {
               <StaticRefinementList attribute="category" values={CATEGORY_REFINEMENT_OPTIONS} />
             </RefinementPane>
             <RefinementPane
-              title="Location"
+              title="Neighbourhood"
               attributes={["location"]}
               {...controlledSearchStateProps}
-              className={css({ display: showLocationFacets ? "auto" : "none" })}
+              className={css({ display: shownNeighbourhoodFacets ? "auto" : "none" })}
             >
               <RefinementList attribute="location" />
             </RefinementPane>

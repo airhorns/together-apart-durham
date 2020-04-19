@@ -17,3 +17,7 @@ export function assert<T>(value: T | undefined | null): T {
   }
   return value;
 }
+
+export const sleep = (ms: number) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};

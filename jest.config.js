@@ -6,7 +6,7 @@ module.exports = {
     "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
     "^.+\\.css$": "<rootDir>/test/config/cssTransform.js",
   },
-  transformIgnorePatterns: ["<rootDir>/node_modules/(?!lodash-es)", "^.+\\.module\\.(css|sass|scss)$"],
+  transformIgnorePatterns: ["<rootDir>/node_modules/(?!lodash-es|react-blurhash)", "^.+\\.module\\.(css|sass|scss)$"],
   moduleNameMapper: {
     "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
   },

@@ -5,7 +5,7 @@ import { Card, StyledBody } from "baseui/card";
 import { Layout } from "../../components/layout/Layout";
 import { SupportLocalCallout } from "../../components/HeroCallout";
 import { Meta } from "../../components/Meta";
-import { $importer } from "../../lib/content";
+import { $backend } from "../../lib/content";
 import Link from "next/link";
 import { Display3 } from "baseui/typography";
 
@@ -38,11 +38,11 @@ export default (props: LocationsPageProps) => (
 );
 
 export const getStaticProps: GetStaticProps<LocationsPageProps, { slug: string }> = async (_context) => {
-  await $importer.prepare();
+  await $backend.prepare();
 
   return {
     props: {
-      locations: sortBy(values($importer.locations) as any[], "name"),
+      locations: sortBy(values($backend.locations) as any[], "name"),
     },
   };
 };

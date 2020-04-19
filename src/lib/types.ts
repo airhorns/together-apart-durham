@@ -23,6 +23,7 @@ export type BusinessDoc = {
   slug: string;
   "updated-on": string;
   "published-on": string;
+  "image-blurhash": string | null;
   location?: string | null;
   category?: string | null;
   hours?: string | null;

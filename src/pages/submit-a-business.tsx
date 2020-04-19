@@ -14,7 +14,7 @@ import { Textarea } from "../components/form/Textarea";
 import { OpaqueNotification } from "../components/OpaqueNotification";
 import { useStyletron } from "baseui";
 import { GetStaticProps } from "next";
-import { $importer } from "../lib/content";
+import { $backend } from "../lib/content";
 import { values, sortBy } from "lodash-es";
 import { HeroCallout } from "../components/HeroCallout";
 import { Heading, HeadingLevel } from "baseui/heading";
@@ -23,6 +23,7 @@ import { FormControl } from "baseui/form-control";
 import { GroupableCheckbox } from "../components/form/Checkbox";
 import { CheckboxProps } from "baseui/checkbox";
 import { StaticLink } from "../components/StaticLink";
+import { CurrentSite } from "../lib/sites";
 
 const Confetti = dynamic(() => import("../components/Confetti"), { ssr: false });
 
@@ -129,9 +130,9 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
               <Input<SubmitFormValues> label="Business Website URL" attribute="websiteURL" placeholder="http://example.com" />
               <Input<SubmitFormValues> label="Business Phone Number" attribute="phoneNumber" placeholder="(613) 111-2233" />
               <Select<SubmitFormValues>
-                label="Business Location"
+                label="Business Neighbourhood"
                 attribute="location"
-                placeholder="Select a location ..."
+                placeholder="Select a neighbourhood ..."
                 options={props.locations}
               />
               <Select<SubmitFormValues>
@@ -227,7 +228,7 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
                   <Input<SubmitFormValues>
                     label="Food Order URL"
                     attribute="orderFoodURL"
-                    placeholder="http://www.ubereats.com/ca/ottawa/food-delivery/a-business-name"
+                    placeholder="http://www.ubereats.com/ca/food-delivery/a-business-name"
                     caption="If customers can order food online, enter the URL to place an order."
                   />
                   <FormControl
@@ -317,12 +318,14 @@ export default (props: SubmitProps) => {
   return (
     <Layout>
       <Meta title="Submit A Business" />
-      <HeroCallout heading="Ottawa gives its support.">
+      <HeroCallout heading={`${CurrentSite.regionName} gives its support.`}>
         Please use this form to submit a business for inclusion in the directory. We do our best to review and list every submission within
         24 hours.
         <br />‍<br />
-        <strong>At this time, we will only be accepting Ottawa-area-founded businesses for submissions.</strong> Thanks for your
-        understanding!
+        <strong>
+          At this time, we will only be accepting businesses founded in the {CurrentSite.regionName} region for submissions.
+        </strong>{" "}
+        Thanks for your understanding!
         <br />
       </HeroCallout>
       <div className="narrow-container">
@@ -354,16 +357,16 @@ export default (props: SubmitProps) => {
 };
 
 export const getStaticProps: GetStaticProps<SubmitProps> = async (_ctx) => {
-  await $importer.prepare();
+  await $backend.prepare();
 
   return {
     props: {
       locations: sortBy(
-        values($importer.locations).map((item) => ({ id: item._id, label: item.name })),
+        values($backend.locations).map((item) => ({ id: item._id, label: item.name })),
         "label"
       ),
       categories: sortBy(
-        values($importer.categories).map((item) => ({ id: item._id, label: item.name })),
+        values($backend.categories).map((item) => ({ id: item._id, label: item.name })),
         "label"
       ),
     },

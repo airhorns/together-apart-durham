@@ -1,4 +1,5 @@
 import React from "react";
+import { CurrentSite } from "../lib/sites";
 
 export const HeroCallout = (props: { heading: React.ReactNode; children: React.ReactNode }) => (
   <div className="hero-section">
@@ -15,6 +16,6 @@ export const HeroCallout = (props: { heading: React.ReactNode; children: React.R
 
 export const SupportLocalCallout = () => (
   <HeroCallout heading="Support local when you can.">
-    Small businesses in Ottawa are open and need your support to stay afloat during the pandemic.
+    Small businesses in the {CurrentSite.regionName} region are open and need your support to stay afloat during the pandemic.
   </HeroCallout>
 );

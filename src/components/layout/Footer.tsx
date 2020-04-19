@@ -1,5 +1,6 @@
 import React from "react";
 import { StaticLink } from "../StaticLink";
+import { CurrentSite } from "../../lib/sites";
 
 const Spacer = () => <> • </>;
 
@@ -17,13 +18,13 @@ export const Footer = (_props: {}) => (
           </a>
         </div>
         <p className="footer-paragraph">
-          Because Ottawa kicks ass. <StaticLink href="/contact">Contact Us</StaticLink> if you see a mistake, want more information, or to
-          start this for your own community!
+          Because {CurrentSite.regionName} kicks ass. <StaticLink href="/contact">Contact Us</StaticLink> if you see a mistake, want more
+          information, or to start this for your own community!
           <br />
           This information is crowdsourced, so please excuse any inaccuracy and let us know so we can fix it!
           <br />
-          <StaticLink href="/locations" className="footer-link">
-            All Locations
+          <StaticLink href="/neighbourhood" className="footer-link">
+            All Neighbourhoods
           </StaticLink>
           <Spacer />
           <StaticLink href="/credits" className="footer-link">

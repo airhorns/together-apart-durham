@@ -8,14 +8,14 @@ import { $backend } from "../../lib/content";
 import { values, find } from "lodash-es";
 import { pathToSearchState } from "../../components/search/searchClient";
 
-interface LocationPageProps extends FullSearchProps {
+interface NeighbourhoodPageProps extends FullSearchProps {
   location: {
     slug: string;
     name: string;
   };
 }
 
-export default (props: LocationPageProps) => {
+export default (props: NeighbourhoodPageProps) => {
   let searchState = props.searchState;
 
   // This page is statically generated ignoring the query params. Interpret them now live to rerender if required.
@@ -35,7 +35,7 @@ export default (props: LocationPageProps) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<LocationPageProps, { slug: string }> = async (context) => {
+export const getStaticProps: GetStaticProps<NeighbourhoodPageProps, { slug: string }> = async (context) => {
   await $backend.prepare();
   const searchState: any = {};
 
@@ -52,7 +52,7 @@ export const getStaticProps: GetStaticProps<LocationPageProps, { slug: string }>
   return {
     props: {
       ...(await getSearchServerSideProps(searchState)),
-      path: "/locations/[slug]",
+      path: "/neighbourhoods/[slug]",
       location: location as any,
     },
   };

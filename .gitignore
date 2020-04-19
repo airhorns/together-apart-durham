@@ -26,4 +26,4 @@ yarn-error.log*
 
 ottawa-covid-19-local-support.webflow
 .env
-search-sync/*.json
+scratch

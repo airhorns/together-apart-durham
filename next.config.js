@@ -1,11 +1,13 @@
+require("dotenv").config();
 const webpack = require("webpack");
-const withTM = require("next-transpile-modules")(["lodash-es"]);
+const withTM = require("next-transpile-modules")(["lodash-es", "react-blurhash"]);
 const nextSourceMaps = require("@zeit/next-source-maps");
 
 module.exports = nextSourceMaps(
   withTM({
     env: {
       SENTRY_DSN: process.env.SENTRY_DSN,
+      CURRENT_SITE: process.env.CURRENT_SITE,
     },
     webpack: (config, { isServer, buildId }) => {
       config.plugins.push(
