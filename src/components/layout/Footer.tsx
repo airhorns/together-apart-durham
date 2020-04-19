@@ -23,7 +23,7 @@ export const Footer = (_props: {}) => (
           <br />
           This information is crowdsourced, so please excuse any inaccuracy and let us know so we can fix it!
           <br />
-          <StaticLink href="/neighbourhood" className="footer-link">
+          <StaticLink href="/neighbourhoods" className="footer-link">
             All Neighbourhoods
           </StaticLink>
           <Spacer />

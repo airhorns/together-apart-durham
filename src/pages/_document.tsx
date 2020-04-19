@@ -40,8 +40,8 @@ export default class StyledDocument extends Document<ExtraProps> {
             property="og:image"
           />
           <meta content="summary" name="twitter:card" />
-          <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon" />
-          <link href="images/webclip.png" rel="apple-touch-icon" />
+          <link href="/images/favicon.png" rel="shortcut icon" type="image/x-icon" />
+          <link href="/images/webclip.png" rel="apple-touch-icon" />
           {TrackingScripts}
           {this.props.stylesheets.map((sheet, i) => (
             <style

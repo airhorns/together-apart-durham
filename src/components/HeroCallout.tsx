@@ -7,7 +7,7 @@ export const HeroCallout = (props: { heading: React.ReactNode; children: React.R
       <div className="hero-content">
         <h1 className="hero-heading">{props.heading}</h1>
         <div className="paragraph-container">
-          <p className="hero-paragraph">{props.children}</p>
+          <div className="hero-paragraph">{props.children}</div>
         </div>
       </div>
     </div>
