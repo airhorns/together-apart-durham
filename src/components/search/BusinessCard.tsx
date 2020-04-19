@@ -3,10 +3,12 @@ import classnames from "classnames";
 import { Hit } from "react-instantsearch-core";
 import { Highlight } from "react-instantsearch-dom";
 import { Blurhash } from "react-blurhash/es";
+import { StatefulPopover } from "baseui/popover";
 import Imgix from "react-imgix";
 import { webflowToImgixURL } from "../../lib/utils";
 import { BusinessDoc } from "../../lib/types";
 import { RichTextHighlight } from "./RichTextHighlight";
+import { Block } from "baseui/block";
 
 const DeliveryApps: { key: keyof BusinessDoc; label: string }[] = [
   { key: "uber-eats", label: "UberEATS" },
@@ -17,8 +19,6 @@ const DeliveryApps: { key: keyof BusinessDoc; label: string }[] = [
 ];
 
 export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
-  const [showTooltip, setShowTooltip] = React.useState(false);
-
   const hasMethods =
     props.hit["gift-card-link"] || props.hit["online-store-link"] || props.hit["online-order-link"] || props.hit["dontations-link"];
 
@@ -86,24 +86,16 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                 <p className="location">{props.hit.location}</p>
                 {props.hit.story && <RichTextHighlight attribute="story" hit={props.hit} />}
               </div>
-              <img
-                src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e7a31dd4dd994117d4fbd0e_i.svg"
-                alt="Information Icon"
-                data-w-id="0149737f-095e-3262-cf45-023fb14261a6"
-                className={classnames("info-icon", {
-                  "w-condition-invisible": props.hit["special-instructions"],
-                })}
-                onMouseEnter={() => setShowTooltip(true)}
-                onMouseLeave={() => setShowTooltip(false)}
-              />
-              <div
-                className="popover"
-                style={{
-                  display: showTooltip ? "auto" : "none",
-                }}
-              >
-                <p className="special-instructions-paragraph">{props.hit["special-instructions"]}</p>
-              </div>
+              {props.hit["special-instructions"] && (
+                <StatefulPopover content={() => <Block padding={"20px"}>{props.hit["special-instructions"]}</Block>} returnFocus autoFocus>
+                  <img
+                    src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e7a31dd4dd994117d4fbd0e_i.svg"
+                    alt="Information Icon"
+                    data-w-id="0149737f-095e-3262-cf45-023fb14261a6"
+                    className="info-icon"
+                  />
+                </StatefulPopover>
+              )}
             </div>
             {hasMethods && (
               <div className="support-methods">
@@ -282,9 +274,6 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                 )}
               </div>
             </div>
-          </div>
-          <div className="special-instructions-mobile w-condition-invisible">
-            <p className="special-instructions-mobile-paragraph w-dyn-bind-empty"></p>
           </div>
         </div>
       </div>

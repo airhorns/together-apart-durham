@@ -793,6 +793,7 @@ label {
 .icon-wrapper {
   padding: 5px;
   color: #fff;
+  min-width: 30px;
 }
 
 .info-text-wrapper {
