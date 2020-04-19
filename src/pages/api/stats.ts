@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { $backend } from "../../lib/content";
-import { values } from "lodash-es";
+import { $backend } from "../../lib/backend";
+import { values, isUndefined } from "lodash-es";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -19,6 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         agg[category.name] = 0;
         return agg;
       }, {} as Record<string, number>),
+      totalBySite: {} as Record<string, number>,
     };
 
     await $backend.paginatedItems(async (page) => {
@@ -36,6 +37,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         if ((category = $backend.categoryNameForItem(item))) {
           stats.publishedByCategoryCounts[category] += 1;
         }
+      });
+
+      page.items.forEach((item) => {
+        if (isUndefined(stats.totalBySite[item.site])) stats.totalBySite[item.site] = 0;
+        stats.totalBySite[item.site] += 1;
       });
     });
 

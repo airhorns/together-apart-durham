@@ -5,7 +5,7 @@ import { Card, StyledBody } from "baseui/card";
 import { Layout } from "../../components/layout/Layout";
 import { SupportLocalCallout } from "../../components/HeroCallout";
 import { Meta } from "../../components/Meta";
-import { $backend } from "../../lib/content";
+import { $backend } from "../../lib/backend";
 import Link from "next/link";
 import { Display3 } from "baseui/typography";
 

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { $backend } from "../../lib/content";
+import { $backend } from "../../lib/backend";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   await $backend.prepare();

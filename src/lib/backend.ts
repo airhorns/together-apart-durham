@@ -3,6 +3,10 @@ import algoliasearch, { SearchIndex } from "algoliasearch";
 import { assert } from "./utils";
 import { keyBy, pick, omit } from "lodash-es";
 
+if (typeof window != "undefined") {
+  throw "Build error: backend being required on frontend";
+}
+
 interface WebflowItem {
   _id: string;
   name: string;
@@ -131,6 +135,7 @@ export class ContentBackend {
       "special-instructions",
       "slug",
       "image-blurhash",
+      "site",
       "updated-on",
       "published-on",
     ]);

@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 import sharp from "sharp";
 import { encode } from "blurhash";
-import { $backend, stripWebflowFunctions, ContentBackend, stripWebflowManagedFields } from "../../lib/content";
+import { $backend, stripWebflowFunctions, ContentBackend, stripWebflowManagedFields } from "../../lib/backend";
 
 export const blurhashImageURL = async (url: string) => {
   const response = await axios.get(url, { responseType: "arraybuffer" });

@@ -8,6 +8,7 @@ module.exports = nextSourceMaps(
     env: {
       SENTRY_DSN: process.env.SENTRY_DSN,
       CURRENT_SITE: process.env.CURRENT_SITE,
+      ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID,
     },
     webpack: (config, { isServer, buildId }) => {
       config.plugins.push(

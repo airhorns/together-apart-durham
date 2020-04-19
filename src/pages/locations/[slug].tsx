@@ -4,7 +4,7 @@ import { Layout } from "../../components/layout/Layout";
 import { HeroCallout } from "../../components/HeroCallout";
 import { Meta } from "../../components/Meta";
 import { GetStaticProps } from "next";
-import { $backend } from "../../lib/content";
+import { $backend } from "../../lib/backend";
 import { values, find } from "lodash-es";
 import { pathToSearchState } from "../../components/search/searchClient";
 

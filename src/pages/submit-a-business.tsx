@@ -14,7 +14,7 @@ import { Textarea } from "../components/form/Textarea";
 import { OpaqueNotification } from "../components/OpaqueNotification";
 import { useStyletron } from "baseui";
 import { GetStaticProps } from "next";
-import { $backend } from "../lib/content";
+import { $backend } from "../lib/backend";
 import { values, sortBy } from "lodash-es";
 import { HeroCallout } from "../components/HeroCallout";
 import { Heading, HeadingLevel } from "baseui/heading";
