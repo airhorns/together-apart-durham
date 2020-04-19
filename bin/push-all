@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -ex
+git push origin "$@"
+git push outaouais "$@"
