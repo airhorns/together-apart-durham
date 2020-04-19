@@ -27,9 +27,9 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
 
   return (
     <div className="business-item w-dyn-item">
-      <div className="card-parent" style={{ position: "relative" }}>
+      <div className="card-parent" style={{ position: "relative", zIndex: 0 }}>
         {props.hit["image-blurhash"] && (
-          <div style={{ position: "absolute", top: 0, left: 0, zIndex: -1 }}>
+          <div style={{ position: "absolute", top: 0, left: 0 }}>
             <Blurhash
               className="card-image"
               hash={props.hit["image-blurhash"]}
@@ -45,7 +45,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
           src={webflowToImgixURL(props.hit.header_image)}
           className="card-image"
           sizes="100vw"
-          htmlAttributes={{ alt: `Goods or services from ${props.hit.name}`, loading: "lazy" }}
+          htmlAttributes={{ alt: `Goods or services from ${props.hit.name}`, loading: "lazy", style: { zIndex: 1 } }}
         />
         <div className="card-content">
           <div className="div-block-2">
