@@ -8,6 +8,10 @@ This is a `next.js` app, so run `yarn install` and then `yarn start` and you're 
 
 You need to get a `.env` file.
 
-# License
+## Multisite considerations
+
+Each separate region (Ottawa vs Toronto vs whatever) is a fully separate deployment of this frontend. The `CURRENT_SITE` environment variable decides for which separate site to build the whole thing for.
+
+## License
 
 MIT
