@@ -6,7 +6,7 @@ import { Button, SHAPE } from "baseui/button";
 import { Drawer, ANCHOR, SIZE } from "baseui/drawer";
 import { ChevronDown } from "baseui/icon";
 import { useStyletron } from "baseui";
-import { searchClient, INDEX_NAME } from "./searchClient";
+import { searchClient, INDEX_NAME, searchStateToURL } from "./searchClient";
 import { compact } from "lodash-es";
 
 export const RefinementPane = connectStateResults(
@@ -24,7 +24,14 @@ export const RefinementPane = connectStateResults(
     const [drawerOpen, setDrawerOpen] = React.useState(false);
 
     const allRefinements: { [key: string]: string[] } = props.searchState.refinementList || {};
-    const refinementCount = compact(props.attributes.flatMap((attribute) => allRefinements[attribute])).length;
+    const allToggles: { [key: string]: string | boolean } = props.searchState.toggle || {};
+    const refinementCount = compact(
+      props.attributes.flatMap(
+        (attribute) =>
+          allRefinements[attribute] || (allToggles[attribute] == "true" || allToggles[attribute] === true ? "toggle" : undefined)
+      )
+    ).length;
+    console.log(props.searchState);
     return (
       <div className={props.className}>
         <HeadingLevel>

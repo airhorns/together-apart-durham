@@ -13,6 +13,7 @@ import { searchClient, searchStateToURL, INDEX_NAME, paramsToSearchState } from 
 import { findResultsState } from "react-instantsearch-dom/server";
 import { Pagination } from "./Pagination";
 import { isUndefined, debounce } from "lodash-es";
+import { ClearRefinements } from "./ClearRefinements";
 
 const CATEGORY_REFINEMENT_OPTIONS = ["Grocery", "Restaurant", "Retail", "Brewery", "Coffee", "Other"].map((value) => ({
   value,
@@ -81,6 +82,7 @@ export const FullSearch = (props: FullSearchProps) => {
               <ToggleRefinement attribute="curbside" label="Curbside Pickup" value={true} />
               <ToggleRefinement attribute="takeout" label="Takeout or In Store Pickup" value={true} />
             </RefinementPane>
+            <ClearRefinements />
           </div>
         </Cell>
         <Cell span={[4, 8, 9]}>
