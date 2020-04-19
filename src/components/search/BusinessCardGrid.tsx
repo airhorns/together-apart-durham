@@ -2,17 +2,27 @@ import React from "react";
 import { connectHits, ScrollTo } from "react-instantsearch-dom";
 import { BusinessCard } from "./BusinessCard";
 import { BusinessDoc } from "./BusinessDoc";
+import { useStyletron } from "baseui";
 
 export const BusinessCardGrid = connectHits<BusinessDoc>(({ hits }) => {
+  const [css, $theme] = useStyletron();
   return (
-    <div className="w-dyn-list">
-      <ScrollTo>
-        <div className="business-list w-dyn-items">
-          {hits.map((hit) => (
-            <BusinessCard key={hit.objectID} hit={hit} />
-          ))}
-        </div>
-      </ScrollTo>
-    </div>
+    <ScrollTo>
+      <div
+        className={css({
+          display: "grid",
+          gridAutoColumns: "1fr",
+          gridColumnGap: $theme.sizing.scale800,
+          gridRowGap: $theme.sizing.scale800,
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gridTemplateRows: "auto auto",
+          marginBottom: $theme.sizing.scale800,
+        })}
+      >
+        {hits.map((hit) => (
+          <BusinessCard key={hit.objectID} hit={hit} />
+        ))}
+      </div>
+    </ScrollTo>
   );
 });

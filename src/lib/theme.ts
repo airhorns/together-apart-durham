@@ -45,15 +45,21 @@ export const theme = createDarkTheme(primitives, {
     HeadingMedium: {
       fontFamily: displayFamily,
       fontSize: "20px",
+      fontWeight: 700,
     },
     HeadingLarge: {
       fontFamily: displayFamily,
+      fontWeight: 700,
     },
     HeadingXLarge: {
       fontFamily: displayFamily,
+      fontWeight: 700,
+      fontSize: "30px",
+      lineHeight: "36px",
     },
     HeadingXXLarge: {
       fontFamily: displayFamily,
+      fontWeight: 700,
     },
     DisplayLarge: {
       fontFamily: displayFamily,
@@ -70,6 +76,7 @@ export const theme = createDarkTheme(primitives, {
   },
   colors: {
     borderFocus: primitives.primary,
+    contentPrimary: "#FFF",
   },
   borders: {
     useRoundedCorners: true,

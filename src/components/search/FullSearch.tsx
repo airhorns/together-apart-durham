@@ -47,7 +47,7 @@ export const FullSearch = (props: FullSearchProps) => {
 
   return (
     <InstantSearch searchClient={searchClient} indexName={INDEX_NAME} resultsState={props.resultsState} {...controlledSearchStateProps}>
-      <Configure filters={props.baseFilters} distinct />
+      <Configure filters={props.baseFilters} distinct hitsPerPage={18} />
       <Grid>
         <Cell span={[4, 8, 12]}>
           <SearchBox />

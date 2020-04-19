@@ -1,11 +1,12 @@
 import React from "react";
 import { CurrentSite } from "../lib/sites";
+import { Heading } from "baseui/heading";
 
 export const HeroCallout = (props: { heading: React.ReactNode; children: React.ReactNode }) => (
   <div className="hero-section">
     <div className="container">
       <div className="hero-content">
-        <h1 className="hero-heading">{props.heading}</h1>
+        <Heading>{props.heading}</Heading>
         <div className="paragraph-container">
           <div className="hero-paragraph">{props.children}</div>
         </div>
