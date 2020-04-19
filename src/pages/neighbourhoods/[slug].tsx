@@ -64,7 +64,13 @@ export default (props: NeighbourhoodPageProps) => {
         </Cell>
       </Grid>
 
-      <FullSearch path={props.path} searchState={searchState} resultsState={props.resultsState} showNeighbourhoodFacets={false} />
+      <FullSearch
+        path={props.path}
+        searchState={searchState}
+        resultsState={props.resultsState}
+        showNeighbourhoodFacets={false}
+        baseFilters={`location:"${props.location.name}"`}
+      />
     </Layout>
   );
 };

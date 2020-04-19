@@ -1,7 +1,7 @@
 import React from "react";
 import Router from "next/router";
 import { ParsedUrlQuery } from "querystring";
-import { InstantSearch } from "react-instantsearch-dom";
+import { InstantSearch, Configure } from "react-instantsearch-dom";
 import { Grid, Cell } from "baseui/layout-grid";
 import { BusinessCardGrid } from "./BusinessCardGrid";
 import { SearchBox } from "./SearchBox";
@@ -22,6 +22,7 @@ const CATEGORY_REFINEMENT_OPTIONS = ["Grocery", "Restaurant", "Retail", "Brewery
 export interface FullSearchProps {
   resultsState?: any;
   searchState?: any;
+  baseFilters?: string;
   showNeighbourhoodFacets?: boolean;
   path: string;
 }
@@ -47,6 +48,7 @@ export const FullSearch = (props: FullSearchProps) => {
 
   return (
     <InstantSearch searchClient={searchClient} indexName={INDEX_NAME} resultsState={props.resultsState} {...controlledSearchStateProps}>
+      <Configure filters={props.baseFilters} distinct />
       <Grid>
         <Cell span={[4, 8, 12]}>
           <SearchBox />
