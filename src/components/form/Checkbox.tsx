@@ -1,22 +1,23 @@
 import React from "react";
-import { useFormikContext, FormikValues } from "formik";
+import { useFormikContext, FormikValues, useField } from "formik";
 import { FormControl, FormControlProps } from "baseui/form-control";
 import { Checkbox as CheckboxControl, CheckboxProps } from "baseui/checkbox";
 
 export const GroupableCheckbox = <Values extends FormikValues>(
   props: { attribute: keyof Values & string; label: React.ReactNode } & CheckboxProps
 ) => {
-  const formik = useFormikContext<Values>();
+  const [field, _meta, helpers] = useField(props.attribute);
+
   const onChange: CheckboxProps["onChange"] = React.useCallback(
     (event) => {
-      formik.setFieldTouched(props.attribute, true);
-      formik.setFieldValue(props.attribute, event.target.checked);
+      helpers.setTouched(true);
+      helpers.setValue(event.target.checked);
     },
-    [formik, props.attribute]
+    [helpers]
   );
 
   return (
-    <CheckboxControl checked={!!formik.values[props.attribute]} onChange={onChange} {...props}>
+    <CheckboxControl checked={!!field.value} onChange={onChange} {...props}>
       {props.label}
     </CheckboxControl>
   );
@@ -25,8 +26,9 @@ export const GroupableCheckbox = <Values extends FormikValues>(
 export const Checkbox = <Values extends FormikValues>(
   props: { label: FormControlProps["label"]; caption?: FormControlProps["caption"]; attribute: keyof Values & string } & CheckboxProps
 ) => {
-  const { errors, touched } = useFormikContext<Values>();
-  const error = touched[props.attribute] ? errors[props.attribute] : null;
+  const [_field, meta] = useField(props.attribute);
+  const error = (meta.touched && meta.error) || undefined;
+  console.log(error);
 
   return (
     <FormControl label={props.label} caption={props.caption} error={error}>

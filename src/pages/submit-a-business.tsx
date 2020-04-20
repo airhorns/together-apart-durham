@@ -42,7 +42,6 @@ export interface SubmitFormValues {
   onlineStoreURL: string;
   supportsTakeout: boolean;
   supportsDelivery: boolean;
-  supportsCurbside: boolean;
   sellsFood: boolean;
   phoneNumber: string;
   orderFoodURL: string;
@@ -80,7 +79,6 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
           onlineStoreURL: "",
           supportsTakeout: false,
           supportsDelivery: false,
-          supportsCurbside: false,
           sellsFood: false,
           phoneNumber: "",
           orderFoodURL: "",
@@ -202,6 +200,7 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
                 <FormControl
                   label="Ordering Options"
                   caption="If you take orders for physical goods, what are the different delivery methods available?"
+                  error={undefined}
                 >
                   <Row>
                     <GroupableCheckbox<SubmitFormValues>
@@ -213,11 +212,6 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
                       overrides={checkboxRowOverrides}
                       attribute="supportsTakeout"
                       label="Pickup In Store"
-                    />
-                    <GroupableCheckbox<SubmitFormValues>
-                      overrides={checkboxRowOverrides}
-                      attribute="supportsCurbside"
-                      label="Curbside Pickup"
                     />
                   </Row>
                 </FormControl>
@@ -246,12 +240,7 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
                       <GroupableCheckbox<SubmitFormValues>
                         overrides={checkboxRowOverrides}
                         attribute="supportsTakeout"
-                        label="Takeout or Inside Pickup"
-                      />
-                      <GroupableCheckbox<SubmitFormValues>
-                        overrides={checkboxRowOverrides}
-                        attribute="supportsCurbside"
-                        label="Curbside Pickup"
+                        label="Takeout or Curbside Pickup"
                       />
                     </Row>
                   </FormControl>

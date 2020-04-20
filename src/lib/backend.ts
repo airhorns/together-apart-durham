@@ -145,6 +145,7 @@ export class ContentBackend {
     ret.category = this.categoryNameForItem(item);
     ret.hours = ContentBackend.HOURS[item["status"]];
     ret["header_image"] = item["image-field"]["url"];
+    ret.pickup = ret["delivery"] || ret["curbside"];
 
     return ret;
   }

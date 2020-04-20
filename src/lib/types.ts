@@ -3,7 +3,7 @@ export type BusinessDoc = {
   takeout: boolean;
   website?: string | null;
   "phone-number"?: string | null;
-  curbside: boolean;
+  pickup: boolean;
   delivery: boolean;
   seamless: boolean;
   _archived: boolean;

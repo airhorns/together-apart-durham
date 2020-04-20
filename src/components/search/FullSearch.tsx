@@ -77,10 +77,9 @@ export const FullSearch = (props: FullSearchProps) => {
             >
               <RefinementList attribute="location" />
             </RefinementPane>
-            <RefinementPane title="Delivery Methods" attributes={["delivery", "curbside", "takeout"]} {...controlledSearchStateProps}>
+            <RefinementPane title="Delivery Methods" attributes={["delivery", "pickup"]} {...controlledSearchStateProps}>
               <ToggleRefinement attribute="delivery" label="Delivery" value={true} />
-              <ToggleRefinement attribute="curbside" label="Curbside Pickup" value={true} />
-              <ToggleRefinement attribute="takeout" label="Takeout or In Store Pickup" value={true} />
+              <ToggleRefinement attribute="pickup" label="Takeout or Pickup" value={true} />
             </RefinementPane>
             <ClearRefinements />
           </div>

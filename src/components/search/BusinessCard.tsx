@@ -22,7 +22,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
   const hasMethods =
     props.hit["gift-card-link"] || props.hit["online-store-link"] || props.hit["online-order-link"] || props.hit["dontations-link"];
 
-  const hasDeliveryMethods = props.hit["takeout"] || props.hit["curbside"] || props.hit["delivery"];
+  const hasDeliveryMethods = props.hit["pickup"] || props.hit["delivery"];
   const hasDeliveryApps = DeliveryApps.some(({ key }) => !!props.hit[key]);
 
   return (
@@ -204,13 +204,12 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                     />
                   </div>
                   <div className="info-text-wrapper app-wrapper">
-                    {props.hit["takeout"] && (
+                    {props.hit["pickup"] && (
                       <span className="info-link app-tile no-pointer">
                         {props.hit.category === "restaurant" ? "Takeout" : "In Store Pickup"}
                       </span>
                     )}
-                    {props.hit.delivery && <span className="info-link app-tile no-pointer">Home Delivery</span>}
-                    {props.hit.curbside && <span className="info-link app-tile no-pointer">Curbside Pickup</span>}
+                    {props.hit.delivery && <span className="info-link app-tile no-pointer">Delivery</span>}
                   </div>
                 </div>
               )}
