@@ -206,7 +206,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                   <div className="info-text-wrapper app-wrapper">
                     {props.hit["pickup"] && (
                       <span className="info-link app-tile no-pointer">
-                        {props.hit.category === "restaurant" ? "Takeout" : "In Store Pickup"}
+                        {props.hit.category === "Restaurant" ? "Takeout" : "In Store Pickup"}
                       </span>
                     )}
                     {props.hit.delivery && <span className="info-link app-tile no-pointer">Delivery</span>}
