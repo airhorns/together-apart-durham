@@ -32,7 +32,6 @@ export const RefinementPane = connectStateResults(
           allRefinements[attribute] || (allToggles[attribute] == "true" || allToggles[attribute] === true ? "toggle" : undefined)
       )
     ).length;
-    console.log(props.searchState);
     return (
       <div className={props.className}>
         <HeadingLevel>
