@@ -3,15 +3,15 @@ import { motion } from "framer-motion";
 import { StaticLink } from "../StaticLink";
 import { useStyletron } from "baseui";
 
-export const Overlay = (props: { isSelected: boolean }) => {
+export const Overlay = () => {
   const [css] = useStyletron();
 
   return (
     <motion.div
-      initial={false}
-      animate={{ opacity: props.isSelected ? 1 : 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      style={{ pointerEvents: props.isSelected ? "auto" : "none" }}
       className={css({
         zIndex: 1,
         position: "fixed",

@@ -1,5 +1,5 @@
 import React from "react";
-import { motion, useMotionValue, useInvertedScale } from "framer-motion";
+import { motion, useMotionValue, useInvertedScale, AnimatePresence } from "framer-motion";
 import { Hit } from "react-instantsearch-core";
 import { Highlight } from "react-instantsearch-dom";
 import { Blurhash } from "react-blurhash/es";
@@ -217,13 +217,16 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
   const [css, $theme] = useStyletron();
   return (
     <HeadingLevel>
-      <div className={css({ width: "100%", height: "100%" })} onClick={() => setIsSelected(!isSelected)} ref={containerRef}>
-        <Overlay isSelected={isSelected} />
+      <div
+        className={css({ width: "100%", height: "100%", cursor: "pointer" })}
+        onClick={() => setIsSelected(!isSelected)}
+        ref={containerRef}
+      >
+        <AnimatePresence>{isSelected && <Overlay />}</AnimatePresence>
         <div
           className={css({
             width: "100%",
-            height: "100%",
-            pointerEvents: "none",
+            height: isSelected ? "auto" : "100%",
             display: "flex",
             flexDirection: "column",
             overflow: "hidden",
@@ -297,6 +300,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
             <div
               className={css({
                 flexGrow: 1,
+                flexShrink: 0,
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
@@ -311,7 +315,13 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                   <p className="category">{props.hit.category}</p>
                 </div>
                 <div>
-                  <Heading $style={{ marginTop: $theme.sizing.scale200, marginBottom: $theme.sizing.scale200 }}>
+                  <Heading
+                    $style={{
+                      marginTop: $theme.sizing.scale200,
+                      marginBottom: $theme.sizing.scale200,
+                      ":hover": { textDecoration: "underline" },
+                    }}
+                  >
                     <Highlight attribute="name" hit={props.hit} tagName="mark" />
                   </Heading>
                   <p className="location">{props.hit.location}</p>
