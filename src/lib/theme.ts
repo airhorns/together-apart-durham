@@ -50,6 +50,7 @@ export const theme = createDarkTheme(primitives, {
     HeadingLarge: {
       fontFamily: displayFamily,
       fontWeight: 700,
+      fontSize: "24px",
     },
     HeadingXLarge: {
       fontFamily: displayFamily,

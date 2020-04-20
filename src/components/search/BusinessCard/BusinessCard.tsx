@@ -108,10 +108,10 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                paddingTop: "25px",
-                paddingBottom: "25px",
-                paddingLeft: "20px",
-                paddingRight: "20px",
+                paddingTop: $theme.sizing.scale600,
+                paddingBottom: $theme.sizing.scale700,
+                paddingLeft: $theme.sizing.scale700,
+                paddingRight: $theme.sizing.scale700,
               })}
             >
               <div className="name-and-category">
