@@ -1,6 +1,6 @@
 import React from "react";
 import { connectHits, ScrollTo } from "react-instantsearch-dom";
-import { BusinessCard } from "./BusinessCard";
+import { BusinessCard } from "./BusinessCard/BusinessCard";
 import { BusinessDoc } from "./BusinessDoc";
 import { useStyletron } from "baseui";
 
