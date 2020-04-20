@@ -1,5 +1,4 @@
 import React from "react";
-import classnames from "classnames";
 import { Hit } from "react-instantsearch-core";
 import { Highlight } from "react-instantsearch-dom";
 import { Blurhash } from "react-blurhash/es";
@@ -52,32 +51,6 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
             <div className="name-and-category">
               <div className="basic-info-wrap">
                 <p className="category">{props.hit.category}</p>
-                <img
-                  src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e7a31dd4dd99493ef4fbcf4_dot.svg"
-                  alt=""
-                  className="separator"
-                />
-                <p
-                  className={classnames("category green", {
-                    "w-condition-invisible": props.hit.hours !== "regular",
-                  })}
-                >
-                  <strong>Regular Hours</strong>
-                </p>
-                <p
-                  className={classnames("category yellow", {
-                    "w-condition-invisible": props.hit.hours !== "limited",
-                  })}
-                >
-                  <strong>Limited Hours</strong>
-                </p>
-                <p
-                  className={classnames("category red", {
-                    "w-condition-invisible": props.hit.hours !== "online_only",
-                  })}
-                >
-                  <strong>Retail Temporarily Closed</strong>
-                </p>
               </div>
               <div className="div-block-3">
                 <h2 className="business-name">
