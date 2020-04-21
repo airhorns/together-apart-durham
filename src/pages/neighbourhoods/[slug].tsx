@@ -39,7 +39,7 @@ export default (props: NeighbourhoodPageProps) => {
   const heading = props.location["location-page-header-title"] || `Support local in ${props.location.name}.`;
   const text =
     props.location["header-text"] ||
-    `Small businesses in ${props.location.name} region are open and need your support to stay afloat during the pandemic.`;
+    `Small businesses in ${props.location.name} are open and need your support to stay afloat during the pandemic.`;
 
   const headerImage = props.location["header-image"] && props.location["header-image"].url;
 
