@@ -146,6 +146,7 @@ export class ContentBackend {
     ret.hours = ContentBackend.HOURS[item["status"]];
     ret["header_image"] = item["image-field"]["url"];
     ret.pickup = ret["delivery"] || ret["curbside"];
+    ret.randomPriority = Math.random();
 
     return ret;
   }
