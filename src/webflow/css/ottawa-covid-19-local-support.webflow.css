@@ -764,8 +764,7 @@ label {
   margin-bottom: 8px;
   padding: 2px 5px;
   border-radius: 5px;
-  background-color: #f2c94c;
-  color: #13141b;
+  border: 1px solid #f2c94c;
   font-size: 12px;
 }
 

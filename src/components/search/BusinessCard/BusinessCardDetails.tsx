@@ -5,6 +5,7 @@ import { BusinessDoc } from "../../../lib/types";
 import { RichTextHighlight } from "../RichTextHighlight";
 import { useStyletron } from "baseui";
 import { Heading, HeadingLevel } from "baseui/heading";
+import { StaticLink } from "../../StaticLink";
 
 const DeliveryApps: { key: keyof BusinessDoc; label: string }[] = [
   { key: "uber-eats", label: "UberEATS" },
