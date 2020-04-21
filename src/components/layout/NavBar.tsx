@@ -2,7 +2,6 @@ import React from "react";
 import { StaticLink } from "../StaticLink";
 import { CurrentSite } from "../../lib/sites";
 import { useStyletron } from "baseui";
-import { Display3 } from "baseui/typography";
 
 export const NavBar = (props: { coBrand?: React.ReactNode }) => {
   const [css, $theme] = useStyletron();
@@ -25,16 +24,7 @@ export const NavBar = (props: { coBrand?: React.ReactNode }) => {
               <img src={CurrentSite.logoImageURL} width="159" alt="Logo" />
             </StaticLink>
             {props.coBrand && (
-              <div className={css({ display: "flex" })}>
-                <Display3
-                  $style={{
-                    fontSize: $theme.typography.font1150.fontSize,
-                    marginLeft: $theme.sizing.scale400,
-                    marginRight: $theme.sizing.scale400,
-                  }}
-                >
-                  &amp;
-                </Display3>
+              <div className={css({ display: "flex", marginLeft: $theme.sizing.scale400, marginRight: $theme.sizing.scale400 })}>
                 {props.coBrand}
               </div>
             )}
