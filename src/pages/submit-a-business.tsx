@@ -219,7 +219,7 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
 
               <HeadingLevel>
                 <Heading>Food Ordering Options</Heading>
-                <GroupableCheckbox attribute="sellsFood" label="Do you sell food or other perishables?" />
+                <GroupableCheckbox attribute="sellsFood" label="Do you sell food for pickup or delivery?" />
                 <div className={css({ display: formik.values.sellsFood ? "block" : "none" })}>
                   <Input<SubmitFormValues>
                     label="Food Order URL"
