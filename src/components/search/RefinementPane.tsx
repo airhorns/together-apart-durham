@@ -51,7 +51,14 @@ export const RefinementPane = connectStateResults(
               [$theme.mediaQuery.large]: { display: "none" },
             })}
           >
-            <Drawer isOpen={drawerOpen} autoFocus onClose={() => setDrawerOpen(false)} anchor={ANCHOR.bottom} size={SIZE.auto}>
+            <Drawer
+              isOpen={drawerOpen}
+              autoFocus
+              overrides={{ Close: { style: { width: $theme.sizing.scale1200, height: $theme.sizing.scale1200 } } }}
+              onClose={() => setDrawerOpen(false)}
+              anchor={ANCHOR.bottom}
+              size={SIZE.auto}
+            >
               <Heading styleLevel={4}>{props.title}</Heading>
               <div className={css({ padding: $theme.sizing.scale400 })}>
                 {/* This fuckery is in order to support persisting the Algolia search state when these inner components unmount. See https://github.com/algolia/react-instantsearch/issues/892 and https://www.algolia.com/doc/guides/building-search-ui/going-further/native/react/ for more information */}
