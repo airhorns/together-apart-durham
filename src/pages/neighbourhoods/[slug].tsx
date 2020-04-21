@@ -17,6 +17,7 @@ interface NeighbourhoodPageProps extends FullSearchProps {
     slug: string;
     name: string;
     "header-image"?: { url: string };
+    "location-page-nav-co-branding-logo"?: { url: string };
     "header-text"?: string;
     "location-page-header-title"?: string;
   };
@@ -31,15 +32,19 @@ export default (props: NeighbourhoodPageProps) => {
     searchState = pathToSearchState(window.location.href);
   }
 
-  const heading = props.location["location-page-header-title"] || `Support local in ${props.location.name} when you can.`;
+  const heading = props.location["location-page-header-title"] || `Support local in ${props.location.name}.`;
   const text =
     props.location["header-text"] ||
     `Small businesses in ${props.location.name} region are open and need your support to stay afloat during the pandemic.`;
 
   const headerImage = props.location["header-image"] && props.location["header-image"].url;
 
+  const coBrand = props.location["location-page-nav-co-branding-logo"] ? (
+    <img height={64} src={props.location["location-page-nav-co-branding-logo"].url} />
+  ) : null;
+
   return (
-    <Layout>
+    <Layout coBrand={coBrand}>
       <Meta title={`${props.location.name} Businesses`} />
       <Grid>
         {headerImage &&
