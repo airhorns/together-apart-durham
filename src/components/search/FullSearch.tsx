@@ -15,7 +15,7 @@ import { Pagination } from "./Pagination";
 import { isUndefined, debounce } from "lodash-es";
 import { ClearRefinements } from "./ClearRefinements";
 
-const CATEGORY_REFINEMENT_OPTIONS = ["Grocery", "Restaurant", "Retail", "Brewery", "Coffee", "Other"].map((value) => ({
+const CATEGORY_REFINEMENT_OPTIONS = ["Brewery", "Coffee", "Grocery", "Restaurant", "Retail", "Other"].map((value) => ({
   value,
   label: value,
 }));
