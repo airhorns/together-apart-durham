@@ -40,7 +40,7 @@ export default (props: NeighbourhoodPageProps) => {
   const headerImage = props.location["header-image"] && props.location["header-image"].url;
 
   const coBrand = props.location["location-page-nav-co-branding-logo"] ? (
-    <img height={64} src={props.location["location-page-nav-co-branding-logo"].url} />
+    <img width={120} src={props.location["location-page-nav-co-branding-logo"].url} />
   ) : null;
 
   return (

@@ -57,12 +57,15 @@ export const theme = createDarkTheme(primitives, {
     },
     DisplayLarge: {
       fontFamily: displayFamily,
+      fontWeight: 700,
     },
     DisplayMedium: {
       fontFamily: displayFamily,
+      fontWeight: 700,
     },
     DisplaySmall: {
       fontFamily: displayFamily,
+      fontWeight: 700,
     },
   },
   colors: {
