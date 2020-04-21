@@ -31,11 +31,10 @@ export default (props: NeighbourhoodPageProps) => {
     searchState = pathToSearchState(window.location.href);
   }
 
-  const heading = props.location["location-page-header-title"] || `Support businesses in ${props.location.name} when you can.`;
+  const heading = props.location["location-page-header-title"] || `Support local in ${props.location.name} when you can.`;
   const text =
     props.location["header-text"] ||
-    `With retailers and restaurants in ${props.location.name} temporarily shut down due to COVID-19, many folks are struggling. Find out
-  who is open for business in your area and how to support them best here.`;
+    `Small businesses in ${props.location.name} region are open and need your support to stay afloat during the pandemic.`;
 
   const headerImage = props.location["header-image"] && props.location["header-image"].url;
 
