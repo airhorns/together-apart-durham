@@ -5,12 +5,16 @@ import { HeroCallout } from "../../components/HeroCallout";
 import { Meta } from "../../components/Meta";
 import { GetStaticProps } from "next";
 import { $backend } from "../../lib/backend";
-import { values, find } from "lodash-es";
+import { values, find, keys } from "lodash-es";
 import { pathToSearchState } from "../../components/search/searchClient";
 import { Grid, Cell } from "baseui/layout-grid";
 import Imgix from "react-imgix";
-import { webflowToImgixURL } from "../../lib/utils";
+import { webflowToImgixURL, assert } from "../../lib/utils";
 import { useStyletron } from "baseui";
+
+const REDIRECTED_SLUGS: Record<string, string> = {
+  "hintonburg-mechanicsville": "wellington-west",
+};
 
 interface NeighbourhoodPageProps extends FullSearchProps {
   location: {
@@ -82,10 +86,12 @@ export default (props: NeighbourhoodPageProps) => {
 export const getStaticProps: GetStaticProps<NeighbourhoodPageProps, { slug: string }> = async (context) => {
   await $backend.prepare();
   const searchState: any = {};
+  let slug = assert(context.params).slug;
+  if (REDIRECTED_SLUGS[slug]) {
+    slug = REDIRECTED_SLUGS[slug];
+  }
 
-  const location = find($backend.locations, {
-    slug: context.params && context.params.slug,
-  });
+  const location = find($backend.locations, { slug });
 
   if (location) {
     searchState.refinementList = { location: [location.name] };
@@ -104,11 +110,16 @@ export const getStaticProps: GetStaticProps<NeighbourhoodPageProps, { slug: stri
 
 export const getStaticPaths = async () => {
   await $backend.prepare();
+  const locationPaths = values($backend.locations)
+    .map((location) => ({
+      params: { slug: location.slug },
+    }))
+    .concat(keys(REDIRECTED_SLUGS).map((slug) => ({ params: { slug } })));
+
+  console.log(locationPaths);
 
   return {
-    paths: values($backend.locations).map((location) => ({
-      params: { slug: location.slug },
-    })),
+    paths: locationPaths,
     fallback: false,
   };
 };
