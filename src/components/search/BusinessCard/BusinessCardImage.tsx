@@ -7,7 +7,7 @@ import { webflowToImgixURL } from "../../../lib/utils";
 import { BusinessDoc } from "../../../lib/types";
 import { useInvertedScale, motion } from "framer-motion";
 
-export const BusinessCardImage = (props: { hit: Hit<BusinessDoc>; isSelected: boolean }) => {
+export const BusinessCardImage = (props: { hit: Hit<BusinessDoc> }) => {
   const [css] = useStyletron();
   const inverted = useInvertedScale();
 

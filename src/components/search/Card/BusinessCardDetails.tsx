@@ -14,7 +14,7 @@ const DeliveryApps: { key: keyof BusinessDoc; label: string }[] = [
   { key: "seamless", label: "Seamless" },
 ];
 
-export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isSelected: boolean; highlight: boolean }) => {
+export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isSelected: boolean }) => {
   const hasDeliveryMethods = props.hit["takeout"] || props.hit["pickup"];
   const hasDeliveryApps = DeliveryApps.some(({ key }) => !!props.hit[key]);
   const [css, $theme] = useStyletron();
@@ -32,12 +32,7 @@ export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isSelected: 
         paddingTop: "20px",
       })}
     >
-      {props.hit.story &&
-        (props.highlight ? (
-          <RichTextHighlight attribute="story" hit={props.hit} />
-        ) : (
-          <div className="w-richtext" dangerouslySetInnerHTML={{ __html: props.hit.story }} />
-        ))}
+      {props.hit.story && <RichTextHighlight attribute="story" hit={props.hit} />}
       {props.hit["special-instructions"] && (
         <HeadingLevel>
           <div>

@@ -1,9 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { StaticLink } from "../StaticLink";
 import { useStyletron } from "baseui";
 
-export const Overlay = () => {
+export const Overlay = (_props: {}) => {
   const [css] = useStyletron();
 
   return (
@@ -23,8 +22,6 @@ export const Overlay = () => {
         transform: "translateX(-50%)",
         width: "100%",
       })}
-    >
-      <StaticLink href="/" />
-    </motion.div>
+    />
   );
 };

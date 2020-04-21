@@ -1,27 +1,24 @@
 import React from "react";
+import Router from "next/router";
 import { motion, useMotionValue, AnimatePresence } from "framer-motion";
 import { Hit } from "react-instantsearch-core";
-import { Highlight } from "react-instantsearch-dom";
 import { BusinessDoc } from "../../../lib/types";
 import { openSpring, closeSpring } from "../../animations";
 import { useScrollConstraints } from "../../hooks/use-scroll-constraints";
 import { useWheelScroll } from "../../hooks/use-wheel-scroll";
-import { Router } from "next/router";
 import { Overlay } from "../Overlay";
 import { useStyletron } from "baseui";
-import { Heading, HeadingLevel } from "baseui/heading";
+import { HeadingLevel } from "baseui/heading";
 import { BusinessCardDetails } from "./BusinessCardDetails";
 import { useInvertedBorderRadius } from "../../hooks/use-inverted-border-radius";
 import { BusinessCardImage } from "./BusinessCardImage";
+import { BusinessCardHeader } from "./BusinessCardHeader";
 
 // Distance in pixels a user has to scroll a card down before we recognise a swipe-to dismiss action.
 const dismissDistance = 150;
 
 export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
   const [isSelected, setIsSelected] = React.useState(false);
-
-  const hasMethods =
-    props.hit["gift-card-link"] || props.hit["online-store-link"] || props.hit["online-order-link"] || props.hit["dontations-link"];
 
   // Nice card poppy outty animation from https://codesandbox.io/s/app-store-ui-using-react-and-framer-motion-ecgc2
   const y = useMotionValue(0);
@@ -45,9 +42,22 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
     [zIndex, isSelected]
   );
 
+  const toggleSelected = React.useCallback(() => {
+    setIsSelected((oldValue) => {
+      if (oldValue) {
+        // selected => deselected
+        // Router.back();
+      } else {
+        // deselected => selected
+        Router.push("/businesses/[slug]", `/businesses/${props.hit.slug}`, { shallow: true });
+      }
+      return !oldValue;
+    });
+  }, [props.hit.slug]);
+
   const checkSwipeToDismiss = React.useCallback(() => {
-    return y.get() > dismissDistance && (Router as any).back();
-  }, [y]);
+    return y.get() > dismissDistance && toggleSelected();
+  }, [y, toggleSelected]);
 
   // When this card is selected, attach a wheel event listener
   const containerRef = React.useRef(null);
@@ -56,18 +66,14 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
   const [css, $theme] = useStyletron();
   return (
     <HeadingLevel>
-      <div
-        className={css({ width: "100%", height: "100%", cursor: "pointer" })}
-        onClick={() => setIsSelected(!isSelected)}
-        ref={containerRef}
-      >
-        <AnimatePresence>{isSelected && <Overlay />}</AnimatePresence>
+      <div className={css({ width: "100%", height: "100%", cursor: "pointer" })} onClick={() => toggleSelected()} ref={containerRef}>
         <div
           className={css({
             width: "100%",
             height: isSelected ? "auto" : "100%",
             display: "flex",
             flexDirection: "column",
+            alignItems: "center",
             overflow: "hidden",
             position: isSelected ? "fixed" : "relative",
             zIndex: isSelected ? 2 : "auto",
@@ -86,6 +92,12 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
             dragConstraints={constraints}
             onDrag={checkSwipeToDismiss}
             onUpdate={checkZIndex}
+            onClick={(event) => {
+              if (isSelected) {
+                // don't close the card when clicks happen inside it to allow for erroneous clicks beside buttons
+                event.stopPropagation();
+              }
+            }}
             className={css({
               position: "relative",
               display: "flex",
@@ -96,11 +108,9 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
               width: "100%",
               height: isSelected ? "auto" : "100%",
               maxWidth: "700px",
-              marginLeft: "auto",
-              marginRight: "auto",
             })}
           >
-            <BusinessCardImage hit={props.hit} isSelected={isSelected} />
+            <BusinessCardImage hit={props.hit} />
             <div
               className={css({
                 flexGrow: 1,
@@ -114,83 +124,12 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                 paddingRight: $theme.sizing.scale700,
               })}
             >
-              <div className="name-and-category">
-                <div className="basic-info-wrap">
-                  <p className="category">{props.hit.category}</p>
-                </div>
-                <div>
-                  <Heading
-                    $style={{
-                      marginTop: $theme.sizing.scale200,
-                      marginBottom: $theme.sizing.scale200,
-                      ":hover": { textDecoration: "underline" },
-                    }}
-                  >
-                    <Highlight attribute="name" hit={props.hit} tagName="mark" />
-                  </Heading>
-                  <p className="location">{props.hit.location}</p>
-                </div>
-              </div>
-              {hasMethods && (
-                <div className="support-methods">
-                  {props.hit["gift-card-link"] && (
-                    <a href={props.hit["gift-card-link"]} target="_blank" rel="noopener" className="method gift-card-method w-inline-block">
-                      <img
-                        src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e8507072b9389f28bb3ea8f_Gift%20Card%20black.svg"
-                        alt=""
-                        className="icon-image"
-                      />
-                      <div className="method-text-wrapper">
-                        <div className="method-text gc">Buy a Gift Card</div>
-                      </div>
-                    </a>
-                  )}
-                  {props.hit["online-store-link"] && (
-                    <a
-                      href={props.hit["online-store-link"]}
-                      target="_blank"
-                      rel="noopener"
-                      className="method shop-online-method w-inline-block"
-                    >
-                      <img
-                        src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e850708db1f6e2a6d8bdcc1_order-online%20black.svg"
-                        alt=""
-                        className="icon-image"
-                      />
-                      <p className="method-text">Shop Online</p>
-                    </a>
-                  )}
-                  {props.hit["online-order-link"] && (
-                    <a
-                      href={props.hit["online-order-link"]}
-                      target="_blank"
-                      rel="noopener"
-                      className="method order-food-method w-inline-block"
-                    >
-                      <img
-                        src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e8507079550ef265edc1c40_Order%20To%20Go%20black.svg"
-                        alt=""
-                        className="icon-image"
-                      />
-                      <p className="method-text">Order Food</p>
-                    </a>
-                  )}
-                  {props.hit["dontations-link"] && (
-                    <a href={props.hit["dontations-link"]} target="_blank" rel="noopener" className="method donate-method w-inline-block">
-                      <img
-                        src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e8508fcf6f6ed08173c5ddb_donate-black%3F.svg"
-                        alt=""
-                        className="icon-image"
-                      />
-                      <p className="method-text">Donate Online</p>
-                    </a>
-                  )}
-                </div>
-              )}
-              {isSelected && <BusinessCardDetails {...props} isSelected={isSelected} />}
+              <BusinessCardHeader hit={props.hit} highlight isSelected={isSelected} />
+              {isSelected && <BusinessCardDetails hit={props.hit} highlight isSelected={isSelected} />}
             </div>
           </motion.div>
         </div>
+        <AnimatePresence>{isSelected && <Overlay />}</AnimatePresence>
       </div>
     </HeadingLevel>
   );
