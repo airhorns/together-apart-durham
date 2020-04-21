@@ -669,11 +669,7 @@ label {
   line-height: 16px;
   text-align: center;
   text-decoration: none;
-}
-
-.method-text.gc {
-  margin-right: 3px;
-  margin-left: 10px;
+  white-space: nowrap;
 }
 
 .information-wrap {

@@ -40,7 +40,7 @@ export const BusinessCardHeader = (props: { hit: Hit<BusinessDoc>; isSelected: b
                 className="icon-image"
               />
               <div className="method-text-wrapper">
-                <div className="method-text gc">Buy a Gift Card</div>
+                <div className="method-text">Buy a Gift Card</div>
               </div>
             </a>
           )}
