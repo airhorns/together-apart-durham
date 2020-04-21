@@ -49,7 +49,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
         // Router.back();
       } else {
         // deselected => selected
-        Router.push("/businesses/[slug]", `/businesses/${props.hit.slug}`, { shallow: true });
+        // Router.push("/businesses/[slug]", `/businesses/${props.hit.slug}`, { shallow: true });
       }
       return !oldValue;
     });
