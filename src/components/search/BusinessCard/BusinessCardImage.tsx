@@ -4,7 +4,7 @@ import { useStyletron } from "styletron-react";
 import Imgix from "react-imgix";
 import { Blurhash } from "react-blurhash/es";
 import { webflowToImgixURL } from "../../../lib/utils";
-import { BusinessDoc } from "../../../lib/types";
+import { BusinessDoc } from "../BusinessDoc";
 import { useInvertedScale, motion } from "framer-motion";
 
 export const BusinessCardImage = (props: { hit: Hit<BusinessDoc> }) => {

@@ -1,11 +1,10 @@
 import React from "react";
 import { motion, useInvertedScale } from "framer-motion";
 import { Hit } from "react-instantsearch-core";
-import { BusinessDoc } from "../../../lib/types";
+import { BusinessDoc } from "../BusinessDoc";
 import { RichTextHighlight } from "../RichTextHighlight";
 import { useStyletron } from "baseui";
 import { Heading, HeadingLevel } from "baseui/heading";
-import { StaticLink } from "../../StaticLink";
 
 const DeliveryApps: { key: keyof BusinessDoc; label: string }[] = [
   { key: "uber-eats", label: "UberEATS" },
@@ -99,7 +98,7 @@ export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isSelected: 
               <div className="info-text-wrapper app-wrapper">
                 {props.hit["pickup"] && (
                   <span className="info-link app-tile no-pointer">
-                    {props.hit.category === "Restaurant" ? "Takeout" : "In Store Pickup"}
+                    {props.hit.category && props.hit.category[0] === "Restaurant" ? "Takeout" : "In Store Pickup"}
                   </span>
                 )}
                 {props.hit.delivery && <span className="info-link app-tile no-pointer">Delivery</span>}

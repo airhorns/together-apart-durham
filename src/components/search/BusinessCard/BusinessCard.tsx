@@ -1,8 +1,7 @@
 import React from "react";
-import Router from "next/router";
 import { motion, useMotionValue, AnimatePresence } from "framer-motion";
 import { Hit } from "react-instantsearch-core";
-import { BusinessDoc } from "../../../lib/types";
+import { BusinessDoc } from "../BusinessDoc";
 import { openSpring, closeSpring } from "../../animations";
 import { useScrollConstraints } from "../../hooks/use-scroll-constraints";
 import { useWheelScroll } from "../../hooks/use-wheel-scroll";
