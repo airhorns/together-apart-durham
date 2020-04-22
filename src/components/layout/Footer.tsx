@@ -18,20 +18,18 @@ export const Footer = (_props: {}) => (
           </a>
         </div>
         <p className="footer-paragraph">
-          Because {CurrentSite.regionName} kicks ass. <StaticLink href="/contact">Contact Us</StaticLink> if you see a mistake, want more
-          information, or to start this for your own community!
+          Because {CurrentSite.regionName} kicks ass.
           <br />
-          This information is crowdsourced, so please excuse any inaccuracy and let us know so we can fix it!
+          This information is crowdsourced, so please excuse any inaccuracy and let us know if we can fix it!
           <br />
+          <StaticLink href="/submit-a-change">Submit a change</StaticLink>
+          <Spacer />
+          <StaticLink href="/submit-a-business">Submit a business</StaticLink>
+          <Spacer />
           <StaticLink href="/neighbourhoods" className="footer-link">
             All Neighbourhoods
           </StaticLink>
-          <Spacer />
-          <StaticLink href="/credits" className="footer-link">
-            Credits
-          </StaticLink>
-          <Spacer />
-          <StaticLink href="/submit-a-business">Submit a business</StaticLink> 
+          <br />
         </p>
         <img
           src="/images/outline-white.png"
@@ -40,6 +38,13 @@ export const Footer = (_props: {}) => (
           alt=""
           className="footer-image"
         />
+        <p>
+          <StaticLink href="/contact">Contact Us</StaticLink>, we&apos;d love to hear what you think!
+          <Spacer />
+          <StaticLink href="/credits" className="footer-link">
+            Credits
+          </StaticLink>
+        </p>
       </div>
     </div>
   </div>

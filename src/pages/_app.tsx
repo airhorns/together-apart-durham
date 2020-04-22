@@ -45,7 +45,7 @@ Router.events.on("routeChangeError", (err, url) => {
   });
 });
 
-if (typeof window != "undefined") {
+if (typeof window != "undefined" && process.env.NODE_ENV == "production") {
   console.log(`%c${Greeting}`, `color: #B10DC9`);
 }
 
