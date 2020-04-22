@@ -62,3 +62,7 @@ textarea {
     box-shadow: inset 0px 0px 0px 30px #fff;
   }
 }
+
+body {
+  font-family: "DM Sans", sans-serif;
+}

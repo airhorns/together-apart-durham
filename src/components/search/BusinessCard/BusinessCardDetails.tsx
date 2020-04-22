@@ -41,12 +41,12 @@ export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isSelected: 
       {props.hit["special-instructions"] && (
         <HeadingLevel>
           <div>
-            <Heading>Ordering Instructions</Heading>
+            <Heading $style={{ fontSize: "16px" }}>Ordering Instructions</Heading>
             {props.hit["special-instructions"]}
           </div>
         </HeadingLevel>
       )}
-      <div className="delivery-options">
+      <div className={css({ marginTop: $theme.sizing.scale800 })}>
         <div className="information-wrap">
           {props.hit["website"] && (
             <div className="website-wrap">

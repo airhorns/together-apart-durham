@@ -570,17 +570,8 @@ label {
   padding-bottom: 10px;
 }
 
-.delivery-options {
-  margin-top: 20px;
-}
-
 .all-caps {
   text-transform: uppercase;
-}
-
-.location {
-  text-transform: uppercase;
-  margin-bottom: 0px;
 }
 
 .business-name {

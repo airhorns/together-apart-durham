@@ -1,7 +1,7 @@
 import React from "react";
 import { Hit } from "react-instantsearch-core";
 import { motion } from "framer-motion";
-import { BusinessDoc } from "../../../lib/types";
+import { BusinessDoc } from "../BusinessDoc";
 import { useStyletron } from "baseui";
 import { HeadingLevel } from "baseui/heading";
 import { BusinessCardDetails } from "./BusinessCardDetails";

@@ -52,7 +52,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
       }
       return !oldValue;
     });
-  }, [props.hit.slug]);
+  }, []);
 
   const checkSwipeToDismiss = React.useCallback(() => {
     return y.get() > dismissDistance && toggleSelected();

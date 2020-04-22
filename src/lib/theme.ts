@@ -36,11 +36,17 @@ export const theme = createDarkTheme(primitives, {
   breakpoints,
   mediaQuery: mapValues(breakpoints, (value) => `@media screen and (min-width: ${value}px)`),
   typography: {
+    ParagraphSmall: {
+      fontSize: "14px",
+    },
     ParagraphMedium: {
+      fontSize: "16px",
+    },
+    LabelSmall: {
       fontSize: "14px",
     },
     LabelMedium: {
-      fontSize: "14px",
+      fontSize: "16px",
     },
     HeadingMedium: {
       fontFamily: displayFamily,

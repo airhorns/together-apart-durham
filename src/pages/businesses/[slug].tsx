@@ -5,18 +5,15 @@ import { Layout } from "../../components/layout/Layout";
 import { Meta } from "../../components/Meta";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { $backend } from "../../lib/backend";
-import { useStyletron } from "baseui";
-import { BusinessDoc } from "../../lib/types";
 import { StaticBusinessCard } from "../../components/search/BusinessCard/StaticBusinessCard";
 import { assert } from "../../lib/utils";
+import { BusinessDoc } from "../../components/search/BusinessDoc";
 
 interface BusinessPageProps {
   business?: Hit<BusinessDoc>;
 }
 
 export default (props: BusinessPageProps) => {
-  const [css, $theme] = useStyletron();
-
   if (!props.business) {
     return <NotFoundPage />;
   }

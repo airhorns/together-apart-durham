@@ -24,7 +24,7 @@ export const BusinessCardHeader = (props: { hit: Hit<BusinessDoc>; isSelected: b
           >
             {props.highlight ? <Highlight attribute="name" hit={props.hit} tagName="mark" /> : props.hit.name}
           </Heading>
-          <p className="location">{props.hit.location}</p>
+          <p className={css({ color: $theme.colors.mono100 })}>{props.hit.location}</p>
         </div>
       </div>
       <div className="support-methods">
