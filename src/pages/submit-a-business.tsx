@@ -45,6 +45,7 @@ export interface SubmitFormValues {
   sellsFood: boolean;
   phoneNumber: string;
   orderFoodURL: string;
+  orderGroceriesURL: string;
   supportsUberEats: boolean;
   supportsSkipTheDishes: boolean;
   supportsGrubHub: boolean;
@@ -91,6 +92,7 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
           sellsFood: false,
           phoneNumber: "",
           orderFoodURL: "",
+          orderGroceriesURL: "",
           supportsUberEats: false,
           supportsSkipTheDishes: false,
           supportsGrubHub: false,
@@ -228,17 +230,23 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
 
               <HeadingLevel>
                 <Heading>Food Ordering Options</Heading>
-                <GroupableCheckbox attribute="sellsFood" label="Do you sell food for pickup or delivery?" />
+                <GroupableCheckbox attribute="sellsFood" label="Do you sell food or groceries for pickup or delivery?" />
                 <div className={css({ display: formik.values.sellsFood ? "block" : "none" })}>
                   <Input<SubmitFormValues>
-                    label="Food Order URL"
+                    label="Prepared Food Order URL"
                     attribute="orderFoodURL"
                     placeholder="http://www.ubereats.com/ca/food-delivery/a-business-name"
-                    caption="If customers can order food online, enter the URL to place an order."
+                    caption="If customers can order prepared food online, enter the URL to place an order."
+                  />
+                  <Input<SubmitFormValues>
+                    label="Groceries Order URL"
+                    attribute="orderGroceriesURL"
+                    placeholder="http://www.yoursite.com/groceries/order"
+                    caption="If customers can order groceries or other foodstuffs online, enter the URL to place an order."
                   />
                   <FormControl
                     label="Ordering Options"
-                    caption="For orders made over the phone, online, or through an app, how can customers get up their food?"
+                    caption="For orders made over the phone, online, or through an app, how can customers get up their order?"
                   >
                     <Row>
                       <GroupableCheckbox<SubmitFormValues>

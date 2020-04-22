@@ -128,6 +128,7 @@ export class ContentBackend {
       "instagram-profile",
       "twitter-profile",
       "online-order-link",
+      "order-groceries-link",
       "online-store-link",
       "donations-link",
       "name",
