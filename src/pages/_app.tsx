@@ -16,7 +16,7 @@ import { theme } from "../lib/theme";
 import sentry from "../lib/sentry";
 import { Greeting } from "../components/Greeting";
 
-const { captureException } = sentry();
+const { Sentry, captureException } = sentry();
 
 const getPathFromUrl = (url: string) => {
   return url.split("?")[0];
@@ -28,9 +28,22 @@ Router.events.on("routeChangeStart", (url) => {
     console.log(`Loading: ${url}`);
     NProgress.start();
   }
+
+  Sentry.addBreadcrumb({
+    category: "route",
+    message: `routeChangeStart: ${url}`,
+  });
 });
+
 Router.events.on("routeChangeComplete", () => NProgress.done());
-Router.events.on("routeChangeError", () => NProgress.done());
+Router.events.on("routeChangeError", (err, url) => {
+  NProgress.done();
+  Sentry.addBreadcrumb({
+    category: "route",
+    message: `routeChangeError: ${url}`,
+    data: err,
+  });
+});
 
 if (typeof window != "undefined") {
   console.log(`%c${Greeting}`, `color: #B10DC9`);

@@ -59,10 +59,19 @@ const invalidURLMessage = "Invalid URL. Please include the http or https bit and
 const checkboxRowOverrides: CheckboxProps["overrides"] = { Root: { style: { marginRight: "1em" } } };
 
 export const SubmitForm = (props: { locations: Option[]; categories: Option[]; onSuccess: (values: SubmitFormValues) => void }) => {
-  const [css] = useStyletron();
+  const [css, $theme] = useStyletron();
 
   return (
-    <div className="w-form">
+    <div
+      className={css({
+        paddingLeft: $theme.sizing.scale400,
+        paddingRight: $theme.sizing.scale400,
+        [$theme.breakpoints.medium]: {
+          paddingLeft: 0,
+          paddingRight: 0,
+        },
+      })}
+    >
       <Formik<SubmitFormValues>
         initialValues={{
           name: "",
