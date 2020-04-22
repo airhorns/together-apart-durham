@@ -1,7 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import dynamic from "next/dynamic";
 import { StyledSpinnerNext } from "baseui/spinner";
 import { toaster } from "baseui/toast";
 import { Layout } from "../components/layout/Layout";
@@ -71,7 +70,7 @@ export const SubmitForm = (props: { businesses: Option[]; onSuccess: (values: Su
         {(formik) => (
           <Form className={css({ position: "relative" })}>
             <HeadingLevel>
-              <Heading>Submit a Business</Heading>
+              <Heading>Submit a Change Request</Heading>
               <Select<SubmitChangeFormValues>
                 label="Business"
                 attribute="businessID"
