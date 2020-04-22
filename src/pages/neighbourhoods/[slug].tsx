@@ -116,8 +116,6 @@ export const getStaticPaths = async () => {
     }))
     .concat(keys(REDIRECTED_SLUGS).map((slug) => ({ params: { slug } })));
 
-  console.log(locationPaths);
-
   return {
     paths: locationPaths,
     fallback: false,

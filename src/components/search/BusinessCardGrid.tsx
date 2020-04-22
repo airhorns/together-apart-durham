@@ -1,7 +1,7 @@
 import React from "react";
 import { connectHits, ScrollTo } from "react-instantsearch-dom";
 import { BusinessCard } from "./BusinessCard";
-import { BusinessDoc } from "../../lib/types";
+import { BusinessDoc } from "./BusinessDoc";
 
 export const BusinessCardGrid = connectHits<BusinessDoc>(({ hits }) => {
   return (

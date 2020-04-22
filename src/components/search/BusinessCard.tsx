@@ -5,9 +5,10 @@ import { Blurhash } from "react-blurhash/es";
 import { StatefulPopover } from "baseui/popover";
 import Imgix from "react-imgix";
 import { webflowToImgixURL } from "../../lib/utils";
-import { BusinessDoc } from "../../lib/types";
+import { BusinessDoc } from "./BusinessDoc";
 import { RichTextHighlight } from "./RichTextHighlight";
 import { Block } from "baseui/block";
+import { isArray } from "lodash-es";
 
 const DeliveryApps: { key: keyof BusinessDoc; label: string }[] = [
   { key: "uber-eats", label: "UberEATS" },
@@ -19,11 +20,14 @@ const DeliveryApps: { key: keyof BusinessDoc; label: string }[] = [
 
 export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
   const hasMethods =
-    props.hit["gift-card-link"] || props.hit["online-store-link"] || props.hit["online-order-link"] || props.hit["dontations-link"];
+    props.hit["gift-card-link"] ||
+    props.hit["online-store-link"] ||
+    props.hit["online-order-link"] ||
+    props.hit["dontations-link"] ||
+    props.hit["order-groceries-link"];
 
   const hasDeliveryMethods = props.hit["pickup"] || props.hit["delivery"];
   const hasDeliveryApps = DeliveryApps.some(({ key }) => !!props.hit[key]);
-
   return (
     <div className="business-item w-dyn-item">
       <div className="card-parent" style={{ position: "relative", zIndex: 0 }}>
@@ -50,7 +54,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
           <div className="div-block-2">
             <div className="name-and-category">
               <div className="basic-info-wrap">
-                <p className="category">{props.hit.category}</p>
+                <p className="category">{isArray(props.hit.category) ? props.hit.category[0] : props.hit.category}</p>
               </div>
               <div className="div-block-3">
                 <h2 className="business-name">
@@ -112,6 +116,17 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                       className="icon-image"
                     />
                     <p className="method-text">Order Food</p>
+                  </a>
+                )}
+                {props.hit["order-groceries-link"] && (
+                  <a
+                    href={props.hit["order-groceries-link"]}
+                    target="_blank"
+                    rel="noopener"
+                    className="method order-groceries-method w-inline-block"
+                  >
+                    <img src={require("../../assets/images/cart.svg")} alt="cart" className="icon-image" />
+                    <p className="method-text">Order Groceries</p>
                   </a>
                 )}
                 {props.hit["dontations-link"] && (
@@ -179,7 +194,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                   <div className="info-text-wrapper app-wrapper">
                     {props.hit["pickup"] && (
                       <span className="info-link app-tile no-pointer">
-                        {props.hit.category === "Restaurant" ? "Takeout" : "In Store Pickup"}
+                        {props.hit.category && props.hit.category[0] === "Restaurant" ? "Takeout" : "In Store Pickup"}
                       </span>
                     )}
                     {props.hit.delivery && <span className="info-link app-tile no-pointer">Delivery</span>}

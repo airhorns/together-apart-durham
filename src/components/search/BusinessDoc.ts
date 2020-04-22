@@ -15,6 +15,7 @@ export type BusinessDoc = {
   "instagram-profile"?: string | null;
   "twitter-profile"?: string | null;
   "online-order-link"?: string | null;
+  "order-groceries-link"?: string | null;
   "online-store-link"?: string | null;
   "dontations-link"?: string | null;
   name?: string | null;
@@ -25,7 +26,7 @@ export type BusinessDoc = {
   "published-on": string;
   "image-blurhash": string | null;
   location?: string | null;
-  category?: string | null;
+  category?: string[] | null;
   hours?: string | null;
   header_image?: string | null;
 };

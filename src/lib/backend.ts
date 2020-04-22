@@ -1,7 +1,7 @@
 import Webflow from "webflow-api";
 import algoliasearch, { SearchIndex } from "algoliasearch";
 import { assert } from "./utils";
-import { keyBy, pick, omit } from "lodash-es";
+import { keyBy, pick, omit, compact, uniq } from "lodash-es";
 
 if (typeof window != "undefined") {
   throw "Build error: backend being required on frontend";
@@ -143,11 +143,18 @@ export class ContentBackend {
 
     ret.objectID = item["_id"];
     ret.location = this.locationNameForItem(item);
-    ret.category = this.categoryNameForItem(item);
     ret.hours = ContentBackend.HOURS[item["status"]];
     ret["header_image"] = item["image-field"]["url"];
     ret.pickup = ret["delivery"] || ret["curbside"];
     ret.randomPriority = Math.random();
+
+    const categories = [this.categoryNameForItem(item)];
+    // Restaurants who sell groceries should also be in the groceries category
+    if (!!item["order-groceries-link"]) {
+      categories.push("Grocery");
+    }
+
+    ret.category = uniq(compact(categories));
 
     return ret;
   }

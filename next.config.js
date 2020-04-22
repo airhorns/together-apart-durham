@@ -1,30 +1,33 @@
 require("dotenv").config();
 const webpack = require("webpack");
+const withImages = require("next-images");
 const withTM = require("next-transpile-modules")(["lodash-es", "react-blurhash"]);
 const nextSourceMaps = require("@zeit/next-source-maps");
 
-module.exports = nextSourceMaps(
-  withTM({
-    env: {
-      SENTRY_DSN: process.env.SENTRY_DSN,
-      CURRENT_SITE: process.env.CURRENT_SITE,
-      ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID,
-    },
-    webpack: (config, { isServer, buildId }) => {
-      config.plugins.push(
-        new webpack.DefinePlugin({
-          "process.env.SENTRY_RELEASE": JSON.stringify(buildId),
-        })
-      );
+module.exports = withImages(
+  nextSourceMaps(
+    withTM({
+      env: {
+        SENTRY_DSN: process.env.SENTRY_DSN,
+        CURRENT_SITE: process.env.CURRENT_SITE,
+        ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID,
+      },
+      webpack: (config, { isServer, buildId }) => {
+        config.plugins.push(
+          new webpack.DefinePlugin({
+            "process.env.SENTRY_RELEASE": JSON.stringify(buildId),
+          })
+        );
 
-      if (!isServer) {
-        config.resolve.alias["@sentry/node"] = "@sentry/browser";
-      }
+        if (!isServer) {
+          config.resolve.alias["@sentry/node"] = "@sentry/browser";
+        }
 
-      config.externals = config.externals || {};
-      config.externals["styletron-server"] = "styletron-server";
+        config.externals = config.externals || {};
+        config.externals["styletron-server"] = "styletron-server";
 
-      return config;
-    },
-  })
+        return config;
+      },
+    })
+  )
 );
