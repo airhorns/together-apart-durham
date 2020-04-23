@@ -132,5 +132,3 @@ export const theme = createDarkTheme(primitives, {
     buttonBorderRadius: LightTheme.borders.radius400,
   },
 });
-
-console.log(theme);

@@ -2,19 +2,19 @@ import React from "react";
 import Router from "next/router";
 import App from "next/app";
 import NProgress from "nprogress";
-import "../webflow/css/normalize.css";
-import "../webflow/css/webflow.css";
-import "../webflow/css/ottawa-covid-19-local-support.webflow.css";
-import "../components/nprogress.css";
-import "../components/global.css";
-
-import { styletron, debug } from "../lib/styletron";
 import { Provider as StyletronProvider } from "styletron-react";
+import { styletron, debug } from "../lib/styletron";
 import { BaseProvider } from "baseui";
 import { ToasterContainer } from "baseui/toast";
 import { theme } from "../lib/theme";
 import sentry from "../lib/sentry";
 import { Greeting } from "../components/Greeting";
+
+import "../webflow/css/normalize.css";
+import "../webflow/css/webflow.css";
+import "../webflow/css/ottawa-covid-19-local-support.webflow.css";
+import "../components/nprogress.css";
+import "../components/global.css";
 
 const { Sentry, captureException } = sentry();
 
