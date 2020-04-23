@@ -7,7 +7,7 @@ export interface SiteConfig {
   algoliaAPIKey: string; // generated via /api/algoliaKeys
 }
 
-export const CurrentSiteName = process.env.CURRENT_SITE || "ottawa";
+export const CurrentSiteName = assert(process.env.CURRENT_SITE);
 export const Sites: { [key: string]: SiteConfig } = {
   ottawa: {
     logoImageURL: "/images/together-apart-white-logo.png",
@@ -26,5 +26,3 @@ export const Sites: { [key: string]: SiteConfig } = {
 };
 
 export const CurrentSite: SiteConfig = assert(Sites[CurrentSiteName]);
-
-console.log(`Building for ${CurrentSite.regionName} region.`, { currentSite: process.env.CURRENT_SITE });

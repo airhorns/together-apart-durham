@@ -4,13 +4,15 @@ const withImages = require("next-images");
 const withTM = require("next-transpile-modules")(["lodash-es", "react-blurhash"]);
 const nextSourceMaps = require("@zeit/next-source-maps");
 
+if (!process.env.CURRENT_SITE) process.env.CURRENT_SITE = "ottawa";
+
 module.exports = withImages(
   nextSourceMaps(
     withTM({
       env: {
         SENTRY_DSN: process.env.SENTRY_DSN,
-        CURRENT_SITE: process.env.CURRENT_SITE,
         ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID,
+        CURRENT_SITE: process.env.CURRENT_SITE,
       },
       webpack: (config, { isServer, buildId }) => {
         config.plugins.push(
@@ -31,3 +33,5 @@ module.exports = withImages(
     })
   )
 );
+
+console.log(`Building for CURRENT_SITE = ${process.env.CURRENT_SITE}.`);
