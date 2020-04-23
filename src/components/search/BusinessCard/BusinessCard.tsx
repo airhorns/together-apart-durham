@@ -123,7 +123,7 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
                 paddingRight: $theme.sizing.scale700,
               })}
             >
-              <BusinessCardHeader hit={props.hit} highlight isSelected={isSelected} />
+              <BusinessCardHeader hit={props.hit} highlight isSelected={isSelected} toggleSelected={toggleSelected} />
               {isSelected && <BusinessCardDetails hit={props.hit} highlight isSelected={isSelected} />}
             </div>
           </motion.div>

@@ -40,7 +40,7 @@ export const StaticBusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
             paddingRight: $theme.sizing.scale700,
           })}
         >
-          <BusinessCardHeader hit={props.hit} highlight={false} isSelected={true} />
+          <BusinessCardHeader hit={props.hit} highlight={false} isSelected={true} toggleSelected={() => null} />
           <BusinessCardDetails hit={props.hit} highlight={false} isSelected={true} />
         </div>
       </motion.div>

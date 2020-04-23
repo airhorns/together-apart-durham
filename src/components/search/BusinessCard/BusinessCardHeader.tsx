@@ -5,7 +5,12 @@ import { BusinessDoc } from "../BusinessDoc";
 import { useStyletron } from "baseui";
 import { Heading } from "baseui/heading";
 
-export const BusinessCardHeader = (props: { hit: Hit<BusinessDoc>; isSelected: boolean; highlight: boolean }) => {
+export const BusinessCardHeader = (props: {
+  hit: Hit<BusinessDoc>;
+  isSelected: boolean;
+  toggleSelected: () => void;
+  highlight: boolean;
+}) => {
   const [css, $theme] = useStyletron();
 
   return (
@@ -79,6 +84,24 @@ export const BusinessCardHeader = (props: { hit: Hit<BusinessDoc>; isSelected: b
               className="icon-image"
             />
             <p className="method-text">Donate Online</p>
+          </a>
+        )}
+        {!props.isSelected && (
+          <a
+            href={`/businesses/${props.hit.slug}`}
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              props.toggleSelected();
+            }}
+            className={css({
+              marginTop: $theme.sizing.scale700,
+              textAlign: "center",
+              textDecoration: "none",
+              ":hover": { textDecoration: "underline" },
+            })}
+          >
+            More info
           </a>
         )}
       </div>
