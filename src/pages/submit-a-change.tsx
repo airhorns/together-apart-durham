@@ -72,27 +72,35 @@ export const SubmitForm = (props: { businesses: Option[]; onSuccess: (values: Su
             <HeadingLevel>
               <Heading>Submit a Change Request</Heading>
               <Select<SubmitChangeFormValues>
+                id="businessID"
                 label="Business"
                 attribute="businessID"
                 placeholder="Select a business ..."
                 options={props.businesses}
               />
               <Input<SubmitChangeFormValues>
+                id="email"
                 label="Contact Email"
                 attribute="submitterEmail"
                 placeholder="hello@example.com"
                 caption="In case we need to get touch to ask questions about this change we need your contact details. We won't share or sell your data."
               />
-              <Input<SubmitChangeFormValues> label="Contact Name" attribute="submitterName" placeholder="Enter your name" />
+              <Input<SubmitChangeFormValues>
+                id="submitterName"
+                label="Contact Name"
+                attribute="submitterName"
+                placeholder="Enter your name"
+              />
 
               <Textarea<SubmitChangeFormValues>
+                id="request"
                 label="What changes should to be made?"
                 attribute="request"
                 caption="Please outline any changes or corrections so we can keep this listing up to date."
               />
 
               <Row>
-                <Button type="submit" disabled={formik.isSubmitting} $style={{ marginRight: "1em" }}>
+                <Button data-testid="submit-change-request" type="submit" disabled={formik.isSubmitting} $style={{ marginRight: "1em" }}>
                   {formik.isSubmitting ? "Submitting ..." : "Submit"}
                 </Button>
                 {formik.isSubmitting && <StyledSpinnerNext />}

@@ -7,6 +7,7 @@ export const ClearRefinements = connectCurrentRefinements(({ items, refine }) =>
   const [css, $theme] = useStyletron();
   return (
     <Button
+      data-testid="clear-refinements"
       kind="secondary"
       shape={SHAPE.pill}
       onClick={() => refine(items as any)}

@@ -85,6 +85,7 @@ export const SearchBox = connectSearchBox(({ currentRefinement, refine }) => {
         value={currentRefinement}
         onChange={(event) => refine(event.currentTarget.value)}
         overrides={{ Before: SearchBefore, After: SearchAfter }}
+        id="search-query"
       />
     </div>
   );

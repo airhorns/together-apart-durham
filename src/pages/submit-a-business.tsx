@@ -131,23 +131,36 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
           <Form className={css({ position: "relative" })}>
             <HeadingLevel>
               <Heading>Submit a Business</Heading>
-              <Input<SubmitFormValues> label="Business Name" attribute="name" />
+              <Input<SubmitFormValues> label="Business Name" id="name" attribute="name" />
               <Input<SubmitFormValues>
                 label="Update Contact Details"
+                id="submitterEmail"
                 attribute="submitterEmail"
                 placeholder="hello@example.com"
                 caption="We'd love to keep in touch to ask questions and make updates to this listing as things change. What's your email? We won't share or sell it."
               />
-              <Input<SubmitFormValues> label="Business Website URL" attribute="websiteURL" placeholder="http://example.com" />
-              <Input<SubmitFormValues> label="Business Phone Number" attribute="phoneNumber" placeholder="(613) 111-2233" />
+              <Input<SubmitFormValues>
+                label="Business Website URL"
+                id="websiteURL"
+                attribute="websiteURL"
+                placeholder="http://example.com"
+              />
+              <Input<SubmitFormValues>
+                label="Business Phone Number"
+                id="phoneNumber"
+                attribute="phoneNumber"
+                placeholder="(613) 111-2233"
+              />
               <Select<SubmitFormValues>
                 label="Business Neighbourhood"
+                id="location"
                 attribute="location"
                 placeholder="Select a neighbourhood ..."
                 options={props.locations}
               />
               <Select<SubmitFormValues>
                 label="Business Category"
+                id="category"
                 attribute="category"
                 placeholder="Select a category ..."
                 options={props.categories}
@@ -155,12 +168,14 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
 
               <Textarea<SubmitFormValues>
                 label="Description"
+                id="description"
                 attribute="description"
                 caption="Give a very short description of your business to explain to customers what you do."
               />
 
               <Input<SubmitFormValues>
                 label="Business Image URL"
+                id="imageURL"
                 attribute="imageURL"
                 placeholder="http://example.com/some_image.jpg"
                 caption={
@@ -172,18 +187,21 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
                 <Heading>Social Links</Heading>
                 <Input<SubmitFormValues>
                   label="Instagram Profile URL"
+                  id="instagramProfileURL"
                   attribute="instagramProfileURL"
                   placeholder="http://www.instagram.com/a-business-name"
                   caption={"If the business has an Instagram profile, enter the URL."}
                 />
                 <Input<SubmitFormValues>
                   label="Facebook Page URL"
+                  id="facebookPageURL"
                   attribute="facebookPageURL"
                   placeholder="http://www.facebook.com/a-business-name"
                   caption={"If the business has an Facebook profile, enter the URL."}
                 />
                 <Input<SubmitFormValues>
                   label="Twitter Profile URL"
+                  id="twitterProfileURL"
                   attribute="twitterProfileURL"
                   placeholder="http://twitter.com/a-business-name"
                   caption={"If the business has an Twitter profile, enter the URL."}
@@ -194,6 +212,7 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
                 <Heading>Online Store</Heading>
                 <Input<SubmitFormValues>
                   label="Online Store URL"
+                  id="onlineStoreURL"
                   attribute="onlineStoreURL"
                   placeholder="http://www.business-website.com/"
                   caption={"If the business has an online store selling goods or services, enter the URL."}
@@ -201,6 +220,7 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
 
                 <Input<SubmitFormValues>
                   label="Gift Card Purchase URL"
+                  id="giftCardURL"
                   attribute="giftCardURL"
                   placeholder="http://www.business-website.com/products/gift-cards"
                   caption={
@@ -234,12 +254,14 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
                 <div className={css({ display: formik.values.sellsFood ? "block" : "none" })}>
                   <Input<SubmitFormValues>
                     label="Prepared Food Order URL"
+                    id="orderFoodURL"
                     attribute="orderFoodURL"
                     placeholder="http://www.ubereats.com/ca/food-delivery/a-business-name"
                     caption="If customers can order prepared food online, enter the URL to place an order."
                   />
                   <Input<SubmitFormValues>
                     label="Groceries Order URL"
+                    id="orderGroceriesURL"
                     attribute="orderGroceriesURL"
                     placeholder="http://www.yoursite.com/groceries/order"
                     caption="If customers can order groceries or other foodstuffs online, enter the URL to place an order."
@@ -279,6 +301,7 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
                   </FormControl>
                   <Textarea<SubmitFormValues>
                     label="Special Ordering Instructions"
+                    id="orderingInstructions"
                     attribute="orderingInstructions"
                     caption="If customers need to follow any specific instructions when ordering please note them here."
                   />
@@ -289,6 +312,7 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
                 <Heading>Donations</Heading>
                 <Input<SubmitFormValues>
                   label="Donations URL"
+                  id="donationsURL"
                   attribute="donationsURL"
                   placeholder="http://www.canadahelps.com/a-business-name"
                   caption="If this business (or non-profit) solicits donations using an online platform, enter the URL where donors can make donations"
@@ -296,7 +320,7 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
               </HeadingLevel>
 
               <Row>
-                <Button type="submit" disabled={formik.isSubmitting} $style={{ marginRight: "1em" }}>
+                <Button data-testid="submit-business" type="submit" disabled={formik.isSubmitting} $style={{ marginRight: "1em" }}>
                   {formik.isSubmitting ? "Submitting ..." : "Submit"}
                 </Button>
                 {formik.isSubmitting && <StyledSpinnerNext />}
