@@ -1,8 +1,7 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 import sharp from "sharp";
 import { encode } from "blurhash";
-import { $backend, stripWebflowFunctions, ContentBackend, stripWebflowManagedFields } from "../../lib/backend";
+import { $backend, stripWebflowFunctions, ContentBackend, stripWebflowManagedFields } from "./backend";
 
 export const blurhashImageURL = async (url: string) => {
   const response = await axios.get(url, { responseType: "arraybuffer" });
@@ -26,7 +25,7 @@ export const blurhashImageURL = async (url: string) => {
   }
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export const hashAll = async () => {
   let updated = 0;
 
   await $backend.paginatedItems(async (page) => {
@@ -50,6 +49,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     );
     console.log("processed page");
   });
-  console.log("finished", { updated });
-  res.status(200).json({ success: true, updated });
+  console.log("finished hashing", { updated });
 };

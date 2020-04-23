@@ -1,8 +1,17 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { $backend } from "../../lib/backend";
-import { values, isUndefined } from "lodash-es";
+import { $backend } from "../../../lib/backend";
+import { values, mapValues, isUndefined } from "lodash-es";
+import { Sites } from "../../../lib/sites";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export const algoliaKeys = async (req: NextApiRequest, res: NextApiResponse) => {
+  const keys = mapValues(
+    Sites,
+    (site) => $backend.$algolia.generateSecuredApiKey("556f6fc163ed52a4034f05ab9f402515", { filters: `site:${site.webflowID}` }) // "secured" search key locked to a site. Note that the key in the string there is not sensitive, it's just the global search key
+  );
+  res.status(200).json({ success: true, keys });
+};
+
+export const stats = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     await $backend.prepare();
 
@@ -50,4 +59,24 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     console.log(e.message);
     res.status(422).json({ success: false });
   }
+};
+
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  let handler: (req: NextApiRequest, res: NextApiResponse) => Promise<void>;
+
+  switch (req.query.tool) {
+    case "stats": {
+      handler = stats;
+      break;
+    }
+    case "algoliaKeys": {
+      handler = algoliaKeys;
+      break;
+    }
+    default: {
+      return res.status(404).json({ message: "tool not found" });
+    }
+  }
+
+  return await handler(req, res);
 };
