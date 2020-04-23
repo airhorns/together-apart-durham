@@ -24,6 +24,7 @@ export const BusinessCardHeader = (props: {
             $style={{
               marginTop: $theme.sizing.scale200,
               marginBottom: $theme.sizing.scale200,
+              letterSpacing: ($theme.typography.font1050 as any).letterSpacing,
               ":hover": props.isSelected ? undefined : { textDecoration: "underline" },
             }}
           >

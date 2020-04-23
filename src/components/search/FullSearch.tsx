@@ -12,6 +12,7 @@ import { searchClient, searchStateToURL, INDEX_NAME } from "./searchClient";
 import { Pagination } from "./Pagination";
 import { isUndefined, debounce } from "lodash-es";
 import { ClearRefinements } from "./ClearRefinements";
+import { HeadingLevel } from "baseui/heading";
 
 const CATEGORY_REFINEMENT_OPTIONS = ["Brewery", "Coffee", "Grocery", "Restaurant", "Retail", "Other"].map((value) => ({
   value,
@@ -53,34 +54,36 @@ export const FullSearch = (props: FullSearchProps) => {
           <SearchBox />
         </Cell>
         <Cell span={[4, 8, 3]}>
-          <div
-            className={css({
-              display: "flex",
-              flexDirection: "row",
-              overflowX: "scroll",
-              [$theme.mediaQuery.large]: {
-                flexDirection: "column",
-                overflowX: "auto",
-              },
-            })}
-          >
-            <RefinementPane title="Category" attributes={["category"]} {...controlledSearchStateProps}>
-              <StaticRefinementList attribute="category" values={CATEGORY_REFINEMENT_OPTIONS} />
-            </RefinementPane>
-            <RefinementPane
-              title="Neighbourhood"
-              attributes={["location"]}
-              {...controlledSearchStateProps}
-              className={css({ display: shownNeighbourhoodFacets ? "auto" : "none" })}
+          <HeadingLevel>
+            <div
+              className={css({
+                display: "flex",
+                flexDirection: "row",
+                overflowX: "scroll",
+                [$theme.mediaQuery.large]: {
+                  flexDirection: "column",
+                  overflowX: "auto",
+                },
+              })}
             >
-              <RefinementList attribute="location" />
-            </RefinementPane>
-            <RefinementPane title="Delivery Methods" attributes={["delivery", "pickup"]} {...controlledSearchStateProps}>
-              <ToggleRefinement attribute="delivery" label="Delivery" value={true} />
-              <ToggleRefinement attribute="pickup" label="Takeout or Pickup" value={true} />
-            </RefinementPane>
-            <ClearRefinements />
-          </div>
+              <RefinementPane title="Category" attributes={["category"]} {...controlledSearchStateProps}>
+                <StaticRefinementList attribute="category" values={CATEGORY_REFINEMENT_OPTIONS} />
+              </RefinementPane>
+              <RefinementPane
+                title="Neighbourhood"
+                attributes={["location"]}
+                {...controlledSearchStateProps}
+                className={css({ display: shownNeighbourhoodFacets ? "auto" : "none" })}
+              >
+                <RefinementList attribute="location" />
+              </RefinementPane>
+              <RefinementPane title="Delivery Methods" attributes={["delivery", "pickup"]} {...controlledSearchStateProps}>
+                <ToggleRefinement attribute="delivery" label="Delivery" value={true} />
+                <ToggleRefinement attribute="pickup" label="Takeout or Pickup" value={true} />
+              </RefinementPane>
+              <ClearRefinements />
+            </div>
+          </HeadingLevel>
         </Cell>
         <Cell span={[4, 8, 9]}>
           <BusinessCardGrid />
