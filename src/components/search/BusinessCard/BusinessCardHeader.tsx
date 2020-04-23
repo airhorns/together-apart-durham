@@ -77,8 +77,8 @@ export const BusinessCardHeader = (props: {
             <p className="method-text">Order Groceries</p>
           </a>
         )}
-        {props.hit["dontations-link"] && (
-          <a href={props.hit["dontations-link"]} target="_blank" rel="noopener" className="method donate-method w-inline-block">
+        {props.hit["donations-link"] && (
+          <a href={props.hit["donations-link"]} target="_blank" rel="noopener" className="method donate-method w-inline-block">
             <img
               src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e8508fcf6f6ed08173c5ddb_donate-black%3F.svg"
               alt=""
