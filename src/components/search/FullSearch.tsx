@@ -1,6 +1,5 @@
 import React from "react";
 import Router from "next/router";
-import { ParsedUrlQuery } from "querystring";
 import { InstantSearch, Configure } from "react-instantsearch-dom";
 import { Grid, Cell } from "baseui/layout-grid";
 import { BusinessCardGrid } from "./BusinessCardGrid";
@@ -9,8 +8,7 @@ import { RefinementList, StaticRefinementList, ToggleRefinement } from "./Refine
 import { useStyletron } from "baseui";
 import { NoResultsIndicator } from "./NoResultsIndicator";
 import { RefinementPane } from "./RefinementPane";
-import { searchClient, searchStateToURL, INDEX_NAME, paramsToSearchState } from "./searchClient";
-import { findResultsState } from "react-instantsearch-dom/server";
+import { searchClient, searchStateToURL, INDEX_NAME } from "./searchClient";
 import { Pagination } from "./Pagination";
 import { isUndefined, debounce } from "lodash-es";
 import { ClearRefinements } from "./ClearRefinements";
@@ -96,18 +94,4 @@ export const FullSearch = (props: FullSearchProps) => {
       </Grid>
     </InstantSearch>
   );
-};
-
-export const getSearchServerSideProps = async (params: ParsedUrlQuery) => {
-  const searchState = paramsToSearchState(params);
-  const resultsState = await findResultsState(FullSearch, {
-    indexName: INDEX_NAME,
-    searchClient,
-    searchState,
-  });
-
-  return {
-    resultsState: { ...resultsState, state: { ...resultsState.state } }, // the .state key is a real object that next won't serialize
-    searchState,
-  };
 };

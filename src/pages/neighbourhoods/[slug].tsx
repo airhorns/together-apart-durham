@@ -1,5 +1,5 @@
 import React from "react";
-import { FullSearch, getSearchServerSideProps, FullSearchProps } from "../../components/search/FullSearch";
+import { FullSearch, FullSearchProps } from "../../components/search/FullSearch";
 import { Layout } from "../../components/layout/Layout";
 import { HeroCallout } from "../../components/HeroCallout";
 import { Meta } from "../../components/Meta";
@@ -11,6 +11,7 @@ import { Grid, Cell } from "baseui/layout-grid";
 import Imgix from "react-imgix";
 import { webflowToImgixURL, assert } from "../../lib/utils";
 import { useStyletron } from "baseui";
+import { getSearchServerSideProps } from "../../components/search/serverSearch";
 
 const REDIRECTED_SLUGS: Record<string, string> = {
   "hintonburg-mechanicsville": "wellington-west",

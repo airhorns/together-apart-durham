@@ -1,10 +1,11 @@
 import React from "react";
-import { FullSearch, getSearchServerSideProps, FullSearchProps } from "../components/search/FullSearch";
+import { FullSearch, FullSearchProps } from "../components/search/FullSearch";
 import { Layout } from "../components/layout/Layout";
 import { Meta } from "../components/Meta";
 import { GetServerSideProps } from "next";
 import { pathToSearchState } from "../components/search/searchClient";
 import { assert } from "../lib/utils";
+import { getSearchServerSideProps } from "../components/search/serverSearch";
 
 type SearchPageProps = FullSearchProps;
 export default (props: SearchPageProps) => {

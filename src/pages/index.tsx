@@ -1,10 +1,11 @@
 import React from "react";
-import { FullSearch, getSearchServerSideProps, FullSearchProps } from "../components/search/FullSearch";
+import { FullSearch, FullSearchProps } from "../components/search/FullSearch";
 import { Layout } from "../components/layout/Layout";
 import { SupportLocalCallout } from "../components/HeroCallout";
 import { Meta } from "../components/Meta";
 import { GetStaticProps } from "next";
 import { pathToSearchState } from "../components/search/searchClient";
+import { getSearchServerSideProps } from "../components/search/serverSearch";
 
 type IndexPageProps = FullSearchProps;
 
