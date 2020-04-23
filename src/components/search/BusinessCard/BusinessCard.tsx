@@ -14,7 +14,7 @@ import { BusinessCardImage } from "./BusinessCardImage";
 import { BusinessCardHeader } from "./BusinessCardHeader";
 
 // Distance in pixels a user has to scroll a card down before we recognise a swipe-to dismiss action.
-const dismissDistance = 150;
+const dismissDistance = 110;
 
 export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
   const [isSelected, setIsSelected] = React.useState(false);
