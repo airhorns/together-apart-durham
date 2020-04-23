@@ -17,7 +17,7 @@ export type BusinessDoc = {
   "online-order-link"?: string | null;
   "order-groceries-link"?: string | null;
   "online-store-link"?: string | null;
-  "dontations-link"?: string | null;
+  "donations-link"?: string | null;
   name?: string | null;
   story?: string | null;
   "special-instructions"?: string | null;
