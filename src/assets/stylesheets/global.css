@@ -5,6 +5,22 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
+  text-rendering: optimizeLegibility;
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "kern";
+}
+
+a {
+  color: #f2c94c;
+}
+
+body {
+  color: #fff;
+  background-color: #13141b;
+  font-size: 16px;
+  line-height: 20px;
+  font-family: "DM Sans", sans-serif;
 }
 
 input {
@@ -16,13 +32,6 @@ textarea {
   -webkit-border-radius: 0;
   border-radius: 0;
   -webkit-appearance: none;
-}
-* {
-  text-rendering: optimizeLegibility;
-  font-smoothing: antialiased;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: "kern";
 }
 
 .checkmark__circle {
@@ -205,15 +214,4 @@ body {
   float: right;
   margin-left: 15px;
   clear: none;
-}
-
-a {
-  color: #f2c94c;
-}
-
-body {
-  color: #fff;
-  background-color: #13141b;
-  font-size: 16px;
-  line-height: 20px;
 }
