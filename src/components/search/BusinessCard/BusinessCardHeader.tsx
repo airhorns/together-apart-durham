@@ -4,6 +4,7 @@ import { Highlight } from "react-instantsearch-dom";
 import { BusinessDoc } from "../BusinessDoc";
 import { useStyletron } from "baseui";
 import { Heading } from "baseui/heading";
+import { CallToActionButton } from "./CallToActionButton";
 
 export const BusinessCardHeader = (props: {
   hit: Hit<BusinessDoc>;
@@ -15,77 +16,71 @@ export const BusinessCardHeader = (props: {
 
   return (
     <>
-      <div className="name-and-category">
-        <div className="basic-info-wrap">
-          <p className="category">{props.hit.category ? props.hit.category[0] : "Uncategorized"}</p>
-        </div>
-        <div>
-          <Heading
-            $style={{
-              marginTop: $theme.sizing.scale200,
-              marginBottom: $theme.sizing.scale200,
-              letterSpacing: ($theme.typography.font1050 as any).letterSpacing,
-              ":hover": props.isSelected ? undefined : { textDecoration: "underline" },
-            }}
-          >
-            {props.highlight ? <Highlight attribute="name" hit={props.hit} tagName="mark" /> : props.hit.name}
-          </Heading>
-          <p className={css({ color: $theme.colors.mono100 })}>{props.hit.location}</p>
-        </div>
+      <div className={css({ position: "relative" })}>
+        <p className={css({ textTransform: "uppercase", marginRight: "0px", marginBottom: "0px" })}>
+          {props.hit.category ? props.hit.category[0] : "Uncategorized"}
+        </p>
+        <Heading
+          $style={{
+            marginTop: $theme.sizing.scale200,
+            marginBottom: $theme.sizing.scale200,
+            letterSpacing: ($theme.typography.font1050 as any).letterSpacing,
+            ":hover": props.isSelected ? undefined : { textDecoration: "underline" },
+          }}
+        >
+          {props.highlight ? <Highlight attribute="name" hit={props.hit} tagName="mark" /> : props.hit.name}
+        </Heading>
+        <p className={css({ color: $theme.colors.mono100 })}>{props.hit.location}</p>
       </div>
-      <div className="support-methods">
+      <div
+        className={css({
+          display: "flex",
+          marginTop: $theme.sizing.scale500,
+          flexDirection: "column",
+          alignItems: "center",
+          flexWrap: "wrap",
+        })}
+      >
         {props.hit["gift-card-link"] && (
-          <a href={props.hit["gift-card-link"]} target="_blank" rel="noopener" className="method gift-card-method w-inline-block">
-            <img
-              src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e8507072b9389f28bb3ea8f_Gift%20Card%20black.svg"
-              alt=""
-              className="icon-image"
-            />
-            <div className="method-text-wrapper">
-              <div className="method-text">Buy a Gift Card</div>
-            </div>
-          </a>
+          <CallToActionButton
+            name="gift-card"
+            href={props.hit["gift-card-link"]}
+            icon={require("../../../assets/images/Gift-Card-black.svg")}
+          >
+            Buy a Gift Card
+          </CallToActionButton>
         )}
         {props.hit["online-store-link"] && (
-          <a href={props.hit["online-store-link"]} target="_blank" rel="noopener" className="method shop-online-method w-inline-block">
-            <img
-              src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e850708db1f6e2a6d8bdcc1_order-online%20black.svg"
-              alt=""
-              className="icon-image"
-            />
-            <p className="method-text">Shop Online</p>
-          </a>
+          <CallToActionButton
+            name="online-store"
+            href={props.hit["online-store-link"]}
+            icon={require("../../../assets/images/order-online-black.svg")}
+          >
+            Shop Online
+          </CallToActionButton>
         )}
         {props.hit["online-order-link"] && (
-          <a href={props.hit["online-order-link"]} target="_blank" rel="noopener" className="method order-food-method w-inline-block">
-            <img
-              src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e8507079550ef265edc1c40_Order%20To%20Go%20black.svg"
-              alt=""
-              className="icon-image"
-            />
-            <p className="method-text">Order Food</p>
-          </a>
+          <CallToActionButton
+            name="order-food-online"
+            href={props.hit["online-order-link"]}
+            icon={require("../../../assets/images/Order-To-Go-black.svg")}
+          >
+            Order Food
+          </CallToActionButton>
         )}
         {props.hit["order-groceries-link"] && (
-          <a
+          <CallToActionButton
+            name="order-groceries-online"
             href={props.hit["order-groceries-link"]}
-            target="_blank"
-            rel="noopener"
-            className="method order-groceries-method w-inline-block"
+            icon={require("../../../assets/images/cart.svg")}
           >
-            <img src={require("../../../assets/images/cart.svg")} alt="cart" className="icon-image" />
-            <p className="method-text">Order Groceries</p>
-          </a>
+            Order Groceries
+          </CallToActionButton>
         )}
         {props.hit["donations-link"] && (
-          <a href={props.hit["donations-link"]} target="_blank" rel="noopener" className="method donate-method w-inline-block">
-            <img
-              src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e8508fcf6f6ed08173c5ddb_donate-black%3F.svg"
-              alt=""
-              className="icon-image"
-            />
-            <p className="method-text">Donate Online</p>
-          </a>
+          <CallToActionButton name="donate" href={props.hit["donations-link"]} icon={require("../../../assets/images/donate-black.svg")}>
+            Donate Online
+          </CallToActionButton>
         )}
         {!props.isSelected && (
           <a

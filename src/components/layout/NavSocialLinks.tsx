@@ -22,10 +22,10 @@ export const NavSocialLinks = () => {
         rel="noopener"
         className={css({ marginRight: $theme.sizing.scale400 })}
       >
-        <img src="/images/instagram.svg" width="30" alt="Instagram Logo" />
+        <img src={require("../../assets/images/instagram.svg")} width="30" alt="Instagram Logo" />
       </NavSocialLink>
       <NavSocialLink href="https://twitter.com/togetherott" target="_blank" rel="noopener">
-        <img src="/images/twitter_white.svg" width="30" alt="Twitter Logo" />
+        <img src={require("../../assets/images/twitter_white.svg")} width="30" alt="Twitter Logo" />
       </NavSocialLink>
     </Row>
   );
