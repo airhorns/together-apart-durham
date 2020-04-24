@@ -1,5 +1,5 @@
 import React from "react";
-import { useFormikContext, FormikValues, useField } from "formik";
+import { FormikValues, useField } from "formik";
 import { FormControl, FormControlProps } from "baseui/form-control";
 import { Checkbox as CheckboxControl, CheckboxProps } from "baseui/checkbox";
 

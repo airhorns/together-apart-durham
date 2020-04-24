@@ -4,7 +4,7 @@ import { Button, SHAPE } from "baseui/button";
 import { useStyletron } from "baseui";
 
 export const ClearRefinements = connectCurrentRefinements(({ items, refine }) => {
-  const [css, $theme] = useStyletron();
+  const [_css, $theme] = useStyletron();
   return (
     <Button
       data-testid="clear-refinements"

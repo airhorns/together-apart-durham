@@ -1107,10 +1107,10 @@
   dependencies:
     "@date-io/core" "^2.6.0"
 
-"@fixings/eslint-config@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@fixings/eslint-config/-/eslint-config-2.0.0.tgz#ac470e57a554cd767675a475e24033e4183f80da"
-  integrity sha512-x5v1+E1U0KZOnyjYSsGCMS0vhhyc6JLiz84qilbXkF8kXEzZopYJ61o1nU6dK0sNa4godqRgIx5GcC7z51gAdw==
+"@fixings/eslint-config@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@fixings/eslint-config/-/eslint-config-4.0.2.tgz#507aed1625b10a8eda5cb8c0d2138786032a2c40"
+  integrity sha512-BKUFdFZWq5/Zxp8Ohih23ieG0uZItMWZ34wJdD04MnWBNsjhSK2BmioRk0P3niRFVXBw/azoPnDnszv8FqbnaQ==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^2.16.0"
     "@typescript-eslint/parser" "^2.16.0"

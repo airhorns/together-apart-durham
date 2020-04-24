@@ -2,7 +2,7 @@ import React from "react";
 
 export const TrackingScripts =
   process.env.NODE_ENV == "production" ? (
-    <>
+    <React.Fragment>
       <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161950128-1"></script>
       <script
         type="text/javascript"
@@ -50,7 +50,7 @@ export const TrackingScripts =
           posthog.init('tl_hyiaQa2nHTjdSBnicFTpuJw6Vy4f3whgxAfA48hg', {api_host: 'https://gadget-posthog.herokuapp.com'})`,
         }}
       />
-    </>
+    </React.Fragment>
   ) : (
-    <></>
+    <React.Fragment />
   );

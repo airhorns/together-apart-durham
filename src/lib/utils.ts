@@ -11,9 +11,9 @@ export const webflowToImgixURL = (src?: string | null) => {
   }
 };
 
-export function assert<T>(value: T | undefined | null): T {
+export function assert<T>(value: T | undefined | null, message?: string): T {
   if (!value) {
-    throw new Error("assertion error");
+    throw new Error("assertion error" + (message ? `: ${message}` : ""));
   }
   return value;
 }

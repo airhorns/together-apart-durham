@@ -3,7 +3,7 @@ import { Layout } from "../components/layout/Layout";
 import { HeroCallout } from "../components/HeroCallout";
 import { Meta } from "../components/Meta";
 
-export default (props: {}) => {
+export default (_props: {}) => {
   return (
     <Layout>
       <Meta title="Not Found" />

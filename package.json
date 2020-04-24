@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.9.0",
-    "@fixings/eslint-config": "^2.0.0",
+    "@fixings/eslint-config": "^4.0.2",
     "@fixings/prettier-config": "^1.0.0",
     "@sentry/browser": "^5.15.4",
     "@sentry/integrations": "^5.15.4",
