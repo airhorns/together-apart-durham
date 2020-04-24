@@ -1,3 +1,6 @@
+require("dotenv").config();
+if (!process.env.CURRENT_SITE) process.env.CURRENT_SITE = "ottawa";
+
 module.exports = {
   collectCoverageFrom: ["**/*.{js,jsx,ts,tsx}", "!**/*.d.ts", "!**/node_modules/**"],
   setupFilesAfterEnv: ["<rootDir>/test/setupTests.js"],

@@ -7,7 +7,7 @@ export interface SiteConfig {
   algoliaAPIKey: string; // generated via /api/algoliaKeys
 }
 
-export const CurrentSiteName = assert(process.env.CURRENT_SITE);
+export const CurrentSiteName = assert(process.env.CURRENT_SITE, "CURRENT_SITE environment variable needs to be set");
 export const Sites: { [key: string]: SiteConfig } = {
   ottawa: {
     logoImageURL: "/images/together-apart-white-logo.png",
