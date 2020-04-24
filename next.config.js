@@ -2,7 +2,7 @@ require("dotenv").config();
 const webpack = require("webpack");
 const withImages = require("next-images");
 const withTM = require("next-transpile-modules")(["lodash-es", "react-blurhash"]);
-const nextSourceMaps = require("@zeit/next-source-maps");
+const nextSourceMaps = require("@zeit/next-source-maps")({ devtool: "cheap-module-source-map" });
 
 if (!process.env.CURRENT_SITE) process.env.CURRENT_SITE = "ottawa";
 
