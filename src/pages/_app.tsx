@@ -23,9 +23,7 @@ const getPathFromUrl = (url: string) => {
 };
 
 Router.events.on("routeChangeStart", (url) => {
-  console.log("url", { new: getPathFromUrl(url), old: window.location.pathname });
   if (getPathFromUrl(url) != window.location.pathname) {
-    console.log(`Loading: ${url}`);
     NProgress.start();
   }
 
@@ -77,7 +75,8 @@ export default class TogetherApartApp extends App<{}, TogetherApartAppState> {
     return (
       <StyletronProvider value={styletron} debug={debug} debugAfterHydration>
         <BaseProvider theme={theme}>
-          <ToasterContainer>{this.state.hasError ? <div>There was an error.</div> : <Component {...pageProps} />}</ToasterContainer>
+          <ToasterContainer />
+          {this.state.hasError ? <div>There was an error.</div> : <Component {...pageProps} />}
         </BaseProvider>
       </StyletronProvider>
     );
