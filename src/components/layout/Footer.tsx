@@ -1,19 +1,21 @@
 import React from "react";
 import { StaticLink } from "../StaticLink";
 import { CurrentSite } from "../../lib/sites";
+import { useStyletron } from "baseui";
 
 const Spacer = () => <> • </>;
 
-export const Footer = (_props: {}) => (
-  <div className="footer">
-    <div className="container">
+export const Footer = (_props: {}) => {
+  const [css, $theme] = useStyletron();
+  return (
+    <div className={css({ paddingTop: $theme.sizing.scale1600, paddingBottom: $theme.sizing.scale1600 })}>
       <div className="footer-wrapper">
         <div className="nav-social-links footer-social-links">
-          <a href="https://instagram.com/togetherott" target="_blank" className="nav-social-link w-inline-block">
+          <a href="https://instagram.com/togetherott" target="_blank" rel="noopener" className="nav-social-link w-inline-block">
             <img src="/images/instagram.svg" width="30" alt="" className="image-3" />
           </a>
           <div className="div-block-4"></div>
-          <a href="https://twitter.com/togetherott" target="_blank" className="nav-social-link w-inline-block">
+          <a href="https://twitter.com/togetherott" target="_blank" rel="noopener" className="nav-social-link w-inline-block">
             <img src="/images/twitter_white.svg" width="30" alt="" className="image-3" />
           </a>
         </div>
@@ -47,5 +49,5 @@ export const Footer = (_props: {}) => (
         </p>
       </div>
     </div>
-  </div>
-);
+  );
+};
