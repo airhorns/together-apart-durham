@@ -1,6 +1,6 @@
 import React from "react";
 import { Hit } from "react-instantsearch-core";
-import { useStyletron } from "styletron-react";
+import { useStyletron } from "baseui";
 import Imgix from "react-imgix";
 import { Blurhash } from "react-blurhash/es";
 import { webflowToImgixURL } from "../../../lib/utils";
@@ -8,7 +8,7 @@ import { BusinessDoc } from "../BusinessDoc";
 import { useInvertedScale, motion } from "framer-motion";
 
 export const BusinessCardImage = (props: { hit: Hit<BusinessDoc> }) => {
-  const [css] = useStyletron();
+  const [css, $theme] = useStyletron();
   const inverted = useInvertedScale();
 
   return (
@@ -45,7 +45,7 @@ export const BusinessCardImage = (props: { hit: Hit<BusinessDoc> }) => {
           objectPosition: "50% 50%",
           zIndex: 2,
         })}
-        sizes="100vw"
+        sizes={`(min-width: ${$theme.breakpoints.medium}px) 33vw, 100vw`}
         htmlAttributes={{ alt: `Goods or services from ${props.hit.name}`, loading: "lazy" }}
       />
     </motion.div>
