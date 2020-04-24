@@ -1429,8 +1429,8 @@ textarea.w-select {
 .w-lightbox-inactive:hover {
   opacity: 0;
 }
-.w-richtext:before,
-.w-richtext:after {
+.webflow-richtext:before,
+.webflow-richtext:after {
   content: " ";
   display: table;
   grid-column-start: 1;
@@ -1438,27 +1438,27 @@ textarea.w-select {
   grid-column-end: 2;
   grid-row-end: 2;
 }
-.w-richtext:after {
+.webflow-richtext:after {
   clear: both;
 }
-.w-richtext[contenteditable="true"]:before,
-.w-richtext[contenteditable="true"]:after {
+.webflow-richtext[contenteditable="true"]:before,
+.webflow-richtext[contenteditable="true"]:after {
   white-space: initial;
 }
-.w-richtext ol,
-.w-richtext ul {
+.webflow-richtext ol,
+.webflow-richtext ul {
   overflow: hidden;
 }
-.w-richtext .w-richtext-figure-selected.w-richtext-figure-type-video div:after,
-.w-richtext .w-richtext-figure-selected[data-rt-type="video"] div:after {
+.webflow-richtext .webflow-richtext-figure-selected.webflow-richtext-figure-type-video div:after,
+.webflow-richtext .webflow-richtext-figure-selected[data-rt-type="video"] div:after {
   outline: 2px solid #2895f7;
 }
-.w-richtext .w-richtext-figure-selected.w-richtext-figure-type-image div,
-.w-richtext .w-richtext-figure-selected[data-rt-type="image"] div {
+.webflow-richtext .webflow-richtext-figure-selected.webflow-richtext-figure-type-image div,
+.webflow-richtext .webflow-richtext-figure-selected[data-rt-type="image"] div {
   outline: 2px solid #2895f7;
 }
-.w-richtext figure.w-richtext-figure-type-video > div:after,
-.w-richtext figure[data-rt-type="video"] > div:after {
+.webflow-richtext figure.webflow-richtext-figure-type-video > div:after,
+.webflow-richtext figure[data-rt-type="video"] > div:after {
   content: "";
   position: absolute;
   display: none;
@@ -1467,67 +1467,67 @@ textarea.w-select {
   right: 0;
   bottom: 0;
 }
-.w-richtext figure {
+.webflow-richtext figure {
   position: relative;
   max-width: 60%;
 }
-.w-richtext figure > div:before {
+.webflow-richtext figure > div:before {
   cursor: default !important;
 }
-.w-richtext figure img {
+.webflow-richtext figure img {
   width: 100%;
 }
-.w-richtext figure figcaption.w-richtext-figcaption-placeholder {
+.webflow-richtext figure figcaption.webflow-richtext-figcaption-placeholder {
   opacity: 0.6;
 }
-.w-richtext figure div {
+.webflow-richtext figure div {
   /* fix incorrectly sized selection border in the data manager */
   font-size: 0px;
   color: transparent;
 }
-.w-richtext figure.w-richtext-figure-type-image,
-.w-richtext figure[data-rt-type="image"] {
+.webflow-richtext figure.webflow-richtext-figure-type-image,
+.webflow-richtext figure[data-rt-type="image"] {
   display: table;
 }
-.w-richtext figure.w-richtext-figure-type-image > div,
-.w-richtext figure[data-rt-type="image"] > div {
+.webflow-richtext figure.webflow-richtext-figure-type-image > div,
+.webflow-richtext figure[data-rt-type="image"] > div {
   display: inline-block;
 }
-.w-richtext figure.w-richtext-figure-type-image > figcaption,
-.w-richtext figure[data-rt-type="image"] > figcaption {
+.webflow-richtext figure.webflow-richtext-figure-type-image > figcaption,
+.webflow-richtext figure[data-rt-type="image"] > figcaption {
   display: table-caption;
   caption-side: bottom;
 }
-.w-richtext figure.w-richtext-figure-type-video,
-.w-richtext figure[data-rt-type="video"] {
+.webflow-richtext figure.webflow-richtext-figure-type-video,
+.webflow-richtext figure[data-rt-type="video"] {
   width: 60%;
   height: 0;
 }
-.w-richtext figure.w-richtext-figure-type-video iframe,
-.w-richtext figure[data-rt-type="video"] iframe {
+.webflow-richtext figure.webflow-richtext-figure-type-video iframe,
+.webflow-richtext figure[data-rt-type="video"] iframe {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
-.w-richtext figure.w-richtext-figure-type-video > div,
-.w-richtext figure[data-rt-type="video"] > div {
+.webflow-richtext figure.webflow-richtext-figure-type-video > div,
+.webflow-richtext figure[data-rt-type="video"] > div {
   width: 100%;
 }
-.w-richtext figure.w-richtext-align-center {
+.webflow-richtext figure.webflow-richtext-align-center {
   margin-right: auto;
   margin-left: auto;
   clear: both;
 }
-.w-richtext figure.w-richtext-align-center.w-richtext-figure-type-image > div,
-.w-richtext figure.w-richtext-align-center[data-rt-type="image"] > div {
+.webflow-richtext figure.webflow-richtext-align-center.webflow-richtext-figure-type-image > div,
+.webflow-richtext figure.webflow-richtext-align-center[data-rt-type="image"] > div {
   max-width: 100%;
 }
-.w-richtext figure.w-richtext-align-normal {
+.webflow-richtext figure.webflow-richtext-align-normal {
   clear: both;
 }
-.w-richtext figure.w-richtext-align-fullwidth {
+.webflow-richtext figure.webflow-richtext-align-fullwidth {
   width: 100%;
   max-width: 100%;
   text-align: center;
@@ -1536,22 +1536,22 @@ textarea.w-select {
   margin-right: auto;
   margin-left: auto;
 }
-.w-richtext figure.w-richtext-align-fullwidth > div {
+.webflow-richtext figure.webflow-richtext-align-fullwidth > div {
   display: inline-block;
   /* padding-bottom is used for aspect ratios in video figures
       we want the div to inherit that so hover/selection borders in the designer-canvas
       fit right*/
   padding-bottom: inherit;
 }
-.w-richtext figure.w-richtext-align-fullwidth > figcaption {
+.webflow-richtext figure.webflow-richtext-align-fullwidth > figcaption {
   display: block;
 }
-.w-richtext figure.w-richtext-align-floatleft {
+.webflow-richtext figure.webflow-richtext-align-floatleft {
   float: left;
   margin-right: 15px;
   clear: none;
 }
-.w-richtext figure.w-richtext-align-floatright {
+.webflow-richtext figure.webflow-richtext-align-floatright {
   float: right;
   margin-left: 15px;
   clear: none;

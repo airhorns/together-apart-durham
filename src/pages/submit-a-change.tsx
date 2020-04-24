@@ -37,10 +37,6 @@ export const SubmitForm = (props: { businesses: Option[]; onSuccess: (values: Su
       className={css({
         paddingLeft: $theme.sizing.scale400,
         paddingRight: $theme.sizing.scale400,
-        [$theme.breakpoints.medium]: {
-          paddingLeft: 0,
-          paddingRight: 0,
-        },
       })}
     >
       <Formik<SubmitChangeFormValues>

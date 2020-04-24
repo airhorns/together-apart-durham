@@ -69,3 +69,131 @@ textarea {
 body {
   font-family: "DM Sans", sans-serif;
 }
+
+.webflow-richtext:before,
+.webflow-richtext:after {
+  content: " ";
+  display: table;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  grid-column-end: 2;
+  grid-row-end: 2;
+}
+.webflow-richtext:after {
+  clear: both;
+}
+.webflow-richtext[contenteditable="true"]:before,
+.webflow-richtext[contenteditable="true"]:after {
+  white-space: initial;
+}
+.webflow-richtext ol,
+.webflow-richtext ul {
+  overflow: hidden;
+}
+.webflow-richtext .webflow-richtext-figure-selected.webflow-richtext-figure-type-video div:after,
+.webflow-richtext .webflow-richtext-figure-selected[data-rt-type="video"] div:after {
+  outline: 2px solid #2895f7;
+}
+.webflow-richtext .webflow-richtext-figure-selected.webflow-richtext-figure-type-image div,
+.webflow-richtext .webflow-richtext-figure-selected[data-rt-type="image"] div {
+  outline: 2px solid #2895f7;
+}
+.webflow-richtext figure.webflow-richtext-figure-type-video > div:after,
+.webflow-richtext figure[data-rt-type="video"] > div:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.webflow-richtext figure {
+  position: relative;
+  max-width: 60%;
+}
+.webflow-richtext figure > div:before {
+  cursor: default !important;
+}
+.webflow-richtext figure img {
+  width: 100%;
+}
+.webflow-richtext figure figcaption.webflow-richtext-figcaption-placeholder {
+  opacity: 0.6;
+}
+.webflow-richtext figure div {
+  /* fix incorrectly sized selection border in the data manager */
+  font-size: 0px;
+  color: transparent;
+}
+.webflow-richtext figure.webflow-richtext-figure-type-image,
+.webflow-richtext figure[data-rt-type="image"] {
+  display: table;
+}
+.webflow-richtext figure.webflow-richtext-figure-type-image > div,
+.webflow-richtext figure[data-rt-type="image"] > div {
+  display: inline-block;
+}
+.webflow-richtext figure.webflow-richtext-figure-type-image > figcaption,
+.webflow-richtext figure[data-rt-type="image"] > figcaption {
+  display: table-caption;
+  caption-side: bottom;
+}
+.webflow-richtext figure.webflow-richtext-figure-type-video,
+.webflow-richtext figure[data-rt-type="video"] {
+  width: 60%;
+  height: 0;
+}
+.webflow-richtext figure.webflow-richtext-figure-type-video iframe,
+.webflow-richtext figure[data-rt-type="video"] iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.webflow-richtext figure.webflow-richtext-figure-type-video > div,
+.webflow-richtext figure[data-rt-type="video"] > div {
+  width: 100%;
+}
+.webflow-richtext figure.webflow-richtext-align-center {
+  margin-right: auto;
+  margin-left: auto;
+  clear: both;
+}
+.webflow-richtext figure.webflow-richtext-align-center.webflow-richtext-figure-type-image > div,
+.webflow-richtext figure.webflow-richtext-align-center[data-rt-type="image"] > div {
+  max-width: 100%;
+}
+.webflow-richtext figure.webflow-richtext-align-normal {
+  clear: both;
+}
+.webflow-richtext figure.webflow-richtext-align-fullwidth {
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  clear: both;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+.webflow-richtext figure.webflow-richtext-align-fullwidth > div {
+  display: inline-block;
+  /* padding-bottom is used for aspect ratios in video figures
+      we want the div to inherit that so hover/selection borders in the designer-canvas
+      fit right*/
+  padding-bottom: inherit;
+}
+.webflow-richtext figure.webflow-richtext-align-fullwidth > figcaption {
+  display: block;
+}
+.webflow-richtext figure.webflow-richtext-align-floatleft {
+  float: left;
+  margin-right: 15px;
+  clear: none;
+}
+.webflow-richtext figure.webflow-richtext-align-floatright {
+  float: right;
+  margin-left: 15px;
+  clear: none;
+}

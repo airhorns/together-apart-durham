@@ -3,8 +3,9 @@ import { motion, useInvertedScale } from "framer-motion";
 import { Hit } from "react-instantsearch-core";
 import { BusinessDoc } from "../BusinessDoc";
 import { RichTextHighlight } from "../RichTextHighlight";
-import { useStyletron } from "baseui";
+import { useStyletron, styled } from "baseui";
 import { Heading, HeadingLevel } from "baseui/heading";
+import { IconDetail, IconWrapper } from "./IconDetail";
 
 const DeliveryApps: { key: keyof BusinessDoc; label: string }[] = [
   { key: "uber-eats", label: "UberEATS" },
@@ -14,11 +15,30 @@ const DeliveryApps: { key: keyof BusinessDoc; label: string }[] = [
   { key: "seamless", label: "Seamless" },
 ];
 
+const InfoBadge = styled("span", ({ $theme }) => ({
+  marginRight: $theme.sizing.scale100,
+  marginTop: $theme.sizing.scale100,
+  marginBottom: $theme.sizing.scale100,
+  padding: "2px 5px",
+  color: "#FFF",
+  border: "1px solid #f2c94c",
+  borderRadius: $theme.borders.radius300,
+  fontSize: "12px",
+  cursor: "default",
+}));
+
 export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isSelected: boolean; highlight: boolean }) => {
   const hasDeliveryMethods = props.hit["takeout"] || props.hit["pickup"];
   const hasDeliveryApps = DeliveryApps.some(({ key }) => !!props.hit[key]);
   const [css, $theme] = useStyletron();
   const inverted = useInvertedScale();
+
+  const infoLinkStyle = css({
+    color: "#FFF",
+    textDecoration: "none",
+    fontSize: "14px",
+  });
+
   return (
     <motion.div
       style={{ ...inverted, originY: 0, originX: 0 }}
@@ -36,7 +56,7 @@ export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isSelected: 
         (props.highlight ? (
           <RichTextHighlight attribute="story" hit={props.hit} />
         ) : (
-          <div className="w-richtext" dangerouslySetInnerHTML={{ __html: props.hit.story }} />
+          <div className="webflow-richtext" dangerouslySetInnerHTML={{ __html: props.hit.story }} />
         ))}
       {props.hit["special-instructions"] && (
         <HeadingLevel>
@@ -47,121 +67,61 @@ export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isSelected: 
         </HeadingLevel>
       )}
       <div className={css({ marginTop: $theme.sizing.scale800 })}>
-        <div className="information-wrap">
+        <div className={css({ display: "flex", flexDirection: "column" })}>
           {props.hit["website"] && (
-            <div className="website-wrap">
-              <div className="icon-wrapper">
-                <img
-                  src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e7a31dd4dd99487574fbcfc_Website.svg"
-                  width="20"
-                  alt=""
-                />
-              </div>
-              <div className="info-text-wrapper">
-                <a
-                  href={props.hit["website"]}
-                  target="_blank"
-                  rel="noopener"
-                  className="info-link url"
-                  style={{ textOverflow: "ellipsis", maxWidth: "225px", whiteSpace: "nowrap", overflow: "hidden" }}
-                >
-                  {props.hit["website"]}
-                </a>
-              </div>
-            </div>
+            <IconDetail icon={require("../../../assets/images/Website.svg")}>
+              <a
+                href={props.hit["website"]}
+                target="_blank"
+                rel="noopener"
+                style={{ textOverflow: "ellipsis", maxWidth: "225px", whiteSpace: "nowrap", overflow: "hidden" }}
+                className={infoLinkStyle}
+              >
+                {props.hit["website"]}
+              </a>
+            </IconDetail>
           )}
           {props.hit["phone-number"] && (
-            <div className="website-wrap">
-              <div className="icon-wrapper">
-                <img
-                  src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e7a31dd4dd994d0aa4fbd03_Phone.svg"
-                  width="20"
-                  alt=""
-                />
-              </div>
-              <div className="info-text-wrapper">
-                <a href={`tel:${props.hit["phone-number"]}`} className="info-link">
-                  {props.hit["phone-number"]}
-                </a>
-              </div>
-            </div>
+            <IconDetail icon={require("../../../assets/images/Phone.svg")}>
+              <a href={`tel:${props.hit["phone-number"]}`} className={infoLinkStyle}>
+                {props.hit["phone-number"]}
+              </a>
+            </IconDetail>
           )}
           {hasDeliveryMethods && (
-            <div className="website-wrap">
-              <div className="icon-wrapper">
-                <img
-                  src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e7a31dd4dd99467364fbcf7_Delivery%20Truck.svg"
-                  width="20"
-                  alt=""
-                />
-              </div>
-              <div className="info-text-wrapper app-wrapper">
-                {props.hit["pickup"] && (
-                  <span className="info-link app-tile no-pointer">
-                    {props.hit.category && props.hit.category[0] === "Restaurant" ? "Takeout" : "In Store Pickup"}
-                  </span>
-                )}
-                {props.hit.delivery && <span className="info-link app-tile no-pointer">Delivery</span>}
-              </div>
-            </div>
+            <IconDetail icon={require("../../../assets/images/Delivery-Truck.svg")}>
+              {props.hit["pickup"] && (
+                <InfoBadge>{props.hit.category && props.hit.category[0] === "Restaurant" ? "Takeout" : "In Store Pickup"}</InfoBadge>
+              )}
+              {props.hit.delivery && <InfoBadge>Delivery</InfoBadge>}
+            </IconDetail>
           )}
           {hasDeliveryApps && (
-            <div className="website-wrap">
-              <div className="icon-wrapper">
-                <img
-                  src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e7a31dd4dd9943d5f4fbd05_Phone.svg"
-                  width="20"
-                  alt=""
-                />
-              </div>
-              <div className="info-text-wrapper app-wrapper">
-                {DeliveryApps.map(
-                  ({ key, label }) =>
-                    props.hit[key] && (
-                      <span key={key} className="info-link app-tile no-pointer">
-                        {label}
-                      </span>
-                    )
-                )}
-              </div>
-            </div>
+            <IconDetail icon={require("../../../assets/images/Smartphone.svg")}>
+              {DeliveryApps.map(({ key, label }) => props.hit[key] && <InfoBadge key={key}>{label}</InfoBadge>)}
+            </IconDetail>
           )}
-          <div className="website-wrap socials-wrap">
+          <div className={css({ display: "flex" })}>
             {props.hit["twitter-profile"] && (
-              <div className="icon-wrapper">
-                <a href={props.hit["twitter-profile"]} className="w-inline-block" target="_blank" rel="noopener">
-                  <img
-                    src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e7bac53bdd045c2eac6e495_twitter_white.svg"
-                    width="20"
-                    alt=""
-                    className="image-3"
-                  />
+              <IconWrapper>
+                <a href={props.hit["twitter-profile"]} target="_blank" rel="noopener">
+                  <img src={require("../../../assets/images/twitter_white.svg")} width="20" alt="Twitter logo" />
                 </a>
-              </div>
+              </IconWrapper>
             )}
             {props.hit["facebook-page"] && (
-              <div className="icon-wrapper">
-                <a href={props.hit["facebook-page"]} className="w-inline-block" target="_blank" rel="noopener">
-                  <img
-                    src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e7bacc673c49866459268aa_facebook.svg"
-                    width="20"
-                    alt=""
-                    className="image-3"
-                  />
+              <IconWrapper>
+                <a href={props.hit["facebook-page"]} target="_blank" rel="noopener">
+                  <img src={require("../../../assets/images/facebook.svg")} width="20" alt="Facebook logo" />
                 </a>
-              </div>
+              </IconWrapper>
             )}
             {props.hit["instagram-profile"] && (
-              <div className="icon-wrapper">
-                <a href={props.hit["instagram-profile"]} className="w-inline-block" target="_blank" rel="noopener">
-                  <img
-                    src="https://global-uploads.webflow.com/5e7a31dcdd44a76199b8112d/5e7bad3dd6833502eba9dc9b_instagram.svg"
-                    width="20"
-                    alt=""
-                    className="image-3"
-                  />
+              <IconWrapper>
+                <a href={props.hit["instagram-profile"]} target="_blank" rel="noopener">
+                  <img src={require("../../../assets/images/instagram.svg")} width="20" alt="Instagram logo" />
                 </a>
-              </div>
+              </IconWrapper>
             )}
           </div>
         </div>

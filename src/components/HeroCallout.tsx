@@ -4,17 +4,24 @@ import { Heading } from "baseui/heading";
 import { useStyletron } from "baseui";
 
 export const HeroCallout = (props: { heading: React.ReactNode; children: React.ReactNode }) => {
-  const [_css, $theme] = useStyletron();
+  const [css, $theme] = useStyletron();
 
   return (
-    <div className="hero-section">
-      <div className="container">
-        <div className="hero-content">
-          <Heading $style={{ letterSpacing: ($theme.typography.font1050 as any).letterSpacing }}>{props.heading}</Heading>
-          <div className="paragraph-container">
-            <div className="hero-paragraph">{props.children}</div>
-          </div>
-        </div>
+    <div
+      className={css({
+        display: "flex",
+        width: "100%",
+        paddingTop: $theme.sizing.scale800,
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: $theme.sizing.scale1600,
+        textAlign: "center",
+      })}
+    >
+      <Heading $style={{ letterSpacing: ($theme.typography.font1050 as any).letterSpacing }}>{props.heading}</Heading>
+      <div className={css({ marginTop: $theme.sizing.scale400 })}>
+        <div>{props.children}</div>
       </div>
     </div>
   );

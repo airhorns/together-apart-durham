@@ -67,10 +67,6 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
       className={css({
         paddingLeft: $theme.sizing.scale400,
         paddingRight: $theme.sizing.scale400,
-        [$theme.breakpoints.medium]: {
-          paddingLeft: 0,
-          paddingRight: 0,
-        },
       })}
     >
       <Formik<SubmitFormValues>

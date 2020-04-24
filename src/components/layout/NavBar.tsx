@@ -2,13 +2,22 @@ import React from "react";
 import { StaticLink } from "../StaticLink";
 import { CurrentSite } from "../../lib/sites";
 import { useStyletron } from "baseui";
+import { Row } from "../Row";
+import { NavSocialLinks } from "./NavSocialLinks";
 
 export const NavBar = (props: { coBrand?: React.ReactNode }) => {
   const [css, $theme] = useStyletron();
-
   return (
-    <div className="nav-bar">
-      <div className="nav-items">
+    <div className={css({ paddingTop: $theme.sizing.scale1200, [$theme.mediaQuery.medium]: { paddingBottom: $theme.sizing.scale700 } })}>
+      <div
+        className={css({
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexDirection: "column",
+          [$theme.mediaQuery.medium]: { flexDirection: "row" },
+        })}
+      >
         <div
           className={css({
             color: $theme.colors.white,
@@ -29,20 +38,28 @@ export const NavBar = (props: { coBrand?: React.ReactNode }) => {
           )}
         </div>
 
-        <div className="nav-link-wrapper">
-          <StaticLink href="/submit-a-business" className="nav-link important-nav-link">
+        <Row>
+          <StaticLink
+            href="/submit-a-business"
+            className={css({
+              marginRight: $theme.sizing.scale700,
+              paddingTop: $theme.sizing.scale300,
+              paddingBottom: $theme.sizing.scale300,
+              paddingLeft: $theme.sizing.scale600,
+              paddingRight: $theme.sizing.scale600,
+              [$theme.mediaQuery.small]: {
+                fontFamily: $theme.typography.DisplayLarge.fontFamily,
+                fontSize: "20px",
+                fontWeight: 400,
+              },
+              textDecoration: "none",
+              textTransform: "uppercase",
+            })}
+          >
             Submit A Business
           </StaticLink>
-          <div className="nav-social-links">
-            <a href="https://instagram.com/togetherott" target="_blank" rel="noopener" className="nav-social-link w-inline-block">
-              <img src="/images/instagram.svg" width="30" alt="" className="image-3" />
-            </a>
-            <div className="div-block-4"></div>
-            <a href="https://twitter.com/togetherott" target="_blank" rel="noopener" className="nav-social-link w-inline-block">
-              <img src="/images/twitter_white.svg" width="30" alt="" className="image-3" />
-            </a>
-          </div>
-        </div>
+          <NavSocialLinks />
+        </Row>
       </div>
     </div>
   );
