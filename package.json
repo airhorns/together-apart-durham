@@ -6,6 +6,7 @@
     "@babel/core": "^7.9.0",
     "@fixings/eslint-config": "^4.0.2",
     "@fixings/prettier-config": "^1.0.0",
+    "@next/bundle-analyzer": "^9.3.5",
     "@sentry/browser": "^5.15.4",
     "@sentry/integrations": "^5.15.4",
     "@sentry/node": "^5.15.4",
@@ -76,7 +77,8 @@
     "start": "next start",
     "lint": "tsc --noEmit --incremental false --tsBuildInfoFile null && prettier --loglevel warn --check \"src/**/*.{js,ts,tsx}\" && eslint --ext js,ts,tsx src",
     "lintfix": "prettier --write --loglevel warn \"src/**/*.{js,ts,tsx}\" && eslint --ext js,ts,tsx --fix src",
-    "test": "jest"
+    "test": "jest",
+    "analyze": "ANALYZE=true yarn build"
   },
   "eslintConfig": {
     "extends": "@fixings/eslint-config",
