@@ -10,11 +10,9 @@ import { theme } from "../lib/theme";
 import sentry from "../lib/sentry";
 import { Greeting } from "../components/Greeting";
 
-import "../webflow/css/normalize.css";
-import "../webflow/css/webflow.css";
-import "../webflow/css/ottawa-covid-19-local-support.webflow.css";
-import "../components/nprogress.css";
-import "../components/global.css";
+import "../assets/stylesheets/reset.css";
+import "../assets/stylesheets/nprogress.css";
+import "../assets/stylesheets/global.css";
 
 const { Sentry, captureException } = sentry();
 

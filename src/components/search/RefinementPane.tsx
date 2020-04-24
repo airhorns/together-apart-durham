@@ -38,10 +38,13 @@ export const RefinementPane = connectStateResults(
           <div
             className={css({
               display: "none",
+              marginBottom: $theme.sizing.scale600,
               [$theme.mediaQuery.large]: { display: "block" },
             })}
           >
-            <Heading styleLevel={4}>{props.title}</Heading>
+            <Heading styleLevel={4} marginBottom={$theme.sizing.scale200}>
+              {props.title}
+            </Heading>
             {props.children}
           </div>
 

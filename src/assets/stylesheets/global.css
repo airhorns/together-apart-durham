@@ -1,3 +1,12 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 input {
   -webkit-border-radius: 0;
   border-radius: 0;
@@ -196,4 +205,15 @@ body {
   float: right;
   margin-left: 15px;
   clear: none;
+}
+
+a {
+  color: #f2c94c;
+}
+
+body {
+  color: #fff;
+  background-color: #13141b;
+  font-size: 16px;
+  line-height: 20px;
 }

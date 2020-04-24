@@ -24,6 +24,7 @@ import { GroupableCheckbox } from "../components/form/Checkbox";
 import { CheckboxProps } from "baseui/checkbox";
 import { StaticLink } from "../components/StaticLink";
 import { CurrentSite } from "../lib/sites";
+import { NarrowContainer } from "../components/layout/NarrowContainer";
 
 const Confetti = dynamic(() => import("../components/Confetti"), { ssr: false });
 
@@ -356,7 +357,7 @@ export default (props: SubmitProps) => {
         Thanks for your understanding!
         <br />
       </HeroCallout>
-      <div className="narrow-container">
+      <NarrowContainer>
         {!success && <SubmitForm locations={props.locations} categories={props.categories} onSuccess={() => setSuccess(true)} />}
         {success && (
           <OpaqueNotification
@@ -379,7 +380,7 @@ export default (props: SubmitProps) => {
             success
           />
         )}
-      </div>
+      </NarrowContainer>
     </Layout>
   );
 };

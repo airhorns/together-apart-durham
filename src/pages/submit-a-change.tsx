@@ -20,6 +20,7 @@ import { Heading, HeadingLevel } from "baseui/heading";
 import { Select } from "../components/form/Select";
 import { StaticLink } from "../components/StaticLink";
 import { CurrentSite } from "../lib/sites";
+import { NarrowContainer } from "../components/layout/NarrowContainer";
 
 export interface SubmitChangeFormValues {
   businessID: string | null;
@@ -129,7 +130,7 @@ export default (props: SubmitProps) => {
         Please use this form to submit a request to change information about a listed business. We do our best to review and action every
         submission within 24 hours.
       </HeroCallout>
-      <div className="narrow-container">
+      <NarrowContainer>
         {!success && <SubmitForm businesses={props.businesses} onSuccess={() => setSuccess(true)} />}
         {success && (
           <OpaqueNotification
@@ -151,7 +152,7 @@ export default (props: SubmitProps) => {
             success
           />
         )}
-      </div>
+      </NarrowContainer>
     </Layout>
   );
 };
