@@ -49,6 +49,11 @@ export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isExpanded: 
       animate={{ opacity: 1 }}
       className={css({
         marginTop: $theme.sizing.scale800,
+        flexGrow: 1,
+        flexShrink: 0,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
       })}
     >
       {props.hit.story &&

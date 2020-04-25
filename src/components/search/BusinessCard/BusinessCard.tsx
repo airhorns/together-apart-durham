@@ -158,7 +158,6 @@ export const BusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
             flexShrink: 0,
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between",
             paddingTop: $theme.sizing.scale600,
             paddingBottom: $theme.sizing.scale700,
             paddingLeft: $theme.sizing.scale700,
