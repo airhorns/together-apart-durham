@@ -228,7 +228,6 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
                 <FormControl
                   label="Ordering Options"
                   caption="If you take orders for physical goods, what are the different delivery methods available?"
-                  error={undefined}
                 >
                   <Row>
                     <GroupableCheckbox<SubmitFormValues>

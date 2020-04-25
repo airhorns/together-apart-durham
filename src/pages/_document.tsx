@@ -13,7 +13,6 @@ interface ExtraProps {
 export default class StyledDocument extends Document<ExtraProps> {
   static async getInitialProps(ctx: any) {
     const page = await ctx.renderPage((App: any) => (props: any) => {
-      console.log(styletron);
       return (
         <StyletronProvider value={styletron}>
           <App {...props} />
