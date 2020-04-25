@@ -39,13 +39,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
   await $backend.prepare();
   const paths: { params: Record<string, string> }[] = [];
 
-  if (process.env.NODE_ENV == "production") {
-    $backend.paginatedItems(async (page) => {
-      page.items.filter($backend.readyForPublish).forEach((item) => {
-        paths.push({ params: { slug: item.slug } });
-      });
+  await $backend.paginatedItems(async (page) => {
+    page.items.filter($backend.readyForPublish).forEach((item) => {
+      paths.push({ params: { slug: item.slug } });
     });
-  }
+  });
+
+  console.log("prepared static paths", { length: paths.length });
 
   return {
     paths: paths,
