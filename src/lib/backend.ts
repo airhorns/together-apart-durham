@@ -71,18 +71,26 @@ export class ContentBackend {
 
   async sync() {
     await this.prepare();
-    let totalSaved = 0;
+    const result: { saved: Record<string, boolean>; totalSaved: number } = { saved: {}, totalSaved: 0 };
 
     await this.paginatedItems(async (page) => {
-      const objects = page.items.filter(this.readyForPublish).map((item) => this.formatWebflowForAlgolia(item));
+      const objects: Record<string, any>[] = [];
+      page.items.forEach((item) => {
+        if (this.readyForPublish(item)) {
+          objects.push(this.formatWebflowForAlgolia(item));
+          result.saved[item.name] = true;
+        } else {
+          result.saved[item.name] = false;
+        }
+      });
 
       const saveResponse = await this.$index.saveObjects(objects);
-      totalSaved += saveResponse.objectIDs.length;
+      result.totalSaved += saveResponse.objectIDs.length;
       console.log(`saved result batch, size=${saveResponse.objectIDs.length}`);
     });
 
-    console.log("sync complete", { totalSaved });
-    return totalSaved;
+    console.log("sync complete", { totalSaved: result.totalSaved });
+    return result;
   }
 
   async paginatedItems(callback: (page: WebflowItemsPage) => Promise<void>) {
