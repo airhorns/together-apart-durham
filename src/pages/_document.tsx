@@ -50,7 +50,6 @@ export default class StyledDocument extends Document<ExtraProps> {
             />
           ))}
           <meta content="summary" name="twitter:card" />
-          <meta content="/images/together-apart-og.png" property="og:image" />
           <link href="/images/favicon.png" rel="shortcut icon" type="image/x-icon" />
           <link href="/images/webclip.png" rel="apple-touch-icon" />
           {TrackingScripts}

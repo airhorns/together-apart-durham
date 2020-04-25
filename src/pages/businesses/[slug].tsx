@@ -6,7 +6,7 @@ import { Meta } from "../../components/Meta";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { $backend } from "../../lib/backend";
 import { StaticBusinessCard } from "../../components/search/BusinessCard/StaticBusinessCard";
-import { assert } from "../../lib/utils";
+import { assert, webflowToImgixURL } from "../../lib/utils";
 import { BusinessDoc } from "../../components/search/BusinessDoc";
 
 interface BusinessPageProps {
@@ -20,7 +20,7 @@ export default (props: BusinessPageProps) => {
 
   return (
     <Layout>
-      <Meta title={`${props.business.name} is open during COVID-19`} />
+      <Meta title={`${props.business.name} is open during COVID-19`} ogImage={webflowToImgixURL(props.business.header_image)} />
       <StaticBusinessCard hit={props.business} />
     </Layout>
   );
