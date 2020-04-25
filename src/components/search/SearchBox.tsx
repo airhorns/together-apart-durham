@@ -68,14 +68,14 @@ const SearchAfter = (_props: {}) => {
 };
 
 export const SearchBox = connectSearchBox(({ currentRefinement, refine }) => {
-  const [css] = useStyletron();
+  const [css, $theme] = useStyletron();
   return (
     <div
       className={css({
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        marginBottom: "1em",
+        marginBottom: $theme.sizing.scale800,
       })}
     >
       <Input

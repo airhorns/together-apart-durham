@@ -28,7 +28,6 @@ export const Checkbox = <Values extends FormikValues>(
 ) => {
   const [_field, meta] = useField(props.attribute);
   const error = (meta.touched && meta.error) || undefined;
-  console.log(error);
 
   return (
     <FormControl label={props.label} caption={props.caption} error={error}>

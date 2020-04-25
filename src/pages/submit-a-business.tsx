@@ -24,6 +24,7 @@ import { GroupableCheckbox } from "../components/form/Checkbox";
 import { CheckboxProps } from "baseui/checkbox";
 import { StaticLink } from "../components/StaticLink";
 import { CurrentSite } from "../lib/sites";
+import { NarrowContainer } from "../components/layout/NarrowContainer";
 
 const Confetti = dynamic(() => import("../components/Confetti"), { ssr: false });
 
@@ -67,10 +68,6 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
       className={css({
         paddingLeft: $theme.sizing.scale400,
         paddingRight: $theme.sizing.scale400,
-        [$theme.breakpoints.medium]: {
-          paddingLeft: 0,
-          paddingRight: 0,
-        },
       })}
     >
       <Formik<SubmitFormValues>
@@ -231,7 +228,6 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
                 <FormControl
                   label="Ordering Options"
                   caption="If you take orders for physical goods, what are the different delivery methods available?"
-                  error={undefined}
                 >
                   <Row>
                     <GroupableCheckbox<SubmitFormValues>
@@ -360,7 +356,7 @@ export default (props: SubmitProps) => {
         Thanks for your understanding!
         <br />
       </HeroCallout>
-      <div className="narrow-container">
+      <NarrowContainer>
         {!success && <SubmitForm locations={props.locations} categories={props.categories} onSuccess={() => setSuccess(true)} />}
         {success && (
           <OpaqueNotification
@@ -383,7 +379,7 @@ export default (props: SubmitProps) => {
             success
           />
         )}
-      </div>
+      </NarrowContainer>
     </Layout>
   );
 };

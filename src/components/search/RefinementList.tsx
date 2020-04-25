@@ -7,6 +7,8 @@ import { isUndefined, keyBy, concat } from "lodash-es";
 import { useStyletron } from "baseui";
 import { Label3 } from "baseui/typography";
 
+const CheckboxOverrides = { Root: { style: { marginBottom: "6px" } } };
+
 export const RefinementOption = (props: {
   item: RefinementListProvided["items"][0];
   onChange: () => void;
@@ -22,7 +24,7 @@ export const RefinementOption = (props: {
   );
 
   return (
-    <Checkbox checked={props.item.isRefined} onChange={props.onChange}>
+    <Checkbox checked={props.item.isRefined} onChange={props.onChange} overrides={CheckboxOverrides}>
       {label}
     </Checkbox>
   );
@@ -99,6 +101,7 @@ export const ToggleRefinement = connectToggleRefinement((props: ToggleProvidedPr
       onChange={(_event) => {
         props.refine(!props.currentRefinement);
       }}
+      overrides={CheckboxOverrides}
     >
       {props.label}
     </Checkbox>

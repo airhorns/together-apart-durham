@@ -10,5 +10,5 @@ export const RichTextHighlight = connectHighlight(({ highlight, attribute, hit }
 
   const html = parsedHit.map((part) => (part.isHighlighted ? `<mark>${part.value}</mark>` : part.value)).join("");
 
-  return <div className="w-richtext" dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div className="webflow-richtext" dangerouslySetInnerHTML={{ __html: html }} />;
 });

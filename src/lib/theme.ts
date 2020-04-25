@@ -36,40 +36,95 @@ export const theme = createDarkTheme(primitives, {
   breakpoints,
   mediaQuery: mapValues(breakpoints, (value) => `@media screen and (min-width: ${value}px)`),
   typography: {
+    ParagraphSmall: {
+      fontSize: "14px",
+    },
     ParagraphMedium: {
+      fontSize: "16px",
+    },
+    LabelSmall: {
       fontSize: "14px",
     },
     LabelMedium: {
-      fontSize: "14px",
+      fontSize: "16px",
     },
     HeadingMedium: {
       fontFamily: displayFamily,
       fontSize: "20px",
+      fontWeight: 700,
     },
     HeadingLarge: {
       fontFamily: displayFamily,
+      fontWeight: 700,
+      fontSize: "24px",
+      letterSpacing: "-1px",
     },
     HeadingXLarge: {
       fontFamily: displayFamily,
+      fontWeight: 700,
+      fontSize: "30px",
+      lineHeight: "36px",
+      letterSpacing: "-1px",
     },
     HeadingXXLarge: {
       fontFamily: displayFamily,
+      fontWeight: 700,
+      letterSpacing: "-1px",
     },
     DisplayLarge: {
       fontFamily: displayFamily,
       fontWeight: 700,
+      letterSpacing: "-1px",
     },
     DisplayMedium: {
       fontFamily: displayFamily,
       fontWeight: 700,
+      letterSpacing: "-1px",
     },
     DisplaySmall: {
       fontFamily: displayFamily,
       fontWeight: 700,
+      letterSpacing: "-1px",
+    },
+    font850: {
+      fontFamily: displayFamily,
+      fontWeight: 700,
+      letterSpacing: "-1px",
+    },
+    font950: {
+      fontFamily: displayFamily,
+      fontWeight: 700,
+      letterSpacing: "-1px",
+    },
+    font1050: {
+      fontFamily: displayFamily,
+      fontWeight: 700,
+      letterSpacing: "-1px",
+    },
+    font1150: {
+      fontFamily: displayFamily,
+      fontWeight: 700,
+      letterSpacing: "-1px",
+    },
+    font1250: {
+      fontFamily: displayFamily,
+      fontWeight: 700,
+      letterSpacing: "-1px",
+    },
+    font1350: {
+      fontFamily: displayFamily,
+      fontWeight: 700,
+      letterSpacing: "-1px",
+    },
+    font1450: {
+      fontFamily: displayFamily,
+      fontWeight: 700,
+      letterSpacing: "-1px",
     },
   },
   colors: {
     borderFocus: primitives.primary,
+    contentPrimary: "#FFF",
   },
   borders: {
     useRoundedCorners: true,
