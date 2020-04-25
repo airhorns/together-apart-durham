@@ -20,7 +20,7 @@ export default (props: BusinessPageProps) => {
 
   return (
     <Layout>
-      <Meta title={`${props.business.name} Businesses`} />
+      <Meta title={`${props.business.name} is open during COVID-19`} />
       <StaticBusinessCard hit={props.business} />
     </Layout>
   );
