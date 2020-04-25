@@ -4,8 +4,11 @@ import { Hit } from "react-instantsearch-core";
 import { BusinessDoc } from "../BusinessDoc";
 import { RichTextHighlight } from "../RichTextHighlight";
 import { useStyletron, styled } from "baseui";
-import { Heading, HeadingLevel } from "baseui/heading";
+import { StatefulPopover } from "baseui/popover";
+import { Button, KIND, SIZE } from "baseui/button";
+import { Heading } from "baseui/heading";
 import { IconDetail, IconWrapper } from "./IconDetail";
+import { Block } from "baseui/block";
 
 const DeliveryApps: { key: keyof BusinessDoc; label: string }[] = [
   { key: "uber-eats", label: "UberEATS" },
@@ -27,7 +30,7 @@ const InfoBadge = styled("span", ({ $theme }) => ({
   cursor: "default",
 }));
 
-export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isSelected: boolean; highlight: boolean }) => {
+export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isExpanded: boolean; highlight: boolean }) => {
   const hasDeliveryMethods = props.hit["takeout"] || props.hit["pickup"];
   const hasDeliveryApps = DeliveryApps.some(({ key }) => !!props.hit[key]);
   const [css, $theme] = useStyletron();
@@ -45,11 +48,7 @@ export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isSelected: 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className={css({
-        borderTopWidth: "1px",
-        borderTopColor: $theme.colors.mono400,
-        borderTopStyle: "solid",
-        marginTop: "20px",
-        paddingTop: "20px",
+        marginTop: $theme.sizing.scale800,
       })}
     >
       {props.hit.story &&
@@ -58,16 +57,25 @@ export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isSelected: 
         ) : (
           <div className="webflow-richtext" dangerouslySetInnerHTML={{ __html: props.hit.story }} />
         ))}
-      {props.hit["special-instructions"] && (
-        <HeadingLevel>
-          <div>
-            <Heading $style={{ fontSize: "16px" }}>Ordering Instructions</Heading>
-            {props.hit["special-instructions"]}
-          </div>
-        </HeadingLevel>
-      )}
+
       <div className={css({ marginTop: $theme.sizing.scale800 })}>
         <div className={css({ display: "flex", flexDirection: "column" })}>
+          {props.hit["special-instructions"] && (
+            <StatefulPopover
+              content={() => (
+                <Block padding="20px" maxWidth="700px">
+                  <Heading $style={{ fontSize: "16px" }}>Ordering Instructions</Heading>
+                  {props.hit["special-instructions"]}
+                </Block>
+              )}
+              returnFocus
+              autoFocus
+            >
+              <Button kind={KIND.minimal} size={SIZE.compact}>
+                Ordering Instructions
+              </Button>
+            </StatefulPopover>
+          )}
           {props.hit["website"] && (
             <IconDetail icon={require("../../../assets/images/Website.svg")}>
               <a
@@ -101,6 +109,7 @@ export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isSelected: 
               {DeliveryApps.map(({ key, label }) => props.hit[key] && <InfoBadge key={key}>{label}</InfoBadge>)}
             </IconDetail>
           )}
+
           <div className={css({ display: "flex" })}>
             {props.hit["twitter-profile"] && (
               <IconWrapper>
