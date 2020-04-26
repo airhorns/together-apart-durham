@@ -4,6 +4,8 @@ import { CurrentSite } from "../../lib/sites";
 import { useStyletron } from "baseui";
 import { Row } from "../Row";
 import { NavSocialLinks } from "./NavSocialLinks";
+import Imgix from "react-imgix";
+import { imgixURL } from "../../lib/utils";
 
 export const NavBar = (props: { coBrand?: React.ReactNode }) => {
   const [css, $theme] = useStyletron();
@@ -29,7 +31,7 @@ export const NavBar = (props: { coBrand?: React.ReactNode }) => {
           })}
         >
           <StaticLink href="/" aria-current="page">
-            <img src={CurrentSite.logoImageURL} width="159" alt="Logo" />
+            <Imgix src={imgixURL(CurrentSite.logoImageURL)} sizes="33vw" width={159} htmlAttributes={{ alt: "Together Apart logo" }} />
           </StaticLink>
           {props.coBrand && (
             <div className={css({ display: "flex", marginLeft: $theme.sizing.scale400, marginRight: $theme.sizing.scale400 })}>

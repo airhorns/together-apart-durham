@@ -81,6 +81,7 @@
     "test": "jest",
     "analyze": "ANALYZE=true yarn build"
   },
+  "sideEffects": [],
   "eslintConfig": {
     "extends": "@fixings/eslint-config",
     "rules": {

@@ -9,7 +9,7 @@ import { values, find, keys } from "lodash-es";
 import { pathToSearchState } from "../../components/search/searchClient";
 import { Grid, Cell } from "baseui/layout-grid";
 import Imgix from "react-imgix";
-import { webflowToImgixURL, assert } from "../../lib/utils";
+import { imgixURL, assert } from "../../lib/utils";
 import { useStyletron } from "baseui";
 import { getSearchServerSideProps } from "../../components/search/serverSearch";
 
@@ -56,7 +56,7 @@ export default (props: NeighbourhoodPageProps) => {
           ((
             <Cell span={[4, 4, 6]}>
               <Imgix
-                src={webflowToImgixURL(headerImage)}
+                src={imgixURL(headerImage)}
                 sizes="100vw"
                 className={css({ marginBottom: $theme.sizing.scale600, borderRadius: $theme.borders.radius200 })}
                 imgixParams={{ ar: "2:1", fit: "crop" }}

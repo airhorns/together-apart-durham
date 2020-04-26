@@ -3,7 +3,7 @@ import { Hit } from "react-instantsearch-core";
 import { useStyletron } from "baseui";
 import Imgix from "react-imgix";
 import { Blurhash } from "react-blurhash/es";
-import { webflowToImgixURL } from "../../../lib/utils";
+import { imgixURL } from "../../../lib/utils";
 import { BusinessDoc } from "../BusinessDoc";
 import { useInvertedScale, motion } from "framer-motion";
 
@@ -36,7 +36,7 @@ export const BusinessCardImage = (props: { hit: Hit<BusinessDoc> }) => {
         </div>
       )}
       <Imgix
-        src={webflowToImgixURL(props.hit.header_image)}
+        src={imgixURL(props.hit.header_image)}
         className={css({
           width: "100%",
           height: "100%",
