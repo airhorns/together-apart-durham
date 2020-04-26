@@ -390,7 +390,7 @@ export const getStaticProps: GetStaticProps<SubmitProps> = async (_ctx) => {
   return {
     props: {
       locations: sortBy(
-        values($backend.locations).map((item) => ({ id: item._id, label: item.name })),
+        values($backend.currentSiteLocations).map((item) => ({ id: item._id, label: item.name })),
         "label"
       ),
       categories: sortBy(

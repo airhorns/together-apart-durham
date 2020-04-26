@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { $backend } from "../../../lib/backend";
 import { values, mapValues, isUndefined } from "lodash-es";
 import { Sites } from "../../../lib/sites";
+import { importer } from "../../../lib/import";
 
 export const algoliaKeys = async (req: NextApiRequest, res: NextApiResponse) => {
   const keys = mapValues(
@@ -71,6 +72,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
     case "algoliaKeys": {
       handler = algoliaKeys;
+      break;
+    }
+    case "import": {
+      handler = importer;
       break;
     }
     default: {

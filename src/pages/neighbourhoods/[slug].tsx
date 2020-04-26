@@ -12,10 +12,14 @@ import Imgix from "react-imgix";
 import { imgixURL, assert } from "../../lib/utils";
 import { useStyletron } from "baseui";
 import { getSearchServerSideProps } from "../../components/search/serverSearch";
+import { CurrentSiteName } from "../../lib/sites";
 
-const REDIRECTED_SLUGS: Record<string, string> = {
-  "hintonburg-mechanicsville": "wellington-west",
-};
+const REDIRECTED_SLUGS: Record<string, string> =
+  CurrentSiteName == "ottawa"
+    ? {
+        "hintonburg-mechanicsville": "wellington-west",
+      }
+    : {};
 
 interface NeighbourhoodPageProps extends FullSearchProps {
   location: {
