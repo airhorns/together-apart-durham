@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps<LocationsPageProps, { slug: string }
 
   return {
     props: {
-      locations: sortBy(values($backend.locations) as any[], "name"),
+      locations: sortBy(values($backend.currentSiteLocations) as any[], "name"),
     },
   };
 };

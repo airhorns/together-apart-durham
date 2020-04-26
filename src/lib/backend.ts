@@ -1,7 +1,7 @@
 import Webflow from "webflow-api";
 import algoliasearch, { SearchIndex } from "algoliasearch";
 import { assert } from "./utils";
-import { keyBy, pick, omit, compact, uniq } from "lodash-es";
+import { keyBy, pick, omit, compact, uniq, filter } from "lodash-es";
 import { CurrentSite } from "./sites";
 
 if (typeof window != "undefined") {
@@ -38,8 +38,9 @@ export class ContentBackend {
   $webflow = new Webflow({ token: assert(process.env.WEBFLOW_API_KEY) });
   $algolia = algoliasearch(assert(process.env.ALGOLIA_APP_ID), assert(process.env.ALGOLIA_API_KEY));
   $index: SearchIndex;
-  locations: { [key: string]: WebflowItem } = null as any;
-  categories: { [key: string]: WebflowItem } = null as any;
+  allLocations: { [key: string]: WebflowItem } = {};
+  currentSiteLocations: { [key: string]: WebflowItem } = {};
+  categories: { [key: string]: WebflowItem } = {};
   prepared = false;
 
   constructor() {
@@ -50,16 +51,17 @@ export class ContentBackend {
     if (this.prepared) {
       return true;
     }
-    this.locations = keyBy(
+    this.allLocations = keyBy(
       (
         await this.$webflow.items({
           collectionId: ContentBackend.LOCATIONS_COLLECTION_ID,
         })
-      ).items
-        .filter(this.partOfCurrentSite)
-        .map(stripWebflowFunctions),
+      ).items.map(stripWebflowFunctions),
       "_id"
     );
+
+    this.currentSiteLocations = keyBy(filter(this.allLocations, this.partOfCurrentSite), "_id");
+
     this.categories = keyBy(
       (
         await this.$webflow.items({
@@ -72,6 +74,8 @@ export class ContentBackend {
     return this.prepared;
   }
 
+  // Syncs all items from webflow into Algolia
+  // Note: not site specific, we just do one big sync then filter down to the site we need on the frontend
   async sync() {
     await this.prepare();
     const result: { saved: Record<string, boolean>; totalSaved: number } = { saved: {}, totalSaved: 0 };
@@ -171,7 +175,7 @@ export class ContentBackend {
   }
 
   locationNameForItem(item: WebflowItem) {
-    return this.locations[item["location-2"]] ? this.locations[item["location-2"]].name : null;
+    return this.allLocations[item["location-2"]] ? this.allLocations[item["location-2"]].name : null;
   }
 
   categoryNameForItem(item: WebflowItem) {

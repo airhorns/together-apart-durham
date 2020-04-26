@@ -20,7 +20,7 @@ export const stats = async (req: NextApiRequest, res: NextApiResponse) => {
       publishedTotal: 0,
       draftTotal: 0,
       archivedTotal: 0,
-      publishedByLocationCounts: values($backend.locations).reduce((agg, location) => {
+      publishedByLocationCounts: values($backend.allLocations).reduce((agg, location) => {
         agg[location.name] = 0;
         return agg;
       }, {} as Record<string, number>),

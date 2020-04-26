@@ -92,7 +92,7 @@ export const getStaticProps: GetStaticProps<NeighbourhoodPageProps, { slug: stri
     slug = REDIRECTED_SLUGS[slug];
   }
 
-  const location = find($backend.locations, { slug });
+  const location = find($backend.currentSiteLocations, { slug });
 
   if (location) {
     searchState.refinementList = { location: [location.name] };
@@ -111,7 +111,7 @@ export const getStaticProps: GetStaticProps<NeighbourhoodPageProps, { slug: stri
 
 export const getStaticPaths = async () => {
   await $backend.prepare();
-  const locationPaths = values($backend.locations)
+  const locationPaths = values($backend.currentSiteLocations)
     .map((location) => ({
       params: { slug: location.slug },
     }))

@@ -34,15 +34,17 @@ export const RefinementList = connectRefinementList((props: RefinementListProvid
   const [css, theme] = useStyletron();
   return (
     <div>
-      <div className={css({ marginBottom: theme.sizing.scale200 })}>
-        <Input
-          size={SIZE.mini}
-          type="search"
-          autoFocus={false}
-          placeholder="Search..."
-          onChange={(event) => props.searchForItems(event.currentTarget.value)}
-        />
-      </div>
+      {props.items.length >= 10 && (
+        <div className={css({ marginBottom: theme.sizing.scale200 })}>
+          <Input
+            size={SIZE.mini}
+            type="search"
+            autoFocus={false}
+            placeholder="Search..."
+            onChange={(event) => props.searchForItems(event.currentTarget.value)}
+          />
+        </div>
+      )}
       {props.items.map((item) => (
         <RefinementOption key={item.label} item={item} onChange={() => props.refine(item.value)} isFromSearch={props.isFromSearch} />
       ))}
