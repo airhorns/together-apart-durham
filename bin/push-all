@@ -2,3 +2,4 @@
 set -ex
 git push origin "$@"
 git push outaouais "$@"
+git push durham "$@"
