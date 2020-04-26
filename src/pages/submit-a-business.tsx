@@ -55,6 +55,7 @@ export interface SubmitFormValues {
   orderingInstructions: string;
   donationsURL: string;
   siteID: string;
+  siteName: string;
 }
 
 const invalidURLMessage = "Invalid URL. Please include the http or https bit and the domain.";
@@ -98,6 +99,7 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
           orderingInstructions: "",
           donationsURL: "",
           siteID: CurrentSite.webflowID,
+          siteName: CurrentSite.regionName,
         }}
         validationSchema={Yup.object({
           name: Yup.string().max(100, "Must be 100 characters or less").required("Required"),

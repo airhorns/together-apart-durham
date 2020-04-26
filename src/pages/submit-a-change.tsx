@@ -28,6 +28,7 @@ export interface SubmitChangeFormValues {
   submitterEmail: string;
   request: string;
   siteID: string;
+  siteName: string;
 }
 
 export const SubmitForm = (props: { businesses: Option[]; onSuccess: (values: SubmitChangeFormValues) => void }) => {
@@ -47,6 +48,7 @@ export const SubmitForm = (props: { businesses: Option[]; onSuccess: (values: Su
           submitterEmail: "",
           request: "",
           siteID: CurrentSite.webflowID,
+          siteName: CurrentSite.regionName,
         }}
         validationSchema={Yup.object({
           businessID: Yup.string().required("Required"),

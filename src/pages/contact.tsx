@@ -15,8 +15,10 @@ import { Textarea } from "../components/form/Textarea";
 import { OpaqueNotification, NotificationOverlay } from "../components/OpaqueNotification";
 import { useStyletron } from "baseui";
 import { NarrowContainer } from "../components/layout/NarrowContainer";
+import { CurrentSite } from "../lib/sites";
 
 export interface ContactFormValues {
+  siteName: string;
   name: string;
   email: string;
   message: string;
@@ -28,6 +30,7 @@ export const ContactForm = () => {
   return (
     <Formik
       initialValues={{
+        siteName: CurrentSite.regionName,
         name: "",
         email: "",
         message: "",
