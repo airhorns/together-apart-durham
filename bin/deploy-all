@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -ex
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+export $(egrep -v '^#' $DIR/../.env | xargs)
+
+git push origin "$@" # triggers deploy all on its own
+git push outaouais "$@"
+curl -X POST $OUTAOUAIS_DEPLOY_HOOK_URL
+git push durham "$@"
+curl -X POST $DURHAM_DEPLOY_HOOK_URL

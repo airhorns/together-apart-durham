@@ -87,7 +87,7 @@ export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isExpanded: 
                 href={props.hit["website"]}
                 target="_blank"
                 rel="noopener"
-                style={{ textOverflow: "ellipsis", maxWidth: "225px", whiteSpace: "nowrap", overflow: "hidden" }}
+                style={{ textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden" }}
                 className={infoLinkStyle}
               >
                 {props.hit["website"]}
