@@ -8,8 +8,8 @@ export default (_props: {}) => {
     <Layout>
       <Meta title="Credits" />
       <HeroCallout heading="Support local businesses when you can.">
-        This site is a not-for-profit community initiative by Ottawa for Ottawa. Let&#x27;s help keep our amazing local businesses afloat as
-        best we can.
+        This site is a not-for-profit community initiative by residents for residents. Let&#x27;s help keep our amazing local businesses
+        afloat as best we can.
         <br />
         <br />
         <a href="https://twitter.com/hashemito">Mo</a>, <a href="https://twitter.com/harrybrundage/">Harry</a>,{" "}
