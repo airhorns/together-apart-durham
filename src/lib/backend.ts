@@ -2,6 +2,7 @@ import Webflow from "webflow-api";
 import algoliasearch, { SearchIndex } from "algoliasearch";
 import { assert } from "./utils";
 import { keyBy, pick, omit, compact, uniq } from "lodash-es";
+import { CurrentSite } from "./sites";
 
 if (typeof window != "undefined") {
   throw "Build error: backend being required on frontend";
@@ -54,7 +55,9 @@ export class ContentBackend {
         await this.$webflow.items({
           collectionId: ContentBackend.LOCATIONS_COLLECTION_ID,
         })
-      ).items.map(stripWebflowFunctions),
+      ).items
+        .filter(this.partOfCurrentSite)
+        .map(stripWebflowFunctions),
       "_id"
     );
     this.categories = keyBy(
@@ -173,6 +176,10 @@ export class ContentBackend {
 
   categoryNameForItem(item: WebflowItem) {
     return this.categories[item["category"]] ? this.categories[item["category"]].name : null;
+  }
+
+  partOfCurrentSite(item: WebflowItem) {
+    return item["site"] == CurrentSite.webflowID;
   }
 }
 
