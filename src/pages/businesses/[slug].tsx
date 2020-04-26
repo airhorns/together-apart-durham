@@ -40,9 +40,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths: { params: Record<string, string> }[] = [];
 
   await $backend.paginatedItems(async (page) => {
-    page.items.filter($backend.readyForPublish).forEach((item) => {
-      paths.push({ params: { slug: item.slug } });
-    });
+    page.items
+      .filter($backend.readyForPublish)
+      .filter($backend.partOfCurrentSite)
+      .forEach((item) => {
+        paths.push({ params: { slug: item.slug } });
+      });
   });
 
   console.log("prepared static paths", { length: paths.length });
