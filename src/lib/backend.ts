@@ -25,6 +25,8 @@ export class ContentBackend {
   static BUSINESSES_COLLECTION_ID = "5e7a88e0ded784db2c263c6a";
   static LOCATIONS_COLLECTION_ID = "5e7a88e0ded78464ab263c6c";
   static CATEGORIES_COLLECTION_ID = "5e7a88e0ded784470a263c6b";
+  static LANDING_PAGES_ID = "5ea73261e4a40c52814d02cc";
+
   static HOURS: Record<string, string> = {
     "1c4b59d310214e49df144a53ed5e38f4": "online_only",
     "20cec4537d84de98052a01fec776854e": "limited",
@@ -36,6 +38,7 @@ export class ContentBackend {
   $index: SearchIndex;
   allLocations: { [key: string]: WebflowItem } = {};
   currentSiteLocations: { [key: string]: WebflowItem } = {};
+  landingPages: { [key: string]: WebflowItem } = {};
   categories: { [key: string]: WebflowItem } = {};
   prepared = false;
 
@@ -66,6 +69,18 @@ export class ContentBackend {
       ).items.map(stripWebflowFunctions),
       "_id"
     );
+
+    this.landingPages = keyBy(
+      (
+        await this.$webflow.items({
+          collectionId: ContentBackend.LANDING_PAGES_ID,
+        })
+      ).items
+        .filter(this.partOfCurrentSite)
+        .map(stripWebflowFunctions),
+      "_id"
+    );
+
     this.prepared = true;
     return this.prepared;
   }
