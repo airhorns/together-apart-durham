@@ -4,10 +4,6 @@ import { assert } from "./utils";
 import { keyBy, pick, omit, compact, uniq, filter } from "lodash-es";
 import { CurrentSite } from "./sites";
 
-if (typeof window != "undefined") {
-  throw "Build error: backend being required on frontend";
-}
-
 interface WebflowItem {
   _id: string;
   name: string;
@@ -161,6 +157,7 @@ export class ContentBackend {
     ret.hours = ContentBackend.HOURS[item["status"]];
     ret["header_image"] = item["image-field"]["url"];
     ret.pickup = ret["delivery"] || ret["curbside"];
+    ret.tags = (item["tags"] || "").split(",");
     ret.randomPriority = Math.random();
 
     const categories = [this.categoryNameForItem(item)];

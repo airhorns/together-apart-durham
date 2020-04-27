@@ -25,6 +25,8 @@ import { CheckboxProps } from "baseui/checkbox";
 import { StaticLink } from "../components/StaticLink";
 import { CurrentSite } from "../lib/sites";
 import { NarrowContainer } from "../components/layout/NarrowContainer";
+import { Tags } from "../components/form/Tags";
+import { StaticTags } from "../lib/StaticTags";
 
 const Confetti = dynamic(() => import("../components/Confetti"), { ssr: false });
 
@@ -34,6 +36,7 @@ export interface SubmitFormValues {
   websiteURL: string;
   location: null | { id: string; label: string };
   category: null | { id: string; label: string };
+  tags: { id: string; label: string }[];
   description: string;
   imageURL: string;
   instagramProfileURL: string;
@@ -61,7 +64,12 @@ export interface SubmitFormValues {
 const invalidURLMessage = "Invalid URL. Please include the http or https bit and the domain.";
 const checkboxRowOverrides: CheckboxProps["overrides"] = { Root: { style: { marginRight: "1em" } } };
 
-export const SubmitForm = (props: { locations: Option[]; categories: Option[]; onSuccess: (values: SubmitFormValues) => void }) => {
+export const SubmitForm = (props: {
+  locations: Option[];
+  categories: Option[];
+  tagOptions: Option[];
+  onSuccess: (values: SubmitFormValues) => void;
+}) => {
   const [css, $theme] = useStyletron();
 
   return (
@@ -78,6 +86,7 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
           websiteURL: "",
           location: null,
           category: null,
+          tags: [],
           description: "",
           imageURL: "",
           instagramProfileURL: "",
@@ -117,8 +126,9 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
           category: Yup.mixed().required("Required"),
         })}
         onSubmit={async (values, helpers) => {
+          const blob = { ...values, tags: values.tags.map((value) => value.label).join(", ") };
           try {
-            await api.post("/submit", values);
+            await api.post("/submit", blob);
             props.onSuccess(values);
           } catch (e) {
             toaster.negative("There was an error submitting your form. Please try again.", { autoHideDuration: 3000 });
@@ -170,6 +180,14 @@ export const SubmitForm = (props: { locations: Option[]; categories: Option[]; o
                 id="description"
                 attribute="description"
                 caption="Give a very short description of your business to explain to customers what you do."
+              />
+
+              <Tags<SubmitFormValues>
+                label="Tags"
+                id="tags"
+                attribute="tags"
+                caption="Select 1-15 tags describing this business to power search and categorization. Please try to use existing tags before creating new ones."
+                options={props.tagOptions}
               />
 
               <Input<SubmitFormValues>
@@ -339,6 +357,7 @@ interface Option {
 interface SubmitProps {
   locations: Option[];
   categories: Option[];
+  tagOptions: Option[];
 }
 
 export default (props: SubmitProps) => {
@@ -359,7 +378,14 @@ export default (props: SubmitProps) => {
         <br />
       </HeroCallout>
       <NarrowContainer>
-        {!success && <SubmitForm locations={props.locations} categories={props.categories} onSuccess={() => setSuccess(true)} />}
+        {!success && (
+          <SubmitForm
+            locations={props.locations}
+            categories={props.categories}
+            tagOptions={props.tagOptions}
+            onSuccess={() => setSuccess(true)}
+          />
+        )}
         {success && (
           <OpaqueNotification
             title="Thanks!"
@@ -397,6 +423,10 @@ export const getStaticProps: GetStaticProps<SubmitProps> = async (_ctx) => {
       ),
       categories: sortBy(
         values($backend.categories).map((item) => ({ id: item._id, label: item.name })),
+        "label"
+      ),
+      tagOptions: sortBy(
+        StaticTags.map((tag) => ({ id: tag, label: tag })),
         "label"
       ),
     },
