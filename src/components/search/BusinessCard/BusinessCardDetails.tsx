@@ -15,7 +15,7 @@ const DeliveryApps: { key: keyof BusinessDoc; label: string }[] = [
   { key: "grubhub", label: "Grubhub" },
   { key: "postmates", label: "Skip the Dishes" },
   { key: "door-dash", label: "Door Dash" },
-  { key: "seamless", label: "Seamless" },
+  { key: "seamless", label: "Foodora" },
 ];
 
 const InfoBadge = styled("span", ({ $theme }) => ({
