@@ -27,7 +27,7 @@ export const Sites: { [key: string]: SiteConfig } = {
     googleAnalyticsID: "UA-161950128-2",
   },
   durham: {
-    logoImageURL: "https://uploads-ssl.webflow.com/5e999d2c5b1997ec28ea3059/5e9aec71fb5d859317f83468_yourdurham251%20copy.png",
+    logoImageURL: "/images/durham-logo.png",
     regionName: "Durham",
     webflowID: "5ea5c7bf52344847b530de6c",
     algoliaAPIKey:
