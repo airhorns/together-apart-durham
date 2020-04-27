@@ -8,12 +8,17 @@ import { searchClient, INDEX_NAME, paramsToSearchState } from "./searchClient";
 import { styletron, debug } from "../../lib/styletron";
 import { FullSearch, FullSearchProps } from "./FullSearch";
 import { theme } from "../../lib/theme";
+import { Layout } from "../layout/Layout";
+import { SupportLocalCallout } from "../HeroCallout";
 
 export const ServerSearchApp = (props: FullSearchProps) => (
   <StyletronProvider value={styletron} debug={debug} debugAfterHydration>
     <BaseProvider theme={theme}>
       <ToasterContainer />
-      <FullSearch {...props} />
+      <Layout>
+        <SupportLocalCallout />
+        <FullSearch {...props} />
+      </Layout>
     </BaseProvider>
   </StyletronProvider>
 );

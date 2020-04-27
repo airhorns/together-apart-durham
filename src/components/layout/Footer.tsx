@@ -1,10 +1,11 @@
 import React from "react";
 import { StaticLink } from "../StaticLink";
-import { CurrentSite } from "../../lib/sites";
+import { CurrentSite, Sites, CurrentSiteName } from "../../lib/sites";
 import { useStyletron } from "baseui";
 import { NavSocialLinks } from "./NavSocialLinks";
 
 const Spacer = () => <> • </>;
+const OtherSites = Object.entries(Sites).filter(([key]) => key != CurrentSiteName);
 
 export const Footer = (_props: {}) => {
   const [css, $theme] = useStyletron();
@@ -41,6 +42,14 @@ export const Footer = (_props: {}) => {
       <p>
         <StaticLink href="/contact">Contact Us</StaticLink>, we&apos;d love to hear what you think!{" "}
         <StaticLink href="/credits">Credits</StaticLink>
+      </p>
+      <p>
+        {OtherSites.map(([key, site], index) => (
+          <React.Fragment key={key}>
+            <a href={site.rootURL}>Together Apart {site.regionName}</a>
+            {index != OtherSites.length - 1 && <Spacer />}
+          </React.Fragment>
+        ))}
       </p>
     </div>
   );

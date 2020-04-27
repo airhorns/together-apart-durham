@@ -1,6 +1,7 @@
 import { assert } from "./utils";
 
 export interface SiteConfig {
+  rootURL: string;
   logoImageURL: string;
   regionName: string;
   webflowID: string;
@@ -11,6 +12,7 @@ export interface SiteConfig {
 export const CurrentSiteName = assert(process.env.CURRENT_SITE, "CURRENT_SITE environment variable needs to be set");
 export const Sites: { [key: string]: SiteConfig } = {
   ottawa: {
+    rootURL: "https://together-apart.ca",
     logoImageURL: "/images/together-apart-white-logo.png",
     regionName: "Ottawa",
     webflowID: "5e9b8391feaebda50a6468b9",
@@ -19,6 +21,7 @@ export const Sites: { [key: string]: SiteConfig } = {
     googleAnalyticsID: "UA-161950128-1",
   },
   outaouais: {
+    rootURL: "https://outaouais.together-apart.ca",
     logoImageURL: "/images/outaouais-logo.png",
     regionName: "Outaouais",
     webflowID: "5e9b83a33ef6dfdaabf72437",
@@ -27,6 +30,7 @@ export const Sites: { [key: string]: SiteConfig } = {
     googleAnalyticsID: "UA-161950128-2",
   },
   durham: {
+    rootURL: "https://durham.together-apart.ca",
     logoImageURL: "/images/durham-logo.png",
     regionName: "Durham",
     webflowID: "5ea5c7bf52344847b530de6c",
