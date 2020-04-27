@@ -127,7 +127,6 @@ export const getStaticProps: GetStaticProps<NeighbourhoodPageProps, { slug: stri
     ? ($backend.landingPages[location["landing-page-configuration"]] as any)
     : null;
 
-  console.log(location, landingPageConfig);
   return {
     props: {
       ...(await getSearchServerSideProps(searchState)),
