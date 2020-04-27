@@ -172,7 +172,7 @@ export class ContentBackend {
     ret.hours = ContentBackend.HOURS[item["status"]];
     ret["header_image"] = item["image-field"]["url"];
     ret.pickup = ret["delivery"] || ret["curbside"];
-    ret.tags = (item["tags"] || "").split(",");
+    ret.tags = (item["tags"] || "").split(",").filter((tag: string) => tag != "");
     ret.randomPriority = Math.random();
 
     const categories = [this.categoryNameForItem(item)];
