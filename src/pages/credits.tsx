@@ -16,7 +16,7 @@ export default (_props: {}) => {
         <a href="https://twitter.com/gleegz">Glennys</a>, <a href="https://twitter.com/shannonkarleen?lang=en">Shannon</a>, Kelsey,{" "}
         <a href="http://twitter.com/travisn">Travis</a>, <a href="https://twitter.com/stevestp">Steve</a>,{" "}
         <a href="https://twitter.com/madsewins">Maddy</a>, and Isabel produced this site with help from the community every step of the way.{" "}
-        <a href="www.sammitchell.ca">Sam</a>, jumped in for Durham Region along with its community.
+        <a href="https://www.sammitchell.ca/">Sam</a> jumped in for Durham Region along with its community.
         <br />
         <br />
         Site originally by{" "}
