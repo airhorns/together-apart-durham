@@ -24,7 +24,7 @@ export const Sites: { [key: string]: SiteConfig } = {
       "ZjdiNmI1MGMwMGM3NGY1ZjJiZWY4ZTcwOGY5OGQxNGUzYWUwMjJhNGY3NGRhMTUxODc2YWM4NTg2ZDZkMDg3ZWZpbHRlcnM9c2l0ZSUzQTVlOWI4M2EzM2VmNmRmZGFhYmY3MjQzNw==",
   },
   durham: {
-    logoImageURL: "https://uploads-ssl.webflow.com/5e999d2c5b1997ec28ea3059/5e9aec71fb5d859317f83468_yourdurham251%20copy.png",
+    logoImageURL: "/images/durham-logo.png",
     regionName: "Durham",
     webflowID: "5ea5c7bf52344847b530de6c",
     algoliaAPIKey:
