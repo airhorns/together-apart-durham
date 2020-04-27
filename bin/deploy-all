@@ -5,6 +5,7 @@ export $(egrep -v '^#' $DIR/../.env | xargs)
 
 git push origin "$@" # triggers deploy all on its own
 git push outaouais "$@"
-curl -X POST $OUTAOUAIS_DEPLOY_HOOK_URL
 git push durham "$@"
+sleep 5
+curl -X POST $OUTAOUAIS_DEPLOY_HOOK_URL
 curl -X POST $DURHAM_DEPLOY_HOOK_URL
