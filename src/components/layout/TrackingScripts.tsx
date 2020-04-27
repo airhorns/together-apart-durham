@@ -1,9 +1,10 @@
 import React from "react";
+import { CurrentSite } from "../../lib/sites";
 
 export const TrackingScripts =
   process.env.NODE_ENV == "production" ? (
     <React.Fragment>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161950128-1"></script>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${CurrentSite.googleAnalyticsID}`}></script>
       <script
         type="text/javascript"
         dangerouslySetInnerHTML={{
@@ -13,7 +14,7 @@ export const TrackingScripts =
     dataLayer.push(arguments);
   }
   gtag("js", new Date());
-  gtag("config", "UA-161950128-1", { anonymize_ip: false });
+  gtag("config", "${CurrentSite.googleAnalyticsID}", { anonymize_ip: false });
 `,
         }}
       />
