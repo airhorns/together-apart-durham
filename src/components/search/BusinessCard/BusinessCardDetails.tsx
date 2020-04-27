@@ -45,10 +45,14 @@ export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isExpanded: 
   return (
     <motion.div
       style={{ ...inverted, originY: 0, originX: 0 }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      // initial={{ opacity: 0 }}
+      // animate={{ opacity: 1 }}
       className={css({
-        marginTop: $theme.sizing.scale800,
+        marginTop: $theme.sizing.scale600,
+        paddingTop: $theme.sizing.scale600,
+        borderTopWidth: "1px",
+        borderTopStyle: "solid",
+        borderTopColor: $theme.colors.mono400,
         flexGrow: 1,
         flexShrink: 0,
         display: "flex",
