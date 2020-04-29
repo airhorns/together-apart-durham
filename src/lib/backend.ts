@@ -170,6 +170,7 @@ export class ContentBackend {
     ret.objectID = item["_id"];
     ret.location = this.locationNameForItem(item);
     ret.hours = ContentBackend.HOURS[item["status"]];
+    ret.landingPageOnly = !!item["landing-pages-only"];
     ret["header_image"] = item["image-field"]["url"];
     ret.pickup = ret["delivery"] || ret["curbside"];
     ret.tags = (item["tags"] || "").split(",").filter((tag: string) => tag != "");

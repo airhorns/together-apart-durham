@@ -21,7 +21,7 @@ export default (props: FullSearchProps) => {
     <Layout>
       <Meta />
       <SupportLocalCallout />
-      <FullSearch {...props} searchState={searchState} />
+      <FullSearch {...props} searchState={searchState} baseFilters={`landingPageOnly=0`} />
     </Layout>
   );
 };
