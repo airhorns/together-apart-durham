@@ -1,4 +1,5 @@
 import React from "react";
+import { CurrentSite } from "../../lib/sites";
 import { styled, useStyletron } from "baseui";
 import { Row } from "../Row";
 
@@ -17,7 +18,7 @@ export const NavSocialLinks = () => {
   return (
     <Row>
       <NavSocialLink
-        href="https://instagram.com/togetherott"
+        href= {(CurrentSite.instagram)}
         target="_blank"
         rel="noopener"
         className={css({ marginRight: $theme.sizing.scale400 })}
