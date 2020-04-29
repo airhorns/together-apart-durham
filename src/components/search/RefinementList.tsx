@@ -34,7 +34,7 @@ export const RefinementList = connectRefinementList((props: RefinementListProvid
   const [css, theme] = useStyletron();
   return (
     <div>
-      {props.items.length >= 10 && (
+      {(props.items.length >= 10 || props.isFromSearch) && (
         <div className={css({ marginBottom: theme.sizing.scale200 })}>
           <Input
             size={SIZE.mini}
