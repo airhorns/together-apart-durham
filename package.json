@@ -108,7 +108,11 @@
   "devDependencies": {
     "@next/bundle-analyzer": "^9.3.5",
     "@pollyjs/core": "^4.2.1",
+    "@types/pollyjs__adapter-node-http": "^2.0.0",
+    "@types/pollyjs__core": "^4.0.0",
+    "@types/pollyjs__persister-fs": "^2.0.0",
     "@types/react-test-renderer": "^16.9.2",
+    "@types/setup-polly-jest": "^0.5.0",
     "babel-jest": "^25.3.0",
     "jest": "^25.3.0",
     "react-test-renderer": "^16.13.1"
