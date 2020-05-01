@@ -6,6 +6,8 @@ import { Meta } from "../components/Meta";
 import { GetStaticProps } from "next";
 import { pathToSearchState } from "../components/search/searchClient";
 import { getSearchServerSideProps } from "../components/search/serverSearch";
+import { CurrentSiteName } from "../lib/sites";
+import { MothersDayContestCard } from "../components/FeaturedCard";
 
 type IndexPageProps = FullSearchProps;
 
@@ -21,6 +23,7 @@ export default (props: FullSearchProps) => {
     <Layout>
       <Meta />
       <SupportLocalCallout />
+      {CurrentSiteName == "ottawa" && <MothersDayContestCard />}
       <FullSearch {...props} searchState={searchState} baseFilters={`landingPageOnly=0`} />
     </Layout>
   );
