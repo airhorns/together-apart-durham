@@ -43,8 +43,9 @@ export const MothersDayContestCard = (props: {}) => {
                 <Heading $style={{ color: $theme.colors.mono1000 }}>Weekly Giveaway</Heading>
                 <div className={css({ marginTop: $theme.sizing.scale600, marginBottom: $theme.sizing.scale600 })}>
                   Every Friday we will be giving away a $100 value gift package of items purchased from local Ottawa businesses. Nominate
-                  someone who is working hard right now, someone you are grateful for, someone who is making a difference. This is Community
-                  Supported Gratitude: by community, for community.
+                  someone who is working hard right now, someone you are grateful for, someone who is making a difference. <br />
+                  <br />
+                  This is Community Supported Gratitude: by community, for community.
                 </div>
                 <Button
                   {...{ as: "a" }}
