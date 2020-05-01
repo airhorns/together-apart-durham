@@ -27,12 +27,6 @@ export class ContentBackend {
   static CATEGORIES_COLLECTION_ID = "5e7a88e0ded784470a263c6b";
   static LANDING_PAGES_ID = "5ea73261e4a40c52814d02cc";
 
-  static HOURS: Record<string, string> = {
-    "1c4b59d310214e49df144a53ed5e38f4": "online_only",
-    "20cec4537d84de98052a01fec776854e": "limited",
-    "750a7ce8734c09d07559d16bfe505b9d": "regular",
-  };
-
   $webflow = new Webflow({ token: assert(process.env.WEBFLOW_API_KEY) });
   $algolia = algoliasearch(assert(process.env.ALGOLIA_APP_ID), assert(process.env.ALGOLIA_API_KEY));
   $index: SearchIndex;
@@ -139,10 +133,8 @@ export class ContentBackend {
   formatWebflowForAlgolia(item: WebflowItem) {
     const ret: Record<string, any> = pick(item, [
       "grubhub",
-      "takeout",
       "website",
       "phone-number",
-      "curbside",
       "delivery",
       "seamless",
       "_archived",
@@ -169,10 +161,9 @@ export class ContentBackend {
 
     ret.objectID = item["_id"];
     ret.location = this.locationNameForItem(item);
-    ret.hours = ContentBackend.HOURS[item["status"]];
     ret.landingPageOnly = !!item["landing-pages-only"];
     ret["header_image"] = item["image-field"]["url"];
-    ret.pickup = ret["delivery"] || ret["curbside"];
+    ret.pickup = item["takeout"] || item["curbside"];
     ret.tags = (item["tags"] || "").split(",").filter((tag: string) => tag != "");
     ret.randomPriority = Math.random();
 

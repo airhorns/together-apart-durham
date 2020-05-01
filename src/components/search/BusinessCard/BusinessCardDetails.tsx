@@ -31,7 +31,7 @@ const InfoBadge = styled("span", ({ $theme }) => ({
 }));
 
 export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isExpanded: boolean; highlight: boolean }) => {
-  const hasDeliveryMethods = props.hit["takeout"] || props.hit["pickup"];
+  const hasDeliveryMethods = props.hit["pickup"] || props.hit["delivery"];
   const hasDeliveryApps = DeliveryApps.some(({ key }) => !!props.hit[key]);
   const [css, $theme] = useStyletron();
   const inverted = useInvertedScale();

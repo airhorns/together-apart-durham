@@ -1,6 +1,5 @@
 export type BusinessDoc = {
   grubhub: boolean;
-  takeout: boolean;
   website?: string | null;
   "phone-number"?: string | null;
   pickup: boolean;
@@ -27,6 +26,5 @@ export type BusinessDoc = {
   "image-blurhash": string | null;
   location?: string | null;
   category?: string[] | null;
-  hours?: string | null;
   header_image?: string | null;
 };

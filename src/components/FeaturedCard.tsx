@@ -5,7 +5,7 @@ import { Grid, Cell } from "baseui/layout-grid";
 import { Button } from "baseui/button";
 import { Block } from "baseui/block";
 
-export const MothersDayContestCard = (props: {}) => {
+export const MothersDayContestCard = (_props: {}) => {
   const [css, $theme] = useStyletron();
 
   return (

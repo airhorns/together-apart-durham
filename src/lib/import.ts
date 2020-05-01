@@ -1,9 +1,8 @@
 import fs from "fs";
 import CsvReadableStream from "csv-reader";
-import Queue from "promise-queue";
 
 import { NextApiRequest, NextApiResponse } from "next";
-import { $backend, ContentBackend } from "./backend";
+import { $backend } from "./backend";
 import { mapValues, keyBy, values, uniq } from "lodash-es";
 import { CurrentSite } from "./sites";
 
@@ -64,7 +63,6 @@ export const importer = async (req: NextApiRequest, res: NextApiResponse) => {
 
   console.log();
   const nullKeys = Object.keys(items[0]).filter((key) => items.every((item) => !item[key]));
-  const queue = new Queue(8, 1000);
   const errors: any[] = [];
   // console.log("creating items", { length: items.length });
 

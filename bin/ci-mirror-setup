@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -ex
-git remote add outaouais https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/airhorns/together-apart-outaouais.git
-git remote add durham https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/airhorns/together-apart-durham.git
+git remote add outaouais https://airhorns:${INPUT_GITHUB_TOKEN}@github.com/airhorns/together-apart-outaouais.git
+git remote add durham https://airhorns:${INPUT_GITHUB_TOKEN}@github.com/airhorns/together-apart-durham.git
