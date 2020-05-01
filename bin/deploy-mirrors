@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -ex
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+export $(egrep -v '^#' $DIR/../.env | xargs)
+
+git push outaouais "$@"
+git push durham "$@"
+sleep 5
+curl -X POST $OUTAOUAIS_DEPLOY_HOOK_URL
+curl -X POST $DURHAM_DEPLOY_HOOK_URL
