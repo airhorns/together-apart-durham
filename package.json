@@ -6,7 +6,8 @@
     "@babel/core": "^7.9.0",
     "@fixings/eslint-config": "^4.0.2",
     "@fixings/prettier-config": "^1.0.0",
-    "@next/bundle-analyzer": "^9.3.5",
+    "@pollyjs/adapter-node-http": "^4.2.1",
+    "@pollyjs/persister-fs": "^4.2.1",
     "@sentry/browser": "^5.15.4",
     "@sentry/integrations": "^5.15.4",
     "@sentry/node": "^5.15.4",
@@ -62,6 +63,7 @@
     "react-dom": "^16.13.1",
     "react-imgix": "^9.0.2",
     "react-instantsearch-dom": "^6.4.0",
+    "setup-polly-jest": "^0.7.0",
     "sharp": "^0.25.2",
     "source-map-explorer": "^2.4.2",
     "styletron-engine-atomic": "^1.4.6",
@@ -104,6 +106,8 @@
     ]
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^9.3.5",
+    "@pollyjs/core": "^4.2.1",
     "@types/react-test-renderer": "^16.9.2",
     "babel-jest": "^25.3.0",
     "jest": "^25.3.0",
