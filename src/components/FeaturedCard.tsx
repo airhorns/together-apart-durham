@@ -27,7 +27,9 @@ export const MothersDayContestCard = (_props: {}) => {
           <Cell span={[4, 5, 7]}>
             <div
               className={css({
-                padding: $theme.sizing.scale800,
+                paddingTop: $theme.sizing.scale800,
+                paddingLeft: $theme.sizing.scale800,
+                paddingRight: $theme.sizing.scale800,
                 paddingBottom: "0px",
                 marginBottom: "-5%",
                 flexDirection: "column",
