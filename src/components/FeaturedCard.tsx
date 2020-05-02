@@ -49,7 +49,8 @@ export const MothersDayContestCard = (_props: {}) => {
                   This is Community Supported Gratitude: by community, for community.
                 </div>
                 <Button
-                  {...{ as: "a" }}
+                  $as="a"
+                  target="_blank"
                   href="https://forms.gle/C4zhnqVauHM1APkY8"
                   overrides={{
                     BaseButton: {
