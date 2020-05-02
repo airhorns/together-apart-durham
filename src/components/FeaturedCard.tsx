@@ -17,7 +17,7 @@ export const MothersDayContestCard = (_props: {}) => {
         justifyContent: "center",
         alignItems: "center",
         marginBottom: $theme.sizing.scale1600,
-        backgroundColor: "rgb(248	249	251)",
+        backgroundColor: "rgb(240	229	228)",
         color: $theme.colors.mono1000,
         borderRadius: $theme.borders.radius400,
         overflow: "hidden",
@@ -25,20 +25,21 @@ export const MothersDayContestCard = (_props: {}) => {
     >
       <HeadingLevel>
         <Grid gridMargins={0} gridGutters={0}>
-          <Cell span={[4, 3, 5]}>
+          <Cell span={[4, 5, 7]}>
             <div
               className={css({
+                padding: $theme.sizing.scale800,
+                paddingBottom: "0px",
+                marginBottom: "-5%",
+                flexDirection: "column",
+                justifyContent: "center",
                 height: "100%",
-                minHeight: "12rem",
-                backgroundImage: `url(${require("../assets/images/mothers-day-bouquet.jpeg")})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                backgroundPosition: "0px 100%",
+                [$theme.mediaQuery.medium]: {
+                  marginBottom: "auto",
+                  paddingBottom: $theme.sizing.scale800,
+                },
               })}
-            />
-          </Cell>
-          <Cell span={[4, 5, 7]}>
-            <Block padding="scale800" display="flex" flexDirection="column" justifyContent="center" height="100%">
+            >
               <div>
                 <Heading $style={{ color: $theme.colors.mono1000 }}>Weekly Giveaway</Heading>
                 <div className={css({ marginTop: $theme.sizing.scale600, marginBottom: $theme.sizing.scale600 })}>
@@ -64,7 +65,23 @@ export const MothersDayContestCard = (_props: {}) => {
                   Submit a Nomination
                 </Button>
               </div>
-            </Block>
+            </div>
+          </Cell>
+          <Cell span={[4, 3, 5]}>
+            <div
+              className={css({
+                height: "100%",
+                minHeight: "12rem",
+                backgroundImage: `url(${require("../assets/images/promos/gratitude-contest/vertical.png")})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                backgroundPosition: "50% 0%",
+                [$theme.mediaQuery.medium]: {
+                  backgroundImage: `url(${require("../assets/images/promos/gratitude-contest/horizontal.png")})`,
+                  backgroundPosition: "0% 50%",
+                },
+              })}
+            />
           </Cell>
         </Grid>
       </HeadingLevel>
