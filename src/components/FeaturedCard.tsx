@@ -3,7 +3,6 @@ import { Heading, HeadingLevel } from "baseui/heading";
 import { useStyletron } from "baseui";
 import { Grid, Cell } from "baseui/layout-grid";
 import { Button } from "baseui/button";
-import { Block } from "baseui/block";
 
 export const MothersDayContestCard = (_props: {}) => {
   const [css, $theme] = useStyletron();
