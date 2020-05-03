@@ -1,3 +1,34 @@
+export const BusinessDocFetchAttributes = [
+  "grubhub",
+  "website",
+  "phone-number",
+  "pickup",
+  "delivery",
+  "seamless",
+  "_archived",
+  "door-dash",
+  "postmates",
+  "uber-eats",
+  "facebook-page",
+  "gift-card-link",
+  "instagram-profile",
+  "twitter-profile",
+  "online-order-link",
+  "order-groceries-link",
+  "online-store-link",
+  "donations-link",
+  "name",
+  "story",
+  "special-instructions",
+  "slug",
+  "updated-on",
+  "published-on",
+  "image-blurhash",
+  "location",
+  "category",
+  "header_image",
+];
+
 export type BusinessDoc = {
   grubhub: boolean;
   website?: string | null;

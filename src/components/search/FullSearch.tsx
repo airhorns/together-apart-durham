@@ -13,6 +13,7 @@ import { Pagination } from "./Pagination";
 import { isUndefined, debounce } from "lodash-es";
 import { ClearRefinements } from "./ClearRefinements";
 import { HeadingLevel } from "baseui/heading";
+import { BusinessDocFetchAttributes } from "./BusinessDoc";
 
 const CATEGORY_REFINEMENT_OPTIONS = ["Brewery", "Coffee", "Grocery", "Restaurant", "Retail", "Other"].map((value) => ({
   value,
@@ -48,7 +49,7 @@ export const FullSearch = (props: FullSearchProps) => {
 
   return (
     <InstantSearch searchClient={searchClient} indexName={INDEX_NAME} resultsState={props.resultsState} {...controlledSearchStateProps}>
-      <Configure filters={props.baseFilters} distinct hitsPerPage={18} />
+      <Configure filters={props.baseFilters} attributesToRetrieve={BusinessDocFetchAttributes} distinct hitsPerPage={18} />
       <Grid gridMargins={0}>
         <Cell span={[4, 8, 12]}>
           <SearchBox />
