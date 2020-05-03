@@ -1,6 +1,5 @@
 import React from "react";
 import { Hit } from "react-instantsearch-core";
-import { motion } from "framer-motion";
 import { BusinessDoc } from "../BusinessDoc";
 import { useStyletron } from "baseui";
 import { HeadingLevel } from "baseui/heading";
@@ -12,7 +11,7 @@ export const StaticBusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
   const [css, $theme] = useStyletron();
   return (
     <HeadingLevel>
-      <motion.div
+      <div
         className={css({
           position: "relative",
           display: "flex",
@@ -43,7 +42,7 @@ export const StaticBusinessCard = (props: { hit: Hit<BusinessDoc> }) => {
           <BusinessCardHeader hit={props.hit} highlight={false} isExpanded={true} toggleExpanded={() => null} />
           <BusinessCardDetails hit={props.hit} highlight={false} isExpanded={true} />
         </div>
-      </motion.div>
+      </div>
     </HeadingLevel>
   );
 };

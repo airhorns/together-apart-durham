@@ -5,15 +5,12 @@ import Imgix from "react-imgix";
 import { Blurhash } from "react-blurhash/es";
 import { imgixURL } from "../../../lib/utils";
 import { BusinessDoc } from "../BusinessDoc";
-import { useInvertedScale, motion } from "framer-motion";
 
 export const BusinessCardImage = (props: { hit: Hit<BusinessDoc> }) => {
   const [css, $theme] = useStyletron();
-  const inverted = useInvertedScale();
 
   return (
-    <motion.div
-      style={{ ...inverted, originX: 0, originY: 0 }}
+    <div
       className={css({
         width: "100%",
         height: "250px",
@@ -48,6 +45,6 @@ export const BusinessCardImage = (props: { hit: Hit<BusinessDoc> }) => {
         sizes={`(min-width: ${$theme.breakpoints.medium}px) 33vw, 100vw`}
         htmlAttributes={{ alt: `Goods or services from ${props.hit.name}`, loading: "lazy" }}
       />
-    </motion.div>
+    </div>
   );
 };

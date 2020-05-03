@@ -1,5 +1,4 @@
 import React from "react";
-import { motion, useInvertedScale } from "framer-motion";
 import { Hit } from "react-instantsearch-core";
 import { BusinessDoc } from "../BusinessDoc";
 import { RichTextHighlight } from "../RichTextHighlight";
@@ -34,7 +33,6 @@ export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isExpanded: 
   const hasDeliveryMethods = props.hit["pickup"] || props.hit["delivery"];
   const hasDeliveryApps = DeliveryApps.some(({ key }) => !!props.hit[key]);
   const [css, $theme] = useStyletron();
-  const inverted = useInvertedScale();
 
   const infoLinkStyle = css({
     color: "#FFF",
@@ -43,10 +41,7 @@ export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isExpanded: 
   });
 
   return (
-    <motion.div
-      style={{ ...inverted, originY: 0, originX: 0 }}
-      // initial={{ opacity: 0 }}
-      // animate={{ opacity: 1 }}
+    <div
       className={css({
         marginTop: $theme.sizing.scale600,
         paddingTop: $theme.sizing.scale600,
@@ -144,6 +139,6 @@ export const BusinessCardDetails = (props: { hit: Hit<BusinessDoc>; isExpanded: 
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
