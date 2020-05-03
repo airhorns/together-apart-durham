@@ -6,7 +6,3 @@ it("renders the homepage", async () => {
   const result = await getStaticProps({});
   expect(renderer.create(<Index {...result.props} />).toJSON()).toBeTruthy();
 });
-
-it("imports ok", () => {
-  expect(true).toBeTruthy();
-});

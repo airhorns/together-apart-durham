@@ -19,18 +19,20 @@ const context = setupPolly({
   },
 });
 
+const ignoredHeaders = ["authorization", "x-algolia-api-key"];
+
 beforeEach(() => {
   context.polly.configure({
     recordIfMissing: !process.env["CI"],
     matchRequestsBy: {
       headers: {
-        exclude: ["AUTHORIZATION"],
+        exclude: ignoredHeaders,
       },
     },
   });
 
   context.polly.server.any().on("beforePersist", (req, recording) => {
-    recording.request.headers = recording.request.headers.filter(({ name }: { name: string }) => name !== "authorization");
+    recording.request.headers = recording.request.headers.filter(({ name }: { name: string }) => !ignoredHeaders.includes(name));
   });
 });
 
