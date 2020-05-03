@@ -81,6 +81,7 @@ export const MothersDayContestCard = (_props: {}) => {
                 [$theme.mediaQuery.medium]: {
                   backgroundImage: `url(${require("../assets/images/promos/gratitude-contest/horizontal.png")})`,
                   backgroundPosition: "0% 50%",
+                  marginRight: "-2px",
                 },
               })}
             />
