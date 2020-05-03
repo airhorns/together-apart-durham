@@ -29,5 +29,15 @@ jobs:
       - uses: actions/checkout@v2
       - name: Set up mirrors
         run: bin/ci-mirror-setup
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          repository: airhorns/together-apart-outaouais
+          github_token: ${{ secrets.INPUT_GITHUB_TOKEN }}
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          repository: airhorns/together-apart-durham
+          github_token: ${{ secrets.INPUT_GITHUB_TOKEN }}
       - name: Deploy to mirrors
         run: bin/deploy-mirrors
