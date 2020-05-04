@@ -16,6 +16,9 @@ export const Meta = (props: { title?: string; description?: string; ogImage?: st
       <meta content={title} property="og:title" />
       <meta content={description} property="og:description" />
       <meta content={ogImage} property="og:image" />
+      <meta content={title} property="twitter:title" />
+      <meta content={description} property="twitter:description" />
+      <meta content={ogImage} property="twitter:image" />
     </Head>
   );
 };
