@@ -1,7 +1,7 @@
 import Webflow from "webflow-api";
 import algoliasearch, { SearchIndex } from "algoliasearch";
 import { assert } from "./utils";
-import { keyBy, pick, omit, compact, uniq, filter } from "lodash-es";
+import { keyBy, pick, omit, compact, uniq, filter, keys } from "lodash-es";
 import { CurrentSite } from "./sites";
 
 interface WebflowItem {
@@ -86,6 +86,13 @@ export class ContentBackend {
       );
 
       this.prepared = true;
+      console.log("backend prepared", {
+        locations: keys(this.allLocations).length,
+        currentSiteLocations: keys(this.currentSiteLocations).length,
+        categories: keys(this.categories).length,
+        landingPages: keys(this.landingPages).length,
+        pid: process.pid,
+      });
     })();
 
     return await this.preparePromise;
@@ -99,7 +106,7 @@ export class ContentBackend {
 
     const items: WebflowItem[] = [];
     await this.paginatedItems(async (page) => {
-      items.concat(page.items.filter(this.partOfCurrentSite).filter(this.readyForPublish));
+      items.push(...page.items.filter(this.partOfCurrentSite).filter(this.readyForPublish));
     });
     this.cachedCurrentSiteItems = items;
     return items;
@@ -217,4 +224,6 @@ export class ContentBackend {
   }
 }
 
-export const $backend = new ContentBackend();
+(globalThis as any)["together-apart-backend"] || ((globalThis as any)["together-apart-backend"] = new ContentBackend());
+
+export const $backend = (globalThis as any)["together-apart-backend"] as ContentBackend;
