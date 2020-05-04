@@ -27,8 +27,11 @@ export class ContentBackend {
   static CATEGORIES_COLLECTION_ID = "5e7a88e0ded784470a263c6b";
   static LANDING_PAGES_ID = "5ea73261e4a40c52814d02cc";
 
-  $webflow = new Webflow({ token: assert(process.env.WEBFLOW_API_KEY) });
-  $algolia = algoliasearch(assert(process.env.ALGOLIA_APP_ID), assert(process.env.ALGOLIA_API_KEY));
+  $webflow = new Webflow({ token: assert(process.env.WEBFLOW_API_KEY, "WEBFLOW_API_KEY environment variable must be set") });
+  $algolia = algoliasearch(
+    assert(process.env.ALGOLIA_APP_ID, "ALGOLIA_APP_ID environment variable must be set"),
+    assert(process.env.ALGOLIA_API_KEY, "ALGOLIA_API_KEY environment variable must be set")
+  );
   $index: SearchIndex;
   allLocations: { [key: string]: WebflowItem } = {};
   currentSiteLocations: { [key: string]: WebflowItem } = {};
