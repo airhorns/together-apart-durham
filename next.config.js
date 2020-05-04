@@ -13,6 +13,7 @@ module.exports = withBundleAnalyzer(
     nextSourceMaps(
       withTM({
         inlineImageLimit: 0,
+        experimental: { modern: true },
         env: {
           SENTRY_DSN: process.env.SENTRY_DSN,
           ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID,
