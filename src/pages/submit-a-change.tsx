@@ -162,12 +162,7 @@ export default (props: SubmitProps) => {
 export const getStaticProps: GetStaticProps<SubmitProps> = async (_ctx) => {
   await $backend.prepare();
 
-  const businesses: Option[] = [];
-  await $backend.paginatedItems(async (page) => {
-    page.items.filter($backend.readyForPublish).forEach((item) => {
-      businesses.push({ id: item._id, label: item.name });
-    });
-  });
+  const businesses: Option[] = (await $backend.currentSiteItems()).map((item) => ({ id: item._id, label: item.name }));
 
   return {
     props: {

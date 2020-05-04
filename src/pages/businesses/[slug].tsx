@@ -37,18 +37,8 @@ export const getStaticProps: GetStaticProps<BusinessPageProps, { slug: string }>
 
 export const getStaticPaths: GetStaticPaths = async () => {
   await $backend.prepare();
-  const paths: { params: Record<string, string> }[] = [];
-
-  await $backend.paginatedItems(async (page) => {
-    page.items
-      .filter($backend.readyForPublish)
-      .filter($backend.partOfCurrentSite)
-      .forEach((item) => {
-        paths.push({ params: { slug: item.slug } });
-      });
-  });
-
-  console.log("prepared static paths", { length: paths.length });
+  const paths: { params: Record<string, string> }[] = (await $backend.currentSiteItems()).map((item) => ({ params: { slug: item.slug } }));
+  console.log("prepared static business item paths", { length: paths.length });
 
   return {
     paths: paths,

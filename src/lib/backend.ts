@@ -39,6 +39,7 @@ export class ContentBackend {
   categories: { [key: string]: WebflowItem } = {};
   preparePromise: Promise<void> | null = null;
   prepared = false;
+  cachedCurrentSiteItems: WebflowItem[] | null = null;
 
   constructor() {
     this.$index = this.$algolia.initIndex("prod_businesses");
@@ -88,6 +89,20 @@ export class ContentBackend {
     })();
 
     return await this.preparePromise;
+  }
+
+  async currentSiteItems() {
+    if (this.cachedCurrentSiteItems) {
+      return this.cachedCurrentSiteItems;
+    }
+    await this.prepare();
+
+    const items: WebflowItem[] = [];
+    await this.paginatedItems(async (page) => {
+      items.concat(page.items.filter(this.partOfCurrentSite).filter(this.readyForPublish));
+    });
+    this.cachedCurrentSiteItems = items;
+    return items;
   }
 
   // Syncs all items from webflow into Algolia
