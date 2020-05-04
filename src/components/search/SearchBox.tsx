@@ -75,7 +75,10 @@ export const SearchBox = connectSearchBox(({ currentRefinement, refine }) => {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        marginBottom: $theme.sizing.scale800,
+        marginBottom: $theme.sizing.scale600,
+        [$theme.mediaQuery.large]: {
+          marginBottom: $theme.sizing.scale800,
+        },
       })}
     >
       <Input

@@ -15,7 +15,7 @@ export const MothersDayContestCard = (_props: {}) => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        marginBottom: $theme.sizing.scale1600,
+        marginBottom: $theme.sizing.scale800,
         backgroundColor: "rgb(240	229	228)",
         color: $theme.colors.mono1000,
         borderRadius: $theme.borders.radius400,
