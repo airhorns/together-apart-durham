@@ -3,6 +3,8 @@ import { Heading, HeadingLevel } from "baseui/heading";
 import { useStyletron } from "baseui";
 import { Grid, Cell } from "baseui/layout-grid";
 import { Button } from "baseui/button";
+import Imgix from "react-imgix";
+import { imgixURL } from "../lib/utils";
 
 export const MothersDayContestCard = (_props: {}) => {
   const [css, $theme] = useStyletron();
@@ -70,7 +72,49 @@ export const MothersDayContestCard = (_props: {}) => {
             </div>
           </Cell>
           <Cell span={[4, 3, 5]}>
-            <div
+            <div className={css({ position: "relative", width: "100%", height: "100%" })}>
+              <Imgix
+                src={imgixURL(require("../assets/images/promos/gratitude-contest/vertical.png"))}
+                sizes="100vw"
+                className={css({
+                  width: "100%",
+                  minHeight: "12rem",
+                  objectFit: "cover",
+                  objectPosition: "50% 0%",
+                  marginTop: "-5%",
+                  [$theme.mediaQuery.medium]: {
+                    display: "none",
+                  },
+                })}
+              />
+              <div
+                className={css({
+                  overflow: "hidden",
+                  position: "absolute",
+                  display: "none",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  [$theme.mediaQuery.medium]: {
+                    display: "block",
+                    marginRight: "-2px",
+                  },
+                })}
+              >
+                <Imgix
+                  src={imgixURL(require("../assets/images/promos/gratitude-contest/horizontal.png"))}
+                  sizes="100vw"
+                  className={css({
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "0% 50%",
+                  })}
+                />
+              </div>
+            </div>
+            {/* <div
               className={css({
                 height: "100%",
                 minHeight: "12rem",
@@ -84,7 +128,7 @@ export const MothersDayContestCard = (_props: {}) => {
                   marginRight: "-2px",
                 },
               })}
-            />
+            /> */}
           </Cell>
         </Grid>
       </HeadingLevel>
