@@ -37,6 +37,7 @@ export class ContentBackend {
   currentSiteLocations: { [key: string]: WebflowItem } = {};
   landingPages: { [key: string]: WebflowItem } = {};
   categories: { [key: string]: WebflowItem } = {};
+  preparePromise: Promise<void> | null = null;
   prepared = false;
 
   constructor() {
@@ -47,39 +48,46 @@ export class ContentBackend {
     if (this.prepared) {
       return true;
     }
-    this.allLocations = keyBy(
-      (
-        await this.$webflow.items({
-          collectionId: ContentBackend.LOCATIONS_COLLECTION_ID,
-        })
-      ).items.map(stripWebflowFunctions),
-      "_id"
-    );
+    if (this.preparePromise) {
+      return await this.preparePromise;
+    }
 
-    this.currentSiteLocations = keyBy(filter(this.allLocations, this.partOfCurrentSite), "_id");
+    this.preparePromise = (async () => {
+      this.allLocations = keyBy(
+        (
+          await this.$webflow.items({
+            collectionId: ContentBackend.LOCATIONS_COLLECTION_ID,
+          })
+        ).items.map(stripWebflowFunctions),
+        "_id"
+      );
 
-    this.categories = keyBy(
-      (
-        await this.$webflow.items({
-          collectionId: ContentBackend.CATEGORIES_COLLECTION_ID,
-        })
-      ).items.map(stripWebflowFunctions),
-      "_id"
-    );
+      this.currentSiteLocations = keyBy(filter(this.allLocations, this.partOfCurrentSite), "_id");
 
-    this.landingPages = keyBy(
-      (
-        await this.$webflow.items({
-          collectionId: ContentBackend.LANDING_PAGES_ID,
-        })
-      ).items
-        .filter(this.partOfCurrentSite)
-        .map(stripWebflowFunctions),
-      "_id"
-    );
+      this.categories = keyBy(
+        (
+          await this.$webflow.items({
+            collectionId: ContentBackend.CATEGORIES_COLLECTION_ID,
+          })
+        ).items.map(stripWebflowFunctions),
+        "_id"
+      );
 
-    this.prepared = true;
-    return this.prepared;
+      this.landingPages = keyBy(
+        (
+          await this.$webflow.items({
+            collectionId: ContentBackend.LANDING_PAGES_ID,
+          })
+        ).items
+          .filter(this.partOfCurrentSite)
+          .map(stripWebflowFunctions),
+        "_id"
+      );
+
+      this.prepared = true;
+    })();
+
+    return await this.preparePromise;
   }
 
   // Syncs all items from webflow into Algolia
