@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -ex
+curl -X POST $OUTAOUAIS_DEPLOY_HOOK_URL
+curl -X POST $DURHAM_DEPLOY_HOOK_URL

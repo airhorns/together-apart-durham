@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-set -ex
-git config --local user.email "action@github.com"
-git config --local user.name "GitHub Action"
-git remote add outaouais https://airhorns:${INPUT_GITHUB_TOKEN}@github.com/airhorns/together-apart-outaouais.git
-git remote add durham https://airhorns:${INPUT_GITHUB_TOKEN}@github.com/airhorns/together-apart-durham.git

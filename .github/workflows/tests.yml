@@ -34,17 +34,23 @@ jobs:
     if: contains(github.ref, 'master')
     steps:
       - uses: actions/checkout@v2
-      - name: Set up mirrors
-        run: bin/ci-mirror-setup
+      - run: git fetch --prune --unshallow
+      - name: Fix push action config
+        run: git config --local --unset-all "http.https://github.com/.extraheader"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           repository: airhorns/together-apart-outaouais
           github_token: ${{ secrets.INPUT_GITHUB_TOKEN }}
+          force: true
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           repository: airhorns/together-apart-durham
           github_token: ${{ secrets.INPUT_GITHUB_TOKEN }}
+          force: true
       - name: Deploy to mirrors
-        run: bin/deploy-mirrors
+        env:
+          OUTAOUAIS_DEPLOY_HOOK_URL: ${{ secrets.OUTAOUAIS_DEPLOY_HOOK_URL }}
+          DURHAM_DEPLOY_HOOK_URL: ${{ secrets.DURHAM_DEPLOY_HOOK_URL }}
+        run: sleep 3 && bin/ci-deploy-mirrors
