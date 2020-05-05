@@ -84,7 +84,7 @@ export const SearchBox = connectSearchBox(({ currentRefinement, refine }) => {
       <Input
         type="search"
         size="large"
-        placeholder="Search"
+        placeholder="Search for shops, products, restaurants ... "
         value={currentRefinement}
         onChange={(event) => refine(event.currentTarget.value)}
         overrides={{ Before: SearchBefore, After: SearchAfter }}
