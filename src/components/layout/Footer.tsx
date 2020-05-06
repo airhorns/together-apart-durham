@@ -29,7 +29,7 @@ export const Footer = (_props: {}) => {
         <Spacer />
         <StaticLink href="/submit-a-business">Submit a business</StaticLink>
         <Spacer />
-        <StaticLink href="/neighbourhoods">All Neighbourhoods</StaticLink>
+        <StaticLink href="/neighbourhoods">All neighbourhoods</StaticLink>
         <br />
       </p>
       <img
@@ -40,7 +40,7 @@ export const Footer = (_props: {}) => {
         className={css({ width: "40px", marginTop: $theme.sizing.scale800, marginBottom: $theme.sizing.scale800 })}
       />
       <p>
-        <StaticLink href="/contact">Contact Us</StaticLink>, we&apos;d love to hear what you think!{" "}
+        <StaticLink href="/contact">Contact us</StaticLink>, we&apos;d love to hear what you think!{" "}
         <StaticLink href="/credits">Credits</StaticLink>
       </p>
       <p>
