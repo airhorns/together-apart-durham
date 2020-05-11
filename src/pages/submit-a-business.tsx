@@ -15,7 +15,7 @@ import { OpaqueNotification } from "../components/OpaqueNotification";
 import { useStyletron } from "baseui";
 import { GetStaticProps } from "next";
 import { $backend } from "../lib/backend";
-import { values, sortBy } from "lodash-es";
+import { values, sortBy, isString } from "lodash-es";
 import { HeroCallout } from "../components/HeroCallout";
 import { Heading, HeadingLevel } from "baseui/heading";
 import { Select } from "../components/form/Select";
@@ -60,6 +60,17 @@ export interface SubmitFormValues {
   siteID: string;
   siteName: string;
 }
+
+const URLKeys: (keyof SubmitFormValues)[] = [
+  "websiteURL",
+  "imageURL",
+  "facebookPageURL",
+  "instagramProfileURL",
+  "twitterProfileURL",
+  "giftCardURL",
+  "onlineStoreURL",
+  "donationsURL",
+];
 
 const invalidURLMessage = "Invalid URL. Please include the http or https bit and the domain.";
 const checkboxRowOverrides: CheckboxProps["overrides"] = { Root: { style: { marginRight: "1em" } } };
@@ -127,6 +138,15 @@ export const SubmitForm = (props: {
         })}
         onSubmit={async (values, helpers) => {
           const blob = { ...values, tags: values.tags.map((value) => value.label).join(", ") };
+
+          // Massage URL keys to be more amenable to webflow's needs when POSTing
+          URLKeys.forEach((key) => {
+            const val = blob[key];
+            if (val && isString(val)) {
+              (blob as any)[key] = val.toLowerCase();
+            }
+          });
+
           try {
             await api.post("/submit", blob);
             props.onSuccess(values);
