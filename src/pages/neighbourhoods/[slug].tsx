@@ -5,7 +5,7 @@ import { HeroCallout } from "../../components/HeroCallout";
 import { Meta } from "../../components/Meta";
 import { GetStaticProps } from "next";
 import { $backend } from "../../lib/backend";
-import { values, find, keys, range, compact } from "lodash-es";
+import { find, range, compact } from "lodash-es";
 import { pathToSearchState } from "../../components/search/searchClient";
 import Imgix from "react-imgix";
 import { imgixURL, assert } from "../../lib/utils";
@@ -107,7 +107,7 @@ export default (props: NeighbourhoodPageProps) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<NeighbourhoodPageProps, { slug: string }> = async (context) => {
+export const getServerSideProps: GetStaticProps<NeighbourhoodPageProps, { slug: string }> = async (context) => {
   await $backend.prepare();
   const searchState: any = {};
   let slug = assert(context.params).slug;
@@ -134,19 +134,5 @@ export const getStaticProps: GetStaticProps<NeighbourhoodPageProps, { slug: stri
       location: location as any,
       landingPageConfig,
     },
-  };
-};
-
-export const getStaticPaths = async () => {
-  await $backend.prepare();
-  const locationPaths = values($backend.currentSiteLocations)
-    .map((location) => ({
-      params: { slug: location.slug },
-    }))
-    .concat(keys(REDIRECTED_SLUGS).map((slug) => ({ params: { slug } })));
-
-  return {
-    paths: locationPaths,
-    fallback: false,
   };
 };
